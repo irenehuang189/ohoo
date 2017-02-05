@@ -3,11 +3,12 @@ $(document).ready(function(){
   $('.ui.sidebar')
     .sidebar({
       context: $('.bottom.segment'),
-      dimPage: false,
+      dimPage: true,
       transition: 'overlay'
     })
     .sidebar('attach events', '#sidebar-trigger');
 
+  $('.ui.menu .item').tab();
   $('.ui.dropdown').dropdown({on: 'hover'});
 
   // Included HTML
