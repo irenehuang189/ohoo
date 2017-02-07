@@ -13,3 +13,7 @@ html.ios body {
   position: absolute;
   bottom: 0;
 }
+
+.right-border {
+  border-right: 1px solid #ddd;
+}
