@@ -58,6 +58,15 @@
           <div class="ui form">
             <div class="fields">
               <div class="field column">
+                <label>Mata Pelajaran</label>
+                <select class="ui dropdown">
+                  <option>Semua</option>
+                  <option>Bahasa Indonesia</option>
+                  <option>Bahasa Inggris</option>
+                  <option>Matematika</option>
+                </select>
+              </div>
+              <div class="field column">
                 <label>Kelas</label>
                 <select class="ui dropdown">
                   <option>Semua</option>
@@ -89,80 +98,59 @@
 
         <!-- Tab -->
         <div class="ui segment">
-          <div class="ui attached tabular menu">
-            <a class="item active" data-tab="first">Nilai Akademik</a>
-            <a class="item" data-tab="second">Ekstrakurikuler</a>
-            <a class="item" data-tab="third">Ketidakhadiran/Kepribadian</a>
-          </div>
-          <div class="ui attached tab segment active" data-tab="first">
-            <!-- Score table -->
-            <table class="ui structured selectable celled table">
-              <thead class="center aligned">
-                <tr>
-                  <th rowspan="3">No.</th>
-                  <th rowspan="3">Mata Pelajaran</th>
-                  <th rowspan="2">SKBM</th>
-                  <th colspan="5">Nilai Hasil Belajar</th>
-                  <th rowspan="3">Rata-rata<br />Kelas</th>
-                </tr>
-                <tr>
-                  <th colspan="2">Pengetahuan/Pemahaman Konsep</th>
-                  <th colspan="2">Praktek</th>
-                  <th>Sikap</th>
-                </tr>
-                <tr>
-                  <th>Angka</th>
-                  <th>Angka</th>
-                  <th>Huruf</th>
-                  <th>Angka</th>
-                  <th>Huruf</th>
-                  <th>Predikat</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1.</td>
-                  <td>Pendidikan Agama</td>
-                  <td class="center aligned">75</td>
-                  <td class="center aligned">100</td>
-                  <td class="center aligned">Seratus</td>
-                  <td class="center aligned">-</td>
-                  <td class="center aligned">-</td>
-                  <td class="center aligned">A</td>
-                  <td class="center aligned">72</td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>Pendidikan Kewarganegaraan</td>
-                  <td class="center aligned">70</td>
-                  <td class="negative center aligned">60</td>
-                  <td class="negative center aligned">Enam puluh</td>
-                  <td class="center aligned">-</td>
-                  <td class="center aligned">-</td>
-                  <td class="center aligned">A</td>
-                  <td class="center aligned">72</td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>Bahasa Indonesia</td>
-                  <td class="center aligned">65</td>
-                  <td class="center aligned">89</td>
-                  <td class="center aligned">Delapan puluh sembilan</td>
-                  <td class="center aligned">75</td>
-                  <td class="center aligned">Tujuh puluh lima</td>
-                  <td class="center aligned">AB</td>
-                  <td class="center aligned">72</td>
-                </tr>
-              </tbody>
-            </table>
-            <!-- /Score table -->
-          </div>
-          <div class="ui attached tab segment" data-tab="second">
-            Second
-          </div>
-          <div class="ui attached tab segment" data-tab="third">
-            Third
-          </div>
+          <!-- Score table -->
+          <table class="ui structured selectable celled table">
+            <thead class="center aligned">
+              <tr>
+                <th>Jenis<i class="sort content ascending icon"></i></th>
+                <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
+                <th>Nilai<i class="sort content ascending icon"></i></th>
+                <th>Rata-rata Kelas</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Ulangan Harian</td>
+                <td>21/01/2017</td>
+                <td class="positive center aligned">
+                  75<i class="smile icon"></i>
+                </td>
+                <td class="center aligned">45</td>
+              </tr>
+              <tr>
+                <td>PR</td>
+                <td>21/01/2017</td>
+                <td class="negative center aligned">
+                  35<i class="frown icon"></i>
+                </td>
+                <td class="center aligned">45</td>
+              </tr>
+              <tr>
+                <td>Ulangan Tengah Semester</td>
+                <td>21/01/2017</td>
+                <td class="warning center aligned">
+                  45<i class="meh icon"></i>
+                </td>
+                <td class="center aligned">45</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr><th colspan="4">
+                <div class="ui right floated pagination menu">
+                  <a class="icon item">
+                    <i class="left chevron icon"></i>
+                  </a>
+                  <a class="item">1</a>
+                  <a class="item">2</a>
+                  <a class="item">3</a>
+                  <a class="icon item">
+                    <i class="right chevron icon"></i>
+                  </a>
+                </div>
+              </th></tr>
+            </tfoot>
+          </table>
+          <!-- /Score table -->
         </div>
         <!-- /Tab -->
 

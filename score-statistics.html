@@ -42,6 +42,10 @@
         <i class="file text outline icon"></i>
         Rapor
       </a>
+      <a class="item" href="detail-report.html">
+        <i class="book outline icon"></i>
+        Rincian Nilai
+      </a>
     </div>
     <div class="pusher">
       <div class="ui basic segment">
@@ -114,6 +118,20 @@
                 <div class="meta">Per Semester</div>
               </div>
               <div class="content">
+                <!-- Course selection -->
+                <div class="ui form">
+                  <div class="inline field">
+                    <label>Mata Pelajaran</label>
+                    <select multiple="" class="ui dropdown">
+                      <option value="">All</option>
+                      <option value="AF">Bahasa Indonesia</option>
+                      <option value="AX">Bahasa Iggris</option>
+                      <option value="AL">Matematika</option>
+                      <option value="AO">Fisika</option>
+                      <option value="AI">Kimia</option>
+                    </select>
+                  </div>
+                </div>
                 <canvas id="score-history"></canvas>
               </div>
             </div>
