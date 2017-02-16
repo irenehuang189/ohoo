@@ -17,3 +17,11 @@ html.ios body {
 .right-border {
   border-right: 1px solid #ddd;
 }
+
+div#login-banner {
+  padding-right: 0;
+}
+
+div#login-form {
+  padding: 40px;
+}

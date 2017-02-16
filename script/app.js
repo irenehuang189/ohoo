@@ -10,4 +10,23 @@ $(document).ready(function(){
 
   $('.ui.menu .item').tab();
   $('.ui.dropdown').dropdown({on: 'hover'});
+
+  $('#login-role a').click(function(){
+    // Reset CSS
+    $('#login-role a img').css({
+      'border': 'none'
+    });
+    $('#login-role a').css({
+      'color': 'blue'
+    });
+
+    // Add CSS to selected
+    $(this).find('img').css({
+      'border':'5px solid red',
+      'border-radius': '100%'
+    });
+    $(this).css({
+      'color': 'red'
+    });
+  });
 });
