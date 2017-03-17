@@ -19,6 +19,4 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/student-report', function () {
-    return view('student.report');
-});
+Route::get('/student-report', 'Student\StudentReportController@showReport');

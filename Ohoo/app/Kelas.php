@@ -15,4 +15,5 @@ class Kelas extends Model
 	public function teacher() {
 		return $this->hasOne('App\Teacher', 'id', 'teacher_id');
 	}
+	
 }
