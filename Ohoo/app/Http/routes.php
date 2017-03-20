@@ -20,3 +20,4 @@ Route::get('/login', function () {
 });
 
 Route::get('/student-report', 'Student\StudentReportController@showReport');
+Route::get('/student-report/{id}', 'Student\StudentReportController@showReportByClassId');

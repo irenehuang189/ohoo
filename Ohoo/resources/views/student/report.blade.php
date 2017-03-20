@@ -24,7 +24,7 @@
     </div>
     <div class="ui right dropdown item">
         <i class="user icon"></i>
-        Tom Hawk
+        {{$student->name}}
         <div class="menu">
             <a class="item">Ubah Password</a>
             <a class="item" href="index.html">Logout</a>
@@ -51,7 +51,7 @@
         <div class="ui basic segment">
 
             <!-- Page Content -->
-            <h2 class="ui header">Rapor</h2>
+            <h2 class="ui header"></h2>
 
             <!-- Filter -->
             <div class="ui segment">
@@ -59,23 +59,22 @@
                     <div class="fields">
                         <div class="field column">
                             <label>Kelas</label>
-                            <select class="ui dropdown">
-                                <option>Semua</option>
-                                <option>Kelas X-1</option>
-                                <option>Kelas XI-2</option>
-                                <option>Kelas XII-2</option>
+                            <select class="ui dropdown" id="classes">
+                                @foreach($classes as $class)
+                                    @if($class->id == $classId)
+                                        <option selected value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }}</option>
+                                    @else
+                                        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="field column">
-                            <label>Semester</label>
-                            <select class="ui dropdown">
-                                <option>Semua</option>
-                                <option>Semester Ganjil</option>
-                                <option>Semester Genap</option>
-                            </select>
-                        </div>
-                        <div class="field column">
-                            <button class="ui vertical animated button" id="bottom-aligned" tabindex="0">
+                            @if($blank == 1)
+                                <button class="ui vertical animated button show-report-blank" id="bottom-aligned" tabindex="0">
+                            @elseif($blank == 0)
+                                <button class="ui vertical animated button show-report" id="bottom-aligned" tabindex="0">
+                            @endif
                                 <div class="visible content">
                                     <i class="search icon"></i>
                                 </div>
@@ -120,39 +119,21 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td>1.</td>
-                            <td>Pendidikan Agama</td>
-                            <td class="center aligned">75</td>
-                            <td class="center aligned">100</td>
-                            <td class="center aligned">Seratus</td>
-                            <td class="center aligned">-</td>
-                            <td class="center aligned">-</td>
-                            <td class="center aligned">A</td>
-                            <td class="center aligned">72</td>
-                        </tr>
-                        <tr>
-                            <td>2.</td>
-                            <td>Pendidikan Kewarganegaraan</td>
-                            <td class="center aligned">70</td>
-                            <td class="negative center aligned">60</td>
-                            <td class="negative center aligned">Enam puluh</td>
-                            <td class="center aligned">-</td>
-                            <td class="center aligned">-</td>
-                            <td class="center aligned">A</td>
-                            <td class="center aligned">72</td>
-                        </tr>
-                        <tr>
-                            <td>3.</td>
-                            <td>Bahasa Indonesia</td>
-                            <td class="center aligned">65</td>
-                            <td class="center aligned">89</td>
-                            <td class="center aligned">Delapan puluh sembilan</td>
-                            <td class="center aligned">75</td>
-                            <td class="center aligned">Tujuh puluh lima</td>
-                            <td class="center aligned">AB</td>
-                            <td class="center aligned">72</td>
-                        </tr>
+                        <?php $i = 0; ?>
+                        @foreach($courses as $course)
+                            <?php $i++ ?>
+                            <tr>
+                                <td>{{ $i }}</td>
+                                <td>{{ $course->name }}</td>
+                                <td class="center aligned">{{ $course->skbm }}</td>
+                                <td class="center aligned">{{ $course->nilai }}</td>
+                                <td class="center aligned">{{ Terbilang($course->nilai) }}</td>
+                                <td class="center aligned">{{ $course->nilai_praktik }}</td>
+                                <td class="center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
+                                <td class="center aligned">{{ $course->sikap }}</td>
+                                <td class="center aligned">{{ round($averages[$i - 1]->avg) }}</td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                     <!-- /Score table -->
@@ -180,5 +161,37 @@
 <script src="../../semantic/dist/semantic.min.js"></script>
 <script src="../../script/Chart.bundle.min.js"></script>
 <script src="../../script/app.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $(".show-report-blank").click(function(){
+            var classId = $("#classes :selected").val();
+            window.location.href = 'student-report/' + classId;
+        });
+        $(".show-report").click(function(){
+            var classId = $("#classes :selected").val();
+            window.location.href = classId;
+        });
+    });
+</script>
+
+
 </body>
 </html>
+
+<!-- Fungsi php -->
+
+<?php
+function Terbilang($x)
+{
+    $abil = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
+    if ($x < 12)
+        return " " . $abil[$x];
+    elseif ($x < 20)
+        return Terbilang($x - 10) . "Belas";
+    elseif ($x < 100)
+        return Terbilang($x / 10) . " Puluh" . Terbilang($x % 10);
+    elseif ($x < 200)
+        return " Seratus" . Terbilang($x - 100);
+}
+?>
