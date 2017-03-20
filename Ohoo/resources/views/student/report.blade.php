@@ -126,10 +126,20 @@
                                 <td>{{ $i }}</td>
                                 <td>{{ $course->name }}</td>
                                 <td class="center aligned">{{ $course->skbm }}</td>
-                                <td class="center aligned">{{ $course->nilai }}</td>
-                                <td class="center aligned">{{ Terbilang($course->nilai) }}</td>
-                                <td class="center aligned">{{ $course->nilai_praktik }}</td>
-                                <td class="center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
+                                @if($course->nilai < $course->skbm)
+                                    <td class="negative center aligned">{{ $course->nilai }}</td>
+                                    <td class="negative center aligned">{{ Terbilang($course->nilai) }}</td>
+                                @else
+                                    <td class="center aligned">{{ $course->nilai }}</td>
+                                    <td class="center aligned">{{ Terbilang($course->nilai) }}</td>
+                                @endif
+                                @if($course->nilai_praktik < $course->skbm)
+                                    <td class="negative center aligned">{{ $course->nilai_praktik }}</td>
+                                    <td class="negative center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
+                                @else
+                                    <td class="center aligned">{{ $course->nilai_praktik }}</td>
+                                    <td class="center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
+                                @endif
                                 <td class="center aligned">{{ $course->sikap }}</td>
                                 <td class="center aligned">{{ round($averages[$i - 1]->avg) }}</td>
                             </tr>
@@ -166,7 +176,7 @@
     $(document).ready(function(){
         $(".show-report-blank").click(function(){
             var classId = $("#classes :selected").val();
-            window.location.href = 'student-report/' + classId;
+            window.location.href = 'report/' + classId;
         });
         $(".show-report").click(function(){
             var classId = $("#classes :selected").val();

@@ -19,5 +19,5 @@ Route::get('/login', function () {
     return view('login');
 });
 
-Route::get('/student-report', 'Student\StudentReportController@showReport');
-Route::get('/student-report/{id}', 'Student\StudentReportController@showReportByClassId');
+Route::get('/student/report', 'Student\StudentReportController@showReport');
+Route::get('/student/report/{id}', 'Student\StudentReportController@showReportByClassId');
