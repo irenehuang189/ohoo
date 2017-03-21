@@ -15,9 +15,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', function () {
-    return view('login');
-});
+/* Login */
+Route::get('login', 'Auth\AuthController@showLoginForm');
+Route::post('login', 'Auth\AuthController@login');
+Route::get('logout', 'Auth\AuthController@logout');
 
 Route::get('/student/report', 'Student\StudentReportController@showReport');
 Route::get('/student/report/{id}', 'Student\StudentReportController@showReportByClassId');
