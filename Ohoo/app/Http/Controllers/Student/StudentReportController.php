@@ -47,4 +47,24 @@ class StudentReportController extends Controller
                             ->get();
         return view('student.report', compact('student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
+
+    public function showDetailedReport() {
+        $studentId = 1;
+        $blank = 1;
+        $courses = [];
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        return view('student.detail-report', compact('blank', 'courses', 'classes'));
+    }
+
+    public function showStatistic() {
+        return view('student.statistic');
+    }
+    
+    public function getCoursesByClassId($classId) {
+        $studentId = 1;
+        $class = Kelas::find($classId);
+        $courses = $class->courses;
+        return $courses;
+    }
 }

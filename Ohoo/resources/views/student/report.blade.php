@@ -34,15 +34,15 @@
 
 <div class="ui bottom attached segment pushable">
     <div class="ui inverted left inline vertical thin sidebar menu">
-        <a class="item" href="statistics.html">
+        <a class="item" href="{{ url('student/statistic') }}">
             <i class="line chart icon"></i>
             Statistik Nilai
         </a>
-        <a class="item" href="report.html">
+        <a class="item" href="{{ url('student/report') }}">
             <i class="file text outline icon"></i>
             Rapor
         </a>
-        <a class="item" href="detail-report.html">
+        <a class="item" href="{{ url('student/detailed-report') }}">
             <i class="book outline icon"></i>
             Rincian Nilai
         </a>
@@ -95,57 +95,61 @@
                 </div>
                 <div class="ui attached tab segment active" data-tab="first">
                     <!-- Score table -->
-                    <table class="ui structured selectable celled table">
-                        <thead class="center aligned">
-                        <tr>
-                            <th rowspan="3">No.</th>
-                            <th rowspan="3">Mata Pelajaran</th>
-                            <th rowspan="2">SKBM</th>
-                            <th colspan="5">Nilai Hasil Belajar</th>
-                            <th rowspan="3">Rata-rata<br />Kelas</th>
-                        </tr>
-                        <tr>
-                            <th colspan="2">Pengetahuan/Pemahaman Konsep</th>
-                            <th colspan="2">Praktek</th>
-                            <th>Sikap</th>
-                        </tr>
-                        <tr>
-                            <th>Angka</th>
-                            <th>Angka</th>
-                            <th>Huruf</th>
-                            <th>Angka</th>
-                            <th>Huruf</th>
-                            <th>Predikat</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <?php $i = 0; ?>
-                        @foreach($courses as $course)
-                            <?php $i++ ?>
+                    @if(count($courses) == 0)
+                        Belum ada nilai
+                    @else
+                        <table class="ui structured selectable celled table">
+                            <thead class="center aligned">
                             <tr>
-                                <td>{{ $i }}</td>
-                                <td>{{ $course->name }}</td>
-                                <td class="center aligned">{{ $course->skbm }}</td>
-                                @if($course->nilai < $course->skbm)
-                                    <td class="negative center aligned">{{ $course->nilai }}</td>
-                                    <td class="negative center aligned">{{ Terbilang($course->nilai) }}</td>
-                                @else
-                                    <td class="center aligned">{{ $course->nilai }}</td>
-                                    <td class="center aligned">{{ Terbilang($course->nilai) }}</td>
-                                @endif
-                                @if($course->nilai_praktik < $course->skbm)
-                                    <td class="negative center aligned">{{ $course->nilai_praktik }}</td>
-                                    <td class="negative center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
-                                @else
-                                    <td class="center aligned">{{ $course->nilai_praktik }}</td>
-                                    <td class="center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
-                                @endif
-                                <td class="center aligned">{{ $course->sikap }}</td>
-                                <td class="center aligned">{{ round($averages[$i - 1]->avg) }}</td>
+                                <th rowspan="3">No.</th>
+                                <th rowspan="3">Mata Pelajaran</th>
+                                <th rowspan="2">SKBM</th>
+                                <th colspan="5">Nilai Hasil Belajar</th>
+                                <th rowspan="3">Rata-rata<br />Kelas</th>
                             </tr>
-                        @endforeach
-                        </tbody>
-                    </table>
+                            <tr>
+                                <th colspan="2">Pengetahuan/Pemahaman Konsep</th>
+                                <th colspan="2">Praktek</th>
+                                <th>Sikap</th>
+                            </tr>
+                            <tr>
+                                <th>Angka</th>
+                                <th>Angka</th>
+                                <th>Huruf</th>
+                                <th>Angka</th>
+                                <th>Huruf</th>
+                                <th>Predikat</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0; ?>
+                            @foreach($courses as $course)
+                                <?php $i++ ?>
+                                <tr>
+                                    <td>{{ $i }}</td>
+                                    <td>{{ $course->name }}</td>
+                                    <td class="center aligned">{{ $course->skbm }}</td>
+                                    @if($course->nilai < $course->skbm)
+                                        <td class="negative center aligned">{{ $course->nilai }}</td>
+                                        <td class="negative center aligned">{{ Terbilang($course->nilai) }}</td>
+                                    @else
+                                        <td class="center aligned">{{ $course->nilai }}</td>
+                                        <td class="center aligned">{{ Terbilang($course->nilai) }}</td>
+                                    @endif
+                                    @if($course->nilai_praktik < $course->skbm)
+                                        <td class="negative center aligned">{{ $course->nilai_praktik }}</td>
+                                        <td class="negative center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
+                                    @else
+                                        <td class="center aligned">{{ $course->nilai_praktik }}</td>
+                                        <td class="center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
+                                    @endif
+                                    <td class="center aligned">{{ $course->sikap }}</td>
+                                    <td class="center aligned">{{ round($averages[$i - 1]->avg) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    @endif
                     <!-- /Score table -->
                 </div>
                 <div class="ui attached tab segment" data-tab="second">

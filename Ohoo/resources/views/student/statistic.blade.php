@@ -34,15 +34,15 @@
 
 <div class="ui bottom attached segment pushable">
     <div class="ui inverted left inline vertical thin sidebar menu">
-        <a class="item" href="statistics.html">
+        <a class="item" href="{{ url('student/statistic') }}">
             <i class="line chart icon"></i>
             Statistik Nilai
         </a>
-        <a class="item" href="report.html">
+        <a class="item" href="{{ url('student/report') }}">
             <i class="file text outline icon"></i>
             Rapor
         </a>
-        <a class="item" href="detail-report.html">
+        <a class="item" href="{{ url('student/detailed-report') }}">
             <i class="book outline icon"></i>
             Rincian Nilai
         </a>

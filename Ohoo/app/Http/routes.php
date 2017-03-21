@@ -22,3 +22,6 @@ Route::get('logout', 'Auth\AuthController@logout');
 
 Route::get('/student/report', 'Student\StudentReportController@showReport');
 Route::get('/student/report/{id}', 'Student\StudentReportController@showReportByClassId');
+Route::get('/student/detailed-report', 'Student\StudentReportController@showDetailedReport');
+Route::get('/student/statistic', 'Student\StudentReportController@showStatistic');
+Route::get('/student/getCoursesByClassId/{id}', 'Student\StudentReportController@getCoursesByClassId');

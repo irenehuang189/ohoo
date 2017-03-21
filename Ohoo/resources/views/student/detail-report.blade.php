@@ -34,15 +34,15 @@
 
 <div class="ui bottom attached segment pushable">
     <div class="ui inverted left inline vertical thin sidebar menu">
-        <a class="item" href="statistics.html">
+        <a class="item" href="{{ url('student/statistic') }}">
             <i class="line chart icon"></i>
             Statistik Nilai
         </a>
-        <a class="item" href="report.html">
+        <a class="item" href="{{ url('student/report') }}">
             <i class="file text outline icon"></i>
             Rapor
         </a>
-        <a class="item" href="detail-report.html">
+        <a class="item" href="{{ url('student/detailed-report') }}">
             <i class="book outline icon"></i>
             Rincian Nilai
         </a>
@@ -58,29 +58,18 @@
                 <div class="ui form">
                     <div class="fields">
                         <div class="field column">
-                            <label>Mata Pelajaran</label>
-                            <select class="ui dropdown">
-                                <option>Semua</option>
-                                <option>Bahasa Indonesia</option>
-                                <option>Bahasa Inggris</option>
-                                <option>Matematika</option>
-                            </select>
-                        </div>
-                        <div class="field column">
                             <label>Kelas</label>
-                            <select class="ui dropdown">
-                                <option>Semua</option>
-                                <option>Kelas X-1</option>
-                                <option>Kelas XI-2</option>
-                                <option>Kelas XII-2</option>
+                            <select class="ui dropdown" id="choose-class">
+                                <option value="-1" disabled selected>-- Pilih Kelas --</option>
+                                @foreach($classes as $class)
+                                    <option value="{{ $class->id }}">{{ $class->name }} - Semester {{  $class->semester }}</option>
+                                @endforeach
                             </select>
                         </div>
                         <div class="field column">
-                            <label>Semester</label>
-                            <select class="ui dropdown">
-                                <option>Semua</option>
-                                <option>Semester Ganjil</option>
-                                <option>Semester Genap</option>
+                            <label>Mata Pelajaran</label>
+                            <select class="ui dropdown" id="choose-course">
+                                <option value="-1" disabled selected>-- Pilih Mata Pelajaran --</option>
                             </select>
                         </div>
                         <div class="field column">
@@ -98,63 +87,67 @@
 
             <!-- Tab -->
             <div class="ui segment">
-                <!-- Score table -->
-                <table class="ui structured selectable celled table">
-                    <thead class="center aligned">
-                    <tr>
-                        <th>Jenis<i class="sort content ascending icon"></i></th>
-                        <th>Materi<i class="sort content ascending icon"></i></th>
-                        <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
-                        <th>Nilai<i class="sort content ascending icon"></i></th>
-                        <th>Rata-rata Kelas</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                        <td>Ulangan Harian</td>
-                        <td>Persamaan Linear</td>
-                        <td>21/01/2017</td>
-                        <td class="positive center aligned">
-                            75<i class="smile icon"></i>
-                        </td>
-                        <td class="center aligned">45</td>
-                    </tr>
-                    <tr>
-                        <td>PR</td>
-                        <td>Persamaan Kuadrat</td>
-                        <td>21/01/2017</td>
-                        <td class="negative center aligned">
-                            35<i class="frown icon"></i>
-                        </td>
-                        <td class="center aligned">45</td>
-                    </tr>
-                    <tr>
-                        <td>Ulangan Tengah Semester</td>
-                        <td>Aljabar & Geometri</td>
-                        <td>21/01/2017</td>
-                        <td class="warning center aligned">
-                            45<i class="meh icon"></i>
-                        </td>
-                        <td class="center aligned">45</td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr><th colspan="5">
-                            <div class="ui right floated pagination menu">
-                                <a class="icon item">
-                                    <i class="left chevron icon"></i>
-                                </a>
-                                <a class="item">1</a>
-                                <a class="item">2</a>
-                                <a class="item">3</a>
-                                <a class="icon item">
-                                    <i class="right chevron icon"></i>
-                                </a>
-                            </div>
-                        </th></tr>
-                    </tfoot>
-                </table>
-                <!-- /Score table -->
+                @if($blank == 1)
+                    Anda belum memilih kelas dan mata pelajaran.
+                @elseif($blank == 0)
+                    <!-- Score table -->
+                    <table class="ui structured selectable celled table">
+                        <thead class="center aligned">
+                        <tr>
+                            <th>Jenis<i class="sort content ascending icon"></i></th>
+                            <th>Materi<i class="sort content ascending icon"></i></th>
+                            <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
+                            <th>Nilai<i class="sort content ascending icon"></i></th>
+                            <th>Rata-rata Kelas</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>Ulangan Harian</td>
+                            <td>Persamaan Linear</td>
+                            <td>21/01/2017</td>
+                            <td class="positive center aligned">
+                                75<i class="smile icon"></i>
+                            </td>
+                            <td class="center aligned">45</td>
+                        </tr>
+                        <tr>
+                            <td>PR</td>
+                            <td>Persamaan Kuadrat</td>
+                            <td>21/01/2017</td>
+                            <td class="negative center aligned">
+                                35<i class="frown icon"></i>
+                            </td>
+                            <td class="center aligned">45</td>
+                        </tr>
+                        <tr>
+                            <td>Ulangan Tengah Semester</td>
+                            <td>Aljabar & Geometri</td>
+                            <td>21/01/2017</td>
+                            <td class="warning center aligned">
+                                45<i class="meh icon"></i>
+                            </td>
+                            <td class="center aligned">45</td>
+                        </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr><th colspan="5">
+                                <div class="ui right floated pagination menu">
+                                    <a class="icon item">
+                                        <i class="left chevron icon"></i>
+                                    </a>
+                                    <a class="item">1</a>
+                                    <a class="item">2</a>
+                                    <a class="item">3</a>
+                                    <a class="icon item">
+                                        <i class="right chevron icon"></i>
+                                    </a>
+                                </div>
+                            </th></tr>
+                        </tfoot>
+                    </table>
+                    <!-- /Score table -->
+                @endif
             </div>
             <!-- /Tab -->
 
@@ -172,5 +165,25 @@
 <script src="../../semantic/dist/semantic.min.js"></script>
 <script src="../../script/Chart.bundle.min.js"></script>
 <script src="../../script/app.js"></script>
+
+<script>
+    $(document).ready(function(){
+        $("#choose-class").change(function(){
+            var classId = $("#choose-class :selected").val();
+            $('#choose-course').empty();
+            $("#choose-course").prepend("<option value='-1' selected='selected' disabled>-- Pilih Mata Pelajaran --</option>");
+            $.get("/student/getCoursesByClassId/" + classId, function (data, status){
+                $.each(data, function(i, course) {
+                    $('#choose-course').append($('<option>', {
+                        value: course.id,
+                        text: course.name
+                    }));
+                });
+                $('#choose-course').prop('selectedIndex',-1);
+            });
+        });
+    });
+</script>
+
 </body>
 </html>
