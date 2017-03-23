@@ -25,3 +25,4 @@ Route::get('/student/report/{id}', 'Student\StudentReportController@showReportBy
 Route::get('/student/detailed-report', 'Student\StudentReportController@showDetailedReport');
 Route::get('/student/statistic', 'Student\StudentReportController@showStatistic');
 Route::get('/student/getCoursesByClassId/{id}', 'Student\StudentReportController@getCoursesByClassId');
+Route::get('/student/detailed-report/{classId}/{courseId}', 'Student\StudentReportController@showDetailedReportByCourseId');

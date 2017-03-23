@@ -54,7 +54,39 @@ class StudentReportController extends Controller
         $courses = [];
         $student = Student::find($studentId);
         $classes = $student->kelas;
-        return view('student.detail-report', compact('blank', 'courses', 'classes'));
+        $courseId = -1;
+        $classId = -1;
+        return view('student.detail-report', compact('blank', 'courses', 'classes','courseId', 'classId'));
+    }
+
+    public function showDetailedReportByCourseId($classId, $courseId) {
+        $studentId = 1;
+        $blank = 0;
+        $courses = Kelas::find($classId)->courses;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $skbm = Course::find($courseId)->skbm;
+        $exams = Course::find($courseId)->exams()
+                        ->join('exam_score', 'exams.id', '=', 'exam_score.exam_id')
+                        ->where('course_id', '=', $courseId)
+                        ->where('student_id', '=', $studentId)
+                        ->get();
+        $exam_averages = Course::find($courseId)->exams()
+                                ->join('exam_score', 'exams.id', '=', 'exam_score.exam_id')
+                                ->groupBy('exam_id')
+                                ->select('exam_id', DB::raw('AVG(score) as avg'))
+                                ->get();
+        $assignments = Course::find($courseId)->assignments()
+                        ->join('assignment_score', 'assignments.id', '=', 'assignment_score.assignment_id')
+                        ->where('course_id', '=', $courseId)
+                        ->where('student_id', '=', $studentId)
+                        ->get();
+        $assignment_averages = Course::find($courseId)->assignments()
+                                    ->join('assignment_score', 'assignments.id', '=', 'assignment_score.assignment_id')
+                                    ->groupBy('assignment_id')
+                                    ->select('assignment_id', DB::raw('AVG(score) as avg'))
+                                    ->get();
+        return view('student.detail-report', compact('blank', 'courses', 'classes', 'exams', 'assignments', 'exam_averages', 'assignment_averages', 'skbm', 'classId', 'courseId'));
     }
 
     public function showStatistic() {
