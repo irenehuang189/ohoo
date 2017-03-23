@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 20 Mar 2017 pada 19.26
+-- Generation Time: 23 Mar 2017 pada 19.17
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -19,6 +19,56 @@ SET time_zone = "+00:00";
 --
 -- Database: `ohoo`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `assignments`
+--
+
+CREATE TABLE IF NOT EXISTS `assignments` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `course_id` int(10) unsigned NOT NULL,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tanggal` date NOT NULL,
+  `materi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assignments_course_id_foreign` (`course_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `assignments`
+--
+
+INSERT INTO `assignments` (`id`, `course_id`, `name`, `tanggal`, `materi`, `created_at`, `updated_at`) VALUES
+(1, 1, 'Tugas 1 - Makalah', '2017-03-30', 'Daya dan Energi', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `assignment_score`
+--
+
+CREATE TABLE IF NOT EXISTS `assignment_score` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `assignment_id` int(10) unsigned NOT NULL,
+  `student_id` int(10) unsigned NOT NULL,
+  `score` decimal(5,2) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `assignment_score_assignment_id_foreign` (`assignment_id`),
+  KEY `assignment_score_student_id_foreign` (`student_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `assignment_score`
+--
+
+INSERT INTO `assignment_score` (`id`, `assignment_id`, `student_id`, `score`, `created_at`, `updated_at`) VALUES
+(1, 1, 1, '90.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -74,7 +124,7 @@ INSERT INTO `courses` (`id`, `teacher_id`, `class_id`, `name`, `skbm`, `created_
 (1, 1, 1, 'Fisika', 60, NULL, NULL),
 (2, 1, 1, 'Kimia', 70, NULL, NULL),
 (3, 1, 2, 'Fisika', 70, NULL, NULL),
-(5, 1, 2, 'Kimia', 65, NULL, NULL);
+(5, 1, 2, 'Matematika', 65, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -120,11 +170,21 @@ CREATE TABLE IF NOT EXISTS `exams` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `course_id` int(10) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `materi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `tanggal` date NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `exams_course_id_foreign` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data untuk tabel `exams`
+--
+
+INSERT INTO `exams` (`id`, `course_id`, `name`, `materi`, `tanggal`, `created_at`, `updated_at`) VALUES
+(2, 1, 'Ujian Tengah Semester', 'Bab 1 - Bab 4', '2017-03-24', NULL, NULL),
+(3, 1, 'Ujian Akhir Semester', 'Seluruh materi', '2017-03-30', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -142,7 +202,16 @@ CREATE TABLE IF NOT EXISTS `exam_score` (
   PRIMARY KEY (`id`),
   KEY `exam_score_exam_id_foreign` (`exam_id`),
   KEY `exam_score_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data untuk tabel `exam_score`
+--
+
+INSERT INTO `exam_score` (`id`, `exam_id`, `student_id`, `score`, `created_at`, `updated_at`) VALUES
+(1, 2, 1, '80.00', NULL, NULL),
+(2, 3, 1, '40.00', NULL, NULL),
+(3, 2, 3, '40.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -178,7 +247,11 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2017_03_19_093215_modify_nilai_in_course_score_table', 7),
 ('2017_03_19_094238_add_semester_to_classes_table', 7),
 ('2017_03_20_173413_add_skbm_to_courses', 8),
-('2017_03_20_173803_modify_course_score', 8);
+('2017_03_20_173803_modify_course_score', 8),
+('2017_03_23_154441_create_assignments_table', 9),
+('2017_03_23_154515_create_assignments_score_table', 9),
+('2017_03_23_160119_modify_exams_table', 10),
+('2017_03_23_160503_modify_assignments_table', 10);
 
 -- --------------------------------------------------------
 
@@ -289,6 +362,19 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
 --
+
+--
+-- Ketidakleluasaan untuk tabel `assignments`
+--
+ALTER TABLE `assignments`
+  ADD CONSTRAINT `assignments_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `assignment_score`
+--
+ALTER TABLE `assignment_score`
+  ADD CONSTRAINT `assignment_score_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `assignment_score_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `classes`
