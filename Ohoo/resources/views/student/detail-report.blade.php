@@ -62,7 +62,11 @@
                             <select class="ui dropdown" id="choose-class">
                                 <option value="-1" disabled selected>-- Pilih Kelas --</option>
                                 @foreach($classes as $class)
-                                    <option value="{{ $class->id }}">{{ $class->name }} - Semester {{  $class->semester }}</option>
+                                    @if($class->id == $classId)
+                                        <option value="{{ $class->id }}" selected>{{ $class->name }} - Semester {{  $class->semester }}</option>
+                                    @else
+                                        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{  $class->semester }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                         </div>
@@ -70,10 +74,21 @@
                             <label>Mata Pelajaran</label>
                             <select class="ui dropdown" id="choose-course">
                                 <option value="-1" disabled selected>-- Pilih Mata Pelajaran --</option>
+                                @foreach($courses as $course)
+                                    @if($course->id == $courseId)
+                                        <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
+                                    @else
+                                        <option value="{{ $course->id }}">{{ $course->name }}</option>
+                                    @endif
+                                @endforeach
                             </select>
                         </div>
                         <div class="field column">
-                            <button class="ui vertical animated button" id="bottom-aligned" tabindex="0">
+                            @if($blank == 1)
+                                <button class="ui vertical animated button show-detailed-report-blank" id="bottom-aligned" tabindex="0">
+                            @elseif($blank == 0)
+                                <button class="ui vertical animated button show-detailed-report" id="bottom-aligned" tabindex="0">
+                            @endif
                                 <div class="visible content">
                                     <i class="search icon"></i>
                                 </div>
@@ -91,68 +106,91 @@
                     Anda belum memilih kelas dan mata pelajaran.
                 @elseif($blank == 0)
                     <!-- Score table -->
-                    <table class="ui structured selectable celled table">
-                        <thead class="center aligned">
-                        <tr>
-                            <th>Jenis<i class="sort content ascending icon"></i></th>
-                            <th>Materi<i class="sort content ascending icon"></i></th>
-                            <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
-                            <th>Nilai<i class="sort content ascending icon"></i></th>
-                            <th>Rata-rata Kelas</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td>Ulangan Harian</td>
-                            <td>Persamaan Linear</td>
-                            <td>21/01/2017</td>
-                            <td class="positive center aligned">
-                                75<i class="smile icon"></i>
-                            </td>
-                            <td class="center aligned">45</td>
-                        </tr>
-                        <tr>
-                            <td>PR</td>
-                            <td>Persamaan Kuadrat</td>
-                            <td>21/01/2017</td>
-                            <td class="negative center aligned">
-                                35<i class="frown icon"></i>
-                            </td>
-                            <td class="center aligned">45</td>
-                        </tr>
-                        <tr>
-                            <td>Ulangan Tengah Semester</td>
-                            <td>Aljabar & Geometri</td>
-                            <td>21/01/2017</td>
-                            <td class="warning center aligned">
-                                45<i class="meh icon"></i>
-                            </td>
-                            <td class="center aligned">45</td>
-                        </tr>
-                        </tbody>
-                        <tfoot>
-                        <tr><th colspan="5">
-                                <div class="ui right floated pagination menu">
-                                    <a class="icon item">
-                                        <i class="left chevron icon"></i>
-                                    </a>
-                                    <a class="item">1</a>
-                                    <a class="item">2</a>
-                                    <a class="item">3</a>
-                                    <a class="icon item">
-                                        <i class="right chevron icon"></i>
-                                    </a>
-                                </div>
-                            </th></tr>
-                        </tfoot>
-                    </table>
-                    <!-- /Score table -->
+                    <h3 class="ui header">Nilai Ujian</h3>
+                    @if(count($exams) == 0)
+                        Tidak ada ujian
+                    @else
+                        <table class="ui structured selectable celled table">
+                            <thead class="center aligned">
+                            <tr>
+                                <th>Nama<i class="sort content ascending icon"></i></th>
+                                <th>Materi<i class="sort content ascending icon"></i></th>
+                                <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
+                                <th>Nilai<i class="sort content ascending icon"></i></th>
+                                <th>Rata-rata Kelas</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0; ?>
+                            @foreach($exams as $exam)
+                                <?php $i++ ?>
+                                <tr>
+                                    <td>{{ $exam->name }}</td>
+                                    <td>{{ $exam->materi }}</td>
+                                    <td>{{ $exam->tanggal }}</td>
+                                    @if($exam->score >= $skbm)
+                                        <td class="positive center aligned">
+                                            {{ $exam->score }}<i class="smile icon"></i>
+                                        </td>
+                                    @else
+                                        <td class="negative center aligned">
+                                            {{ $exam->score }}<i class="frown icon"></i>
+                                        </td>
+                                    @endif
+                                    <td class="center aligned">{{ round($exam_averages[$i - 1]->avg) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                    <!-- /Score Ujian table -->
                 @endif
             </div>
+            @if($blank != 1)
+                <div class="ui segment">
+                    <h3 class="ui header">Nilai Tugas</h3>
+                    @if(count($assignments) == 0)
+                        Tidak ada tugas
+                    @else
+                        <table class="ui structured selectable celled table">
+                            <thead class="center aligned">
+                            <tr>
+                                <th>Nama<i class="sort content ascending icon"></i></th>
+                                <th>Materi<i class="sort content ascending icon"></i></th>
+                                <th>Tanggal Pengumpulan<i class="sort content ascending icon"></i></th>
+                                <th>Nilai<i class="sort content ascending icon"></i></th>
+                                <th>Rata-rata Kelas</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <?php $i = 0; ?>
+                            @foreach($assignments as $assigment)
+                                <?php $i++; ?>
+                                <tr>
+                                    <td>{{ $assigment->name }}</td>
+                                    <td>{{ $assigment->materi }}</td>
+                                    <td>{{ $assigment->tanggal }}</td>
+                                    @if($assigment->score >= $skbm)
+                                        <td class="positive center aligned">
+                                            {{ $assigment->score }}<i class="smile icon"></i>
+                                        </td>
+                                    @else
+                                        <td class="negative center aligned">
+                                            {{ $assigment->score }}<i class="frown icon"></i>
+                                        </td>
+                                    @endif
+                                    <td class="center aligned">{{ round($assignment_averages[$i - 1]->avg) }}</td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    @endif
+                    <!-- /Assignment score table -->
+                </div>
+            @endif
             <!-- /Tab -->
 
             <!-- /Page Content -->
-
         </div>
     </div>
 </div>
@@ -181,6 +219,16 @@
                 });
                 $('#choose-course').prop('selectedIndex',-1);
             });
+        });
+        $(".show-detailed-report-blank").click(function(){
+            var classId = $("#choose-class :selected").val();
+            var courseId = $("#choose-course :selected").val();
+            window.location.href = 'detailed-report/' + classId + '/' + courseId;
+        });
+        $(".show-detailed-report").click(function(){
+            var classId = $("#choose-class :selected").val();
+            var courseId = $("#choose-course :selected").val();
+            window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
         });
     });
 </script>

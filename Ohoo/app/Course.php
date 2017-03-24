@@ -17,4 +17,8 @@ class Course extends Model
 	public function exams() {
 		return $this->hasMany('App\Exam');
 	}
+
+	public function assignments() {
+		return $this->hasMany('App\Assignment');
+	}
 }
