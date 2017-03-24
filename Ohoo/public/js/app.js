@@ -10,6 +10,9 @@ $(document).ready(function(){
 
   $('.ui.menu .item').tab();
   $('.ui.dropdown').dropdown({on: 'hover'});
+  $('.ui.sticky').sticky({
+    context: '#context'
+  });
 
   $('#login-role a').click(function(){
     // Reset CSS
