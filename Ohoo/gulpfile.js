@@ -13,4 +13,9 @@ var elixir = require('laravel-elixir');
 
 elixir(function(mix) {
     mix.sass('app.scss');
+
+    // Semantic
+    mix.copy('semantic/dist/semantic.min.js', 'public/js/semantic.min.js');
+    mix.copy('semantic/dist/semantic.min.css', 'public/css/semantic.min.css');
+    mix.copy('semantic/dist/themes/default/assets/fonts', 'public/css/themes/default/assets/fonts');
 });

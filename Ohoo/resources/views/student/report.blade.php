@@ -4,8 +4,8 @@
     <title>ohoo</title>
 
     <!-- Style -->
-    <link rel="stylesheet" type="text/css" href="../../semantic/dist/semantic.min.css" />
-    <link rel="stylesheet" type="text/css" href="../../style/app.css" />
+    <link rel="stylesheet" type="text/css" href="{{{ asset('css/semantic.min.css') }}}" />
+    <link rel="stylesheet" type="text/css" href="{{{ asset('css/app.css') }}}" />
 </head>
 <body>
 <div class="ui top attached borderless stackable grid menu">
@@ -172,9 +172,9 @@
         src="https://code.jquery.com/jquery-3.1.1.min.js"
         integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
         crossorigin="anonymous"></script>
-<script src="../../semantic/dist/semantic.min.js"></script>
-<script src="../../script/Chart.bundle.min.js"></script>
-<script src="../../script/app.js"></script>
+<script src="{{{ asset('js/semantic.min.js') }}}"></script>
+<script src="{{{ asset('js/Chart.bundle.min.js') }}}"></script>
+<script src="{{{ asset('js/app.js') }}}"></script>
 
 <script>
     $(document).ready(function(){
