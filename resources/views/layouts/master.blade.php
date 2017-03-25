@@ -31,9 +31,6 @@
   @if(Request::is('student/statistic'))
   <script src="{{ asset('js/student-chart.js') }}"></script>
   @endif
-  @if(Request::is('teacher/homeroom/statistic'))
-  <script src="{{ asset('js/homeroom-teacher-chart.js') }}"></script>
-  @endif
   <script src="{{ asset('js/app.js') }}"></script>
   @yield('js')
 

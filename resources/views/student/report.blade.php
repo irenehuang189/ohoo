@@ -38,7 +38,7 @@
 @section('header-left-column', 'Rapor')
 
 @section('left-column')
-<div class="ui attached tabular menu">
+<div class="ui attached tabular teal menu">
   <a class="item active" data-tab="first">Nilai Akademik</a>
   <a class="item" data-tab="second">Ekstrakurikuler</a>
   <a class="item" data-tab="third">Ketidakhadiran/Kepribadian</a>
@@ -48,7 +48,7 @@
   @if(count($courses) == 0)
       Belum ada nilai
   @else
-    <table class="ui structured selectable celled table">
+    <table class="ui structured selectable celled teal table">
       <thead class="center aligned">
       <tr>
         <th rowspan="3">No.</th>

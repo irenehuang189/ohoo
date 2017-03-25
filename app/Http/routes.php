@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function() {
-    return view('layouts/three-column-content');
+    return view('login');
 });
 
 /* Login */
