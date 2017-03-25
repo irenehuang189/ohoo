@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Rapor Semester')
+@section('title', 'Statistik Nilai')
 
 @section('user-name')
   NAMA DI SINI
@@ -62,6 +62,30 @@
           </div>
         </div>
         <!-- /Peta Kemampuan Siswa Card -->
+        <!-- Histori Peringkat Kelas Card -->
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Histori Peringkat Kelas</div>
+            <div class="meta">Per Semester</div>
+          </div>
+          <div class="content">
+            <canvas id="rank"></canvas>
+          </div>
+        </div>
+        <!-- /Histori Peringkat Kelas Card -->
+      </div>
+      <div class="ui column">
+        <!-- Histori Nilai Keseluruhan Card -->
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Histori Nilai Keseluruhan</div>
+            <div class="meta">Per Semester</div>
+          </div>
+          <div class="content">
+            <canvas id="mean-score"></canvas>
+          </div>
+        </div>
+        <!-- /Histori Nilai Keseluruhan Card -->
         <!-- Histori Nilai Mata Pelajaran Card -->
         <div class="ui fluid card">
           <div class="content">
@@ -87,30 +111,6 @@
           </div>
         </div>
         <!-- /Histori Nilai Mata Pelajaran Card -->
-      </div>
-      <div class="ui column">
-        <!-- Histori Nilai Keseluruhan Card -->
-        <div class="ui fluid card">
-          <div class="content">
-            <div class="header">Histori Nilai Keseluruhan</div>
-            <div class="meta">Per Semester</div>
-          </div>
-          <div class="content">
-            <canvas id="mean-score"></canvas>
-          </div>
-        </div>
-        <!-- /Histori Nilai Keseluruhan Card -->
-        <!-- Histor Peringkat Kelas Card -->
-        <div class="ui fluid card">
-          <div class="content">
-            <div class="header">Histori Peringkat Kelas</div>
-            <div class="meta">Per Semester</div>
-          </div>
-          <div class="content">
-            <canvas id="rank"></canvas>
-          </div>
-        </div>
-        <!-- /Histori Peringkat Kelas Card -->
       </div>
     </div>
     <!-- /Statistics -->

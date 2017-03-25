@@ -34,8 +34,8 @@ var options = {
 var meanScoreDataset = [{
   label: 'Nilai Rata-rata',
   data: [90, 65, 72, 83, 62, 80],
-  backgroundColor: bgColor[1],
-  borderColor: color[1],
+  backgroundColor: bgColor[3],
+  borderColor: color[3],
 }];
 var meanScoreChart = new Chart($("#mean-score"), {
   type: 'line',
@@ -66,12 +66,12 @@ var meanScoreChart = new Chart($("#rank"), {
 // Kemampuan siswa
 var skillDataset = [{
     label: 'Rata-rata Nilai',
-    backgroundColor: bgColor[4],
-    borderColor: color[4],
-    pointBackgroundColor: color[4],
+    backgroundColor: bgColor[0],
+    borderColor: color[0],
+    pointBackgroundColor: color[0],
     pointBorderColor: "#fff",
-    pointHoverBackgroundColor: bgColor[4],
-    pointHoverBorderColor: color[4],
+    pointHoverBackgroundColor: bgColor[0],
+    pointHoverBorderColor: color[0],
     data: [67, 85, 54, 87, 72, 39, 28, 28, 93, 18, 54, 87, 72, 49]
 }];
 var skillChart = new Chart($("#skill"), {
