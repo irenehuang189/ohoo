@@ -1,0 +1,24 @@
+/*******************************
+     User Global Variables
+*******************************/
+@fontSize : 11px;
+@headerFont : "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+@pageFont : "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
+
+/* Colors */
+@blue: #80A6CD;
+@green: #78CB5B;
+@orange: #D26911;
+@black: #333333;
+@teal: #47B7B3;
+@grey: #3b3a36;
+@primaryColor: @grey; // Dark grey
+@secondaryColor: @teal;   // Light teal
+
+/*-------------------
+     Alpha Colors
+--------------------*/
+@subtleTransparentBlack     : rgba(71, 183, 179, 0.05);
+@transparentBlack           : rgba(71, 183, 179, 0.07);
+@strongTransparentBlack     : rgba(71, 183, 179, 0.12);
+@veryStrongTransparentBlack : rgba(71, 183, 179, 0.17);
