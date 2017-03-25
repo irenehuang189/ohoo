@@ -1,19 +1,18 @@
 @extends('layouts.master')
 
-@section('title', 'Rapor Semester')
+@section('title', 'Statistik Nilai')
 
 @section('user-name')
   {{ $student->name }}
 @endsection
 
 @section('content')
-<div class="ui grid" id="context"> 
+<div class="ui grid"> 
   <div class="one wide column"></div>
   <div class="fourteen wide column">
   <!-- Page Content -->
     <h2 class="ui header">Statistik Nilai</h2>
 
-    <!-- Statistics -->
     <!-- Overview -->
     <div class="ui three column grid">
       <div class="column">
@@ -48,19 +47,22 @@
       </div>
     </div>
     <!-- /Overview -->
+
+    <!-- Statistics -->
     <div class="ui two column grid">
-      <div class="column">
+      <div class="ui column">
+        <!-- Peta Kemampuan Siswa Card -->
         <div class="ui fluid card">
           <div class="content">
-            <div class="header">Histori Nilai Keseluruhan</div>
-            <div class="meta">Per Semester</div>
+            <div class="header">Kemampuan Siswa</div>
+            <div class="meta">Per Mata Pelajaran</div>
           </div>
           <div class="content">
-            <canvas id="mean-score"></canvas>
+            <canvas id="skill"></canvas>
           </div>
         </div>
-      </div>
-      <div class="column">
+        <!-- /Peta Kemampuan Siswa Card -->
+        <!-- Histori Peringkat Kelas Card -->
         <div class="ui fluid card">
           <div class="content">
             <div class="header">Histori Peringkat Kelas</div>
@@ -70,8 +72,21 @@
             <canvas id="rank"></canvas>
           </div>
         </div>
+        <!-- /Histori Peringkat Kelas Card -->
       </div>
-      <div class="column">
+      <div class="ui column">
+        <!-- Histori Nilai Keseluruhan Card -->
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Histori Nilai Keseluruhan</div>
+            <div class="meta">Per Semester</div>
+          </div>
+          <div class="content">
+            <canvas id="mean-score"></canvas>
+          </div>
+        </div>
+        <!-- /Histori Nilai Keseluruhan Card -->
+        <!-- Histori Nilai Mata Pelajaran Card -->
         <div class="ui fluid card">
           <div class="content">
             <div class="header">Histori Nilai Mata Pelajaran</div>
@@ -95,19 +110,7 @@
             <canvas id="score-history"></canvas>
           </div>
         </div>
-      </div>
-    </div>
-    <div class="ui grid">
-      <div class="six wide column">
-        <div class="ui fluid card">
-          <div class="content">
-            <div class="header">Kemampuan Siswa</div>
-            <div class="meta">Per Mata Pelajaran</div>
-          </div>
-          <div class="content">
-            <canvas id="skill"></canvas>
-          </div>
-        </div>
+        <!-- /Histori Nilai Mata Pelajaran Card -->
       </div>
     </div>
     <!-- /Statistics -->

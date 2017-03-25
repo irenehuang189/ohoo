@@ -1,4 +1,4 @@
-@extends('layouts.two-column-content')
+@extends('layouts.student.two-column-content')
 
 @section('title', 'Rapor Semester')
 
@@ -26,10 +26,10 @@
     @elseif($blank == 0)
     <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
     @endif
-      <div class="visible content">
+      <div class="visible content">Search</div>
+      <div class="hidden content">
         <i class="search icon"></i>
       </div>
-      <div class="hidden content">Search</div>
     </button>
   </div>
 </div>

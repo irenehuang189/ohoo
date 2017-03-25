@@ -32,7 +32,7 @@
     @yield('user-name')
     <div class="menu">
     <a class="item">Ubah Password</a>
-    <a class="item" href="index.html">Logout</a>
+    <a class="item">Keluar</a>
     </div>
   </div>
 </div>

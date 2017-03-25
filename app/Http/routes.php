@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', function () {
-    return view('layouts/app');
+Route::get('/', function() {
+    return view('layouts/three-column-content');
 });
 
 /* Login */
@@ -31,3 +31,17 @@ Route::get('/student/detailed-report/{classId}/{courseId}', 'Student\StudentRepo
 Route::get('/student/statistic', 'Student\StudentStatisticController@showStatistic');
 Route::get('/student/getMeanStatistic', 'Student\StudentStatisticController@getMeanStatistic');
 Route::get('/student/getRankStatistic', 'Student\StudentStatisticController@getRankStatistic');
+
+/* Teacher */
+Route::get('/teacher/class', function() {
+  return view('teacher/class');
+});
+Route::get('/teacher/course', function() {
+  return view('teacher/course');
+});
+Route::get('/teacher/individu', function() {
+  return view('teacher/individu');
+});
+Route::get('/teacher/statistic', function() {
+  return view('teacher/statistic');
+});
