@@ -76,4 +76,40 @@ class StudentStatisticController extends Controller
         }
         return $rank;
     }
+
+    public function getMeanStatistic() {
+        $studentId = 1;
+        $courses = Student::find($studentId)->kelas()
+            ->join('courses', 'classes.id', '=', 'courses.class_id')
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('course_score.student_id', '=', $studentId)
+            ->groupBy('courses.class_id')
+            ->select('classes.name', 'classes.semester', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        return $courses;
+    }
+
+    public function getRankStatistic() {
+        $studentId = 1;
+        $classes = Student::find($studentId)->kelas;
+        $data = array();
+        foreach ($classes as $class) {
+            $totalScores = $class->courses()
+                ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+                ->groupBy('student_id')
+                ->select('*', DB::raw('SUM(nilai) as total'))
+                ->orderBy('total', 'desc')
+                ->get();
+            $rank = 0;
+            foreach($totalScores as $totalScore) {
+                $rank++;
+                if($totalScore->student_id == $studentId) {
+                    break;
+                }
+            }
+            $temp = array("name" => $class->name, "semester" => $class->semester, "rank" => $rank);
+            array_push($data, $temp);
+        }
+        return $data;
+    }
 }

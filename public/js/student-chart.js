@@ -58,37 +58,56 @@ var scoreHistoryChart = new Chart($("#score-history"), {
 });
 
 // Mean score chart
-var meanScoreDataset = [{
-  label: 'Nilai Rata-rata',
-  data: [90, 65, 72, 83, 62, 80],
-  backgroundColor: 'rgba(255, 99, 132, 0.2)',
-  borderColor: 'rgba(255, 99, 132, 1)',
-}];
-var meanScoreChart = new Chart($("#mean-score"), {
-  type: 'line',
-  data: {
-    labels: ["X-I", "X-II", "XI-I", "XI-II", "XII-I", "XII-II"],
-    datasets: meanScoreDataset
-  },
-  options: options
+$.get("/student/getMeanStatistic", function (data, status){
+  var nilai = [];
+  var kelas = [];
+  $.each(data, function(i, statistik) {
+    nilai.push(statistik.avg);
+    kelas.push(statistik.name + "-" + statistik.semester);
+  });
+  var meanScoreDataset = [{
+    label: 'Nilai Rata-rata',
+    data: nilai,
+    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+    borderColor: 'rgba(255, 99, 132, 1)',
+  }];
+  var meanScoreChart = new Chart($("#mean-score"), {
+    type: 'line',
+    data: {
+      labels: kelas,
+      datasets: meanScoreDataset
+    },
+    options: options
+  });
 });
 
 // Rank chart
-var rankDataset = [{
-  label: 'Peringkat',
-  data: [10, 13, 7, 6, 15, 9],
-  backgroundColor: bgColor,
-  borderColor: borderColor,
-  borderWidth: 2
-}];
-var meanScoreChart = new Chart($("#rank"), {
-  type: 'bar',
-  data: {
-    labels: ["X-I", "X-II", "XI-I", "XI-II", "XII-I", "XII-II"],
-    datasets: rankDataset
-  },
-  options: options
+$.get("/student/getRankStatistic", function (data, status){
+  var rank = [];
+  var kelas = [];
+  $.each(data, function(i, statistik) {
+    rank.push(statistik.rank);
+    kelas.push(statistik.name + "-" + statistik.semester);
+  });
+  var rankDataset = [{
+    label: 'Peringkat',
+    data: rank,
+    backgroundColor: bgColor,
+    borderColor: borderColor,
+    borderWidth: 2
+  }];
+  var meanScoreChart = new Chart($("#rank"), {
+    type: 'bar',
+    data: {
+      labels: kelas,
+      datasets: rankDataset
+    },
+    options: options
+  });
 });
+
+// Rank chart
+
 
 // Student skill chart
 var skillDataset = [{

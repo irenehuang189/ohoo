@@ -29,3 +29,5 @@ Route::get('/student/detailed-report/{classId}/{courseId}', 'Student\StudentRepo
 
 /* Student statistic */
 Route::get('/student/statistic', 'Student\StudentStatisticController@showStatistic');
+Route::get('/student/getMeanStatistic', 'Student\StudentStatisticController@getMeanStatistic');
+Route::get('/student/getRankStatistic', 'Student\StudentStatisticController@getRankStatistic');
