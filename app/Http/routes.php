@@ -20,9 +20,12 @@ Route::get('login', 'Auth\AuthController@showLoginForm');
 Route::post('login', 'Auth\AuthController@login');
 Route::get('logout', 'Auth\AuthController@logout');
 
+/* Student report */
 Route::get('/student/report', 'Student\StudentReportController@showReport');
 Route::get('/student/report/{id}', 'Student\StudentReportController@showReportByClassId');
 Route::get('/student/detailed-report', 'Student\StudentReportController@showDetailedReport');
-Route::get('/student/statistic', 'Student\StudentReportController@showStatistic');
 Route::get('/student/getCoursesByClassId/{id}', 'Student\StudentReportController@getCoursesByClassId');
 Route::get('/student/detailed-report/{classId}/{courseId}', 'Student\StudentReportController@showDetailedReportByCourseId');
+
+/* Student statistic */
+Route::get('/student/statistic', 'Student\StudentStatisticController@showStatistic');

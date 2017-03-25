@@ -3,7 +3,7 @@
 @section('title', 'Rapor Semester')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $student->name }}
 @endsection
 
 @section('content')
@@ -20,7 +20,7 @@
         <div class="ui fluid card">
           <div class="content">
             <div class="ui blue statistic">
-              <div class="value">74</div>
+              <div class="value">{{ round($averageScore) }}</div>
               <div class="label">Rata-rata Nilai</div>
             </div>
           </div>
@@ -30,7 +30,7 @@
         <div class="ui fluid card">
           <div class="content">
             <div class="ui red statistic">
-              <div class="value">3</div>
+              <div class="value">{{ $nilaiMerah }}</div>
               <div class="label">Nilai Merah</div>
             </div>
           </div>
@@ -40,7 +40,7 @@
         <div class="ui fluid card">
           <div class="content">
             <div class="ui teal statistic">
-              <div class="value"><i class="trophy icon"></i> 13</div>
+              <div class="value"><i class="trophy icon"></i> {{ $rank }}</div>
               <div class="label">Peringkat</div>
             </div>
           </div>
