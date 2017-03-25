@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-<div class="ui grid" id="context"> 
+<div class="ui grid"> 
   <div class="one wide column"></div>
   <div class="fourteen wide column">
   <!-- Page Content -->

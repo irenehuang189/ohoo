@@ -13,6 +13,7 @@ $(document).ready(function(){
   $('.ui.sticky').sticky({
     context: '#context'
   });
+  $('.ui.accordion').accordion();
 
   $('#login-role a').click(function(){
     // Reset CSS
