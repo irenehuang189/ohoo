@@ -16,6 +16,7 @@ use App\Http\Requests;
 use App\Student;
 use App\Kelas;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class StudentStatisticController extends Controller
 {
@@ -30,7 +31,15 @@ class StudentStatisticController extends Controller
         $averageScore = $this->getAverageScore($studentId, $class);
         $nilaiMerah = $this->getNilaiMerah($studentId, $class);
         $rank = $this->getRank($studentId, $class);
-        return view('student.statistic', compact('student','averageScore', 'nilaiMerah', 'rank'));
+        $studentId = 1;
+        $courses = Student::find($studentId)->kelas()
+            ->join('courses', 'classes.id', '=', 'courses.class_id')
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('course_score.student_id', '=', $studentId)
+            ->groupBy('courses.name')
+            ->select('courses.name')
+            ->get();
+        return view('student.statistic', compact('student','averageScore', 'nilaiMerah', 'rank', 'courses'));
     }
 
     private function getAverageScore($studentId, $class) {
@@ -75,5 +84,77 @@ class StudentStatisticController extends Controller
             }
         }
         return $rank;
+    }
+
+    public function getMeanStatistic() {
+        $studentId = 1;
+        $courses = Student::find($studentId)->kelas()
+            ->join('courses', 'classes.id', '=', 'courses.class_id')
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('course_score.student_id', '=', $studentId)
+            ->groupBy('courses.class_id')
+            ->select('classes.name', 'classes.semester', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        return $courses;
+    }
+
+    public function getRankStatistic() {
+        $studentId = 1;
+        $classes = Student::find($studentId)->kelas;
+        $data = array();
+        foreach ($classes as $class) {
+            $totalScores = $class->courses()
+                ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+                ->groupBy('student_id')
+                ->select('*', DB::raw('SUM(nilai) as total'))
+                ->orderBy('total', 'desc')
+                ->get();
+            $rank = 0;
+            foreach($totalScores as $totalScore) {
+                $rank++;
+                if($totalScore->student_id == $studentId) {
+                    break;
+                }
+            }
+            $temp = array("name" => $class->name, "semester" => $class->semester, "rank" => $rank);
+            array_push($data, $temp);
+        }
+        return $data;
+    }
+
+    public function getCapabilityStatistic() {
+        $studentId = 1;
+        $courses = Student::find($studentId)->kelas()
+                ->join('courses', 'classes.id', '=', 'courses.class_id')
+                ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+                ->where('course_score.student_id', '=', $studentId)
+                ->groupBy('courses.name')
+                ->select('courses.name', DB::raw('AVG(nilai) as avg'))
+                ->get();
+        return $courses;
+    }
+    
+    public function getHistoryCoursesStatistic($data) {
+        $studentId = 1;
+        $courses = json_decode($data);
+        $response = [];
+        $courseScore = Student::find($studentId)->kelas()
+                        ->join('courses', 'classes.id', '=', 'courses.class_id')
+                        ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+                        ->where('course_score.student_id', '=', $studentId)
+                        ->select(DB::raw('courses.name as course_name'), DB::raw('classes.name as kelas'), 'semester', 'nilai')
+                        ->get();
+        foreach ($courses as $course) {
+            $i = 0;
+
+            foreach ($courseScore as $n) {
+
+                if ($n->course_name == $course) {
+                    $temp = array("kelas" => $n->kelas, "semester" => $n->semester, "nilai" => $n->nilai);
+                }
+                $i++;
+            }
+        }
+        return $response;
     }
 }
