@@ -5,6 +5,12 @@ var bgColor = [
   'rgba(255, 99, 132, 0.4)', // Pink
   'rgba(153, 102, 255, 0.4)', // Purple
   'rgba(54, 162, 235, 0.4)', // Blue
+  'rgba(255, 159, 64, 0.4)', // Orange
+  'rgba(75, 192, 192, 0.4)', // Green
+  'rgba(255, 206, 86, 0.4)', // Yellow
+  'rgba(255, 99, 132, 0.4)', // Pink
+  'rgba(153, 102, 255, 0.4)', // Purple
+  'rgba(54, 162, 235, 0.4)', // Blue
   'rgba(255, 159, 64, 0.4)' // Orange
 ];
 
@@ -14,7 +20,13 @@ var color = [
   'rgba(255, 99, 132, 1)', // Pink
   'rgba(153, 102, 255, 1)', // Purple
   'rgba(54, 162, 235, 1)', // Blue
-  'rgba(255, 159, 64, 1)' // Orange
+  'rgba(255, 159, 64, 1)', // Orange
+  'rgba(75, 192, 192, 0.4)', // Green
+  'rgba(255, 206, 86, 0.4)', // Yellow
+  'rgba(255, 99, 132, 0.4)', // Pink
+  'rgba(153, 102, 255, 0.4)', // Purple
+  'rgba(54, 162, 235, 0.4)', // Blue
+  'rgba(255, 159, 64, 0.4)' // Orange
 ];
 
 var options = {
@@ -79,30 +91,70 @@ $.get("/student/getRankStatistic", function (data, status){
   });
 });
 
-var skillDataset = [{
-  label: 'Rata-rata Nilai',
-  backgroundColor: bgColor[0],
-  borderColor: color[0],
-  pointBackgroundColor: color[0],
-  pointBorderColor: "#fff",
-  pointHoverBackgroundColor: bgColor[0],
-  pointHoverBorderColor: color[0],
-  data: [67, 85, 54, 87, 72, 39, 28, 28, 93, 18, 54, 87, 72, 49]
-}];
-var skillChart = new Chart($("#skill"), {
-  type: 'radar',
-  data: {
-    labels: ['Pendidikan Agama', 'Pendidikan Kewarganegaraan', 'Bahasa Indonesia', 'Bahasa Inggris', 'Matematika', 'Kesenian', 'Pendidikan Jasmani', 'Sejarah', 'Geografi', 'Ekonomi', 'Sosiologi', 'Fisika', 'Kimia', 'Biologi', 'TIK', 'Bahasa Mandarin'],
-    datasets: skillDataset
-  },
-  options: options
+// Statistik kemampuan siswa
+$.get("/student/getCapabilityStatistic", function (data, status){
+  var nilai = [];
+  var courses = [];
+  $.each(data, function(i, statistik) {
+    nilai.push(statistik.avg);
+    courses.push(statistik.name);
+  });
+  var skillDataset = [{
+    label: 'Rata-rata Nilai',
+    backgroundColor: bgColor[0],
+    borderColor: color[0],
+    pointBackgroundColor: color[0],
+    pointBorderColor: "#fff",
+    pointHoverBackgroundColor: bgColor[0],
+    pointHoverBorderColor: color[0],
+    data: nilai
+  }];
+  var skillChart = new Chart($("#skill"), {
+    type: 'radar',
+    data: {
+      labels: courses,
+      datasets: skillDataset
+    },
+    options: options
+  });
 });
 
+// Histori nilai mata pelajaran
+$("#histori-nilai").change(function(){
+  var courses = [];
+  $('#histori-nilai :selected').each(function(i, selected){
+    courses[i] = $(selected).text();
+  });
+  var courses = JSON.stringify(courses);
+  $.get("/student/getHistoryCoursesStatistic/" + courses, function (data, status){
+    var tabNilai = [];
+    var kelas = [];
+    // $.each(data, function(i, statistik) {
+    //   nilai.push(statistik.avg);
+    //   kelas.push(statistik.name + "-" + statistik.semester);
+    // });
+    // var meanScoreDataset = [{
+    //   label: 'Nilai Rata-rata',
+    //   data: nilai,
+    //   backgroundColor: bgColor[3],
+    //   borderColor: color[3],
+    // }];
+    // var meanScoreChart = new Chart($("#mean-score"), {
+    //   type: 'line',
+    //   data: {
+    //     labels: kelas,
+    //     datasets: meanScoreDataset
+    //   },
+    //   options: options
+    // });
+  });
+
+});
 
 // histori nilai mata pelajaran
 var scoreHistoryDataset = [{
   label: 'Matematika',
-  data: [70, 50, 35, 76, 82, 90],
+  data: [70, 0, 0, 76, 82, 90],
   fill: false,
   backgroundColor: bgColor[0],
   borderColor: color[0],

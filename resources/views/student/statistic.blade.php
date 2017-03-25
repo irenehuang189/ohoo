@@ -97,13 +97,13 @@
             <div class="ui form">
               <div class="inline field">
                 <label>Mata Pelajaran</label>
-                <select multiple="" class="ui dropdown">
-                  <option value="">All</option>
-                  <option value="AF">Bahasa Indonesia</option>
-                  <option value="AX">Bahasa Iggris</option>
-                  <option value="AL">Matematika</option>
-                  <option value="AO">Fisika</option>
-                  <option value="AI">Kimia</option>
+                <select multiple="" class="ui dropdown " id="histori-nilai">
+                  <option value="">Pilih mata pelajaran</option>
+                  <?php $id = 0 ?>
+                  @foreach($courses as $course)
+                    <option value={{ $id }}>{{ $course->name }}</option>
+                    <?php $id++; ?>
+                  @endforeach
                 </select>
               </div>
             </div>
