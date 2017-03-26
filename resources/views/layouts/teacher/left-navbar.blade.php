@@ -50,7 +50,7 @@
       <i class="privacy icon"></i>Ubah Password
     </span>
   </a>
-  <a class="item">
+  <a class="item" href="{{ url('/logout') }}">
     <span>
       <i class="sign out icon"></i>Keluar
     </span>
