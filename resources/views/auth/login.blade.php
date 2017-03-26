@@ -1,66 +1,69 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ohoo</title>
 
-@section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-8 col-md-offset-2">
-            <div class="panel panel-default">
-                <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ url('/login') }}">
-                        {{ csrf_field() }}
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="{{{ asset('images/favicon.ico') }}}" type="image/x-icon">
+    <link rel="icon" href="{{{ asset('images/favicon.ico') }}}" type="image/x-icon">
+    
+    <!-- Style -->
+    <link rel="stylesheet" type="text/css" href="{{{ asset('css/semantic.min.css') }}}" />
+    <link rel="stylesheet" type="text/css" href="{{{ asset('css/app.css') }}}" />
+</head>
+<body style="background-image:url(images/login-bg.jpg)">
+<p><br /><br /></p>
+<div class="ui container center aligned" id="holder">
+    <div class="ui centered fluid card">
+        <div class="ui grid">
+            <div class="eleven wide column" id="login-banner">
+                <img class="ui fluid image" src="images/login-banner.jpg" />
+            </div>
+            <!-- User type -->
+            <div class="ui five wide column" id="login-form">
+                <h3>LOGIN</h3><br /><br />
+                <div class="ui three column grid" id="login-role">
+                    <a class="column right-border">
+                        <img class="ui circular image" src="images/teacher-icon.png" />Guru
+                    </a>
+                    <a class="column right-border">
+                        <img class="ui circular image" src="images/parent-icon.png" />Orang Tua
+                    </a>
+                    <a class="column">
+                        <img class="ui circular image" src="images/student-icon.png" />Murid
+                    </a>
 
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}">
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                    <div class="ui hidden divider"></div>
+                    <!-- Login form -->
+                    <form class="ui form" method="post" action="{{ url('/login') }}">
+                    {{ csrf_field() }}
+                        <div class="ui left icon input field">
+                            <input name="username" type="text" placeholder="Username" value="{{ old('username') }}" />
+                            <i class="user icon"></i>
                         </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password">
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
+                        <div class="ui left icon input field">
+                            <input name="password" type="password" placeholder="Password" />
+                            <i class="key icon"></i>
                         </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember"> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    <i class="fa fa-btn fa-sign-in"></i> Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ url('/password/reset') }}">Forgot Your Password?</a>
-                            </div>
+                        <div class="field">
+                            <button type="submit" class="ui button">Login</button>
                         </div>
                     </form>
+                    <!-- /Login form -->
                 </div>
             </div>
+            <!-- /User type -->
         </div>
     </div>
 </div>
-@endsection
+
+<!-- Script -->
+<script
+        src="https://code.jquery.com/jquery-3.1.1.min.js"
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+        crossorigin="anonymous"></script>
+<script src="{{{ asset('js/semantic.min.js') }}}"></script>
+<script src="{{{ asset('js/Chart.bundle.min.js') }}}"></script>
+<script src="{{{ asset('js/app.js') }}}"></script>
+</body>
+</html>

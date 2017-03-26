@@ -32,7 +32,7 @@
     @yield('user-name')
     <div class="menu">
     <a class="item">Ubah Password</a>
-    <a class="item">Keluar</a>
+    <a class="item" href="{{ url('/logout') }}">Keluar</a>
     </div>
   </div>
 </div>
