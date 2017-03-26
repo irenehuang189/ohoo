@@ -12,17 +12,17 @@
 
 @section('right-column')
 <div class="row">
-  <button class="ui fluid right labeled icon teal button">
+  <a href="{{ url('teacher/class') }}" class="ui fluid right labeled icon teal button">
     Simpan & Selesai<i class="save icon"></i>
-  </button>
+  </a>
 </div>
 <div class="row">
-  <button class="ui fluid right labeled icon button">
+  <a href="{{ url('teacher/class/add') }}" class="ui fluid right labeled icon button">
     Simpan & Lanjutkan<i class="pencil icon"></i>
-  </button>
+  </a>
 </div>
 <div class="row">
-  <button class="ui fluid right labeled icon red button">
+  <button class="ui fluid right labeled icon red button" id="delete">
     Batal<i class="trash icon"></i>
   </button>
 </div>
@@ -93,5 +93,27 @@
   </tbody>
 </table>
 <!-- /Tabel Daftar Siswa -->
+
+<!-- Modal Hapus -->
+<div class="ui basic modal">
+  <div class="ui icon header">
+    <i class="archive icon"></i>
+    Apakah Anda yakin ingin menghapus?
+  </div>
+  <div class="content">
+    <p>Data akan dihapus segera. Anda tidak dapat mengembalikan data yang telah dihapus.</p>
+  </div>
+  <div class="actions">
+    <div class="ui basic cancel inverted button">
+      <i class="remove icon"></i>
+      Tidak
+    </div>
+    <a class="ui red ok inverted button" href="{{ url('teacher/class') }}">
+      <i class="checkmark icon"></i>
+      Ya
+    </a>
+  </div>
+</div>
+<!-- /Modal Hapus -->
 
 @endsection
