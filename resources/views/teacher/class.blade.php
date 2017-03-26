@@ -6,6 +6,10 @@
   NAMA DI SINI
 @endsection
 
+@section('user-tid')
+  187290 1271 9276
+@endsection
+
 @section('right-column')
 <div class="ui small form">
   <div class="field">
@@ -26,8 +30,8 @@
 @endsection
 
 @section('header-left-column')
-Nilai Kelas X-1
-<div class="ui divider"></div>
+  Nilai Kelas X-1
+  <div class="ui divider"></div>
 @endsection
 
 @section('left-column')
@@ -37,9 +41,9 @@ Nilai Kelas X-1
       <h3 class="ui header">Nilai Ujian</h3>
     </div>
     <div class="four wide right aligned column">
-      <button class="ui labeled icon compact teal button">
+      <a class="ui labeled icon compact teal button" href="{{ url('teacher/class/add') }}">
         <i class="plus icon"></i>Tambah
-      </button>
+      </a>
     </div>
   </div>
   <table class="ui structured selectable celled table">
@@ -62,9 +66,9 @@ Nilai Kelas X-1
         </td>
         <td>
           <div class="ui icon mini buttons">
-            <button class="ui blue button"><i class="eye icon"></i></button>
-            <button class="ui yellow button"><i class="pencil icon"></i></button>
-            <button class="ui red button"><i class="trash icon"></i></button>
+            <button class="ui blue basic  button"><i class="eye icon"></i></button>
+            <button class="ui yellow basic button"><i class="pencil icon"></i></button>
+            <button class="ui red basic button"><i class="trash icon"></i></button>
           </div>
         </td>
       </tr>
@@ -78,9 +82,9 @@ Nilai Kelas X-1
       <h3 class="ui header">Nilai Tugas</h3>
     </div>
     <div class="four wide right aligned column">
-      <button class="ui labeled icon compact teal button">
+      <a class="ui labeled icon compact teal button" href="{{ url('teacher/class/add') }}">
         <i class="plus icon"></i>Tambah
-      </button>
+      </a>
     </div>
   </div>
   <table class="ui structured selectable celled table">
@@ -101,9 +105,9 @@ Nilai Kelas X-1
         <td class="center aligned">round($assignment_averages[$i - 1]->avg)</td>
         <td>
           <div class="ui icon mini buttons">
-            <button class="ui blue button"><i class="eye icon"></i></button>
-            <button class="ui yellow button"><i class="pencil icon"></i></button>
-            <button class="ui red button"><i class="trash icon"></i></button>
+            <button class="ui blue basic  button"><i class="eye icon"></i></button>
+            <button class="ui yellow basic button"><i class="pencil icon"></i></button>
+            <button class="ui red basic button"><i class="trash icon"></i></button>
           </div>
         </td>
       </tr>

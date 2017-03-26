@@ -35,15 +35,23 @@ Route::get('/student/getCapabilityStatistic', 'Student\StudentStatisticControlle
 Route::get('/student/getHistoryCoursesStatistic/{request}', 'Student\StudentStatisticController@getHistoryCoursesStatistic');
 
 /* Teacher */
+// Class
 Route::get('/teacher/class', function() {
   return view('teacher/class');
 });
+Route::get('/teacher/class/add', function() {
+  return view('teacher/class/add');
+});
+
 Route::get('/teacher/course', function() {
   return view('teacher/course');
 });
+
+// Individu
 Route::get('/teacher/individu', function() {
   return view('teacher/individu');
 });
+
 Route::get('/teacher/statistic', function() {
   return view('teacher/statistic');
 });

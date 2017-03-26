@@ -4,8 +4,8 @@
     <img class="ui image" src="{{ asset('images/logo.png') }}">
     <div class="ui hidden divider"></div>
     <div class="ui center aligned grid">
-      <h5>Bambang Supendi</h5>
-      187290 1271 9276
+      <h5>@yield('user-name')</h5>
+      @yield('user-tid')
     </div>
     <div class="ui hidden divider"></div>
   </div>
