@@ -14,7 +14,6 @@
    
     <!-- Context -->
     <div class="ui segment">
-      <h2 class="ui header">@yield('header-left-column')</h2>
       @yield('left-column')
     </div>
     <!-- /Context -->

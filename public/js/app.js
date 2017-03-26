@@ -15,6 +15,12 @@ $(document).ready(function(){
   });
   $('.ui.accordion').accordion();
 
+  // Before delete modal
+  $('#delete').click(function(){
+    $('.ui.basic.modal').modal({blurring: true}).modal('show');
+  });
+
+  // Login page
   $('#login-role a').click(function(){
     // Reset CSS
     $('#login-role a img').css({
@@ -74,7 +80,5 @@ $(document).ready(function(){
   $('#semester').click(function(e){
       // $(this).parent().siblings('.ui.tab[data-tab="semester"]').html('lalala');
       window.location.href = 'tes';
-    // $.get('/tes', function(data, status){
-    // });
   });
 });

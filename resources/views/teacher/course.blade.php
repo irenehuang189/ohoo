@@ -9,7 +9,5 @@
 @section('right-column')
 @endsection
 
-@section('header-left-column', 'Nilai Mata Pelajaran')
-
 @section('left-column')
 @endsection

@@ -1,6 +1,6 @@
 @extends('layouts.teacher.two-column-content')
 
-@section('title', 'Nilai Kelas')
+@section('title', 'Tambah Nilai Kelas')
 
 @section('user-name')
   NAMA DI SINI
@@ -11,9 +11,6 @@
 @endsection
 
 @section('right-column')
-<div>
-
-</div>
 <div class="row">
   <button class="ui fluid right labeled icon teal button">
     Simpan & Selesai<i class="save icon"></i>
@@ -31,15 +28,12 @@
 </div>
 @endsection
 
-@section('header-left-column')
+@section('left-column')
+<h2 class="ui dividing header">
   Tambah Nilai Kelas X-1
   <div class="sub header">Mata Pelajaran Matematika</div>
-  <div class="ui divider"></div>
-@endsection
-
-@section('left-column')
+</h2>
 <!-- Rincian Penilaian -->
-<div class="ui teal big ribbon label">Rincian</div>
 <div class="ui hidden divider"></div>
 <div class="ui grid">
   <div class="row">
@@ -69,38 +63,35 @@
 
 <!-- Tabel Daftar Siswa -->
 <div class="ui hidden divider"></div>
-<div class="ui teal big ribbon label">Daftar Siswa</div>
+<div class="ui teal big ribbon label">Nilai Siswa</div>
 <div class="ui hidden divider"></div>
-<div class="ui container">
-  <!-- <div class="column"> -->
-  <table class="ui celled striped table">
-    <thead class="center aligned"><tr>
-      <th class="one wide">No.</th>
-      <th>Nama Lengkap</th>
-      <th class="two wide">Nilai</th>
-    </tr></thead>
-    <tbody>
-      <tr>
-        <td class="center aligned">1</td>
-        <td>Wina Aryasubedjo</td>
-        <td>
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="center aligned">2</td>
-        <td>Bekti Hutama</td>
-        <td>
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-</div>
+<table class="ui striped very compact table">
+  <thead class="center aligned"><tr>
+    <th class="one wide">No.</th>
+    <th>Nama Lengkap</th>
+    <th class="two wide">Nilai</th>
+  </tr></thead>
+  <tbody>
+    <tr>
+      <td class="center aligned">1</td>
+      <td>Wina Aryasubedjo</td>
+      <td>
+        <div class="ui input">
+          <input type="number" placeholder="0"/>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td class="center aligned">2</td>
+      <td>Bekti Hutama</td>
+      <td>
+        <div class="ui input">
+          <input type="number" placeholder="0"/>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
 <!-- /Tabel Daftar Siswa -->
 
 @endsection

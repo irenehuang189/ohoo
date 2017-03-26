@@ -42,6 +42,9 @@ Route::get('/teacher/class', function() {
 Route::get('/teacher/class/add', function() {
   return view('teacher/class/add');
 });
+Route::get('/teacher/class/detail', function() {
+  return view('teacher/class/detail');
+});
 
 Route::get('/teacher/course', function() {
   return view('teacher/course');
