@@ -129,56 +129,64 @@ $("#histori-nilai").change(function(){
   $.get("/student/getHistoryCoursesStatistic/" + courses, function (data, status){
     var tabNilai = [];
     var kelas = [];
-    // $.each(data, function(i, statistik) {
-    //   nilai.push(statistik.avg);
-    //   kelas.push(statistik.name + "-" + statistik.semester);
-    // });
-    // var meanScoreDataset = [{
-    //   label: 'Nilai Rata-rata',
-    //   data: nilai,
-    //   backgroundColor: bgColor[3],
-    //   borderColor: color[3],
-    // }];
-    // var meanScoreChart = new Chart($("#mean-score"), {
-    //   type: 'line',
-    //   data: {
-    //     labels: kelas,
-    //     datasets: meanScoreDataset
-    //   },
-    //   options: options
-    // });
+    var scoreHistoryDataset = [];
+    var response = JSON.parse(data);
+    var course_scores = response.course_scores;
+    var classes = response.classes;
+    for (var i=0; i<course_scores.length; i++) {
+      var dataset = {
+        label: course_scores[i].course_name,
+        data: course_scores[i].scores,
+        fill: false,
+        backgroundColor: bgColor[i],
+        borderColor: color[i]
+      }
+      scoreHistoryDataset.push(dataset);
+    }
+    var classNames = [];
+    for (var i=0; i<classes.length; i++) {
+      classNames.push(classes[i].name + "-" + classes[i].semester);
+    }
+    var scoreHistoryChart = new Chart($("#score-history"), {
+      type: 'line',
+      data: {
+        labels: classNames,
+        datasets: scoreHistoryDataset
+      },
+      options: options
+    });
   });
 
 });
 
 // histori nilai mata pelajaran
-var scoreHistoryDataset = [{
-  label: 'Matematika',
-  data: [70, 0, 0, 76, 82, 90],
-  fill: false,
-  backgroundColor: bgColor[0],
-  borderColor: color[0],
-}, {
-  label: 'Bahasa Indonesia',
-  data: [80, 90, 87, 76, 63, 93],
-  fill: false,
-  backgroundColor: bgColor[1],
-  borderColor: color[1],
-}, {
-  label: 'Fisika',
-  data: [55, 72, 36, 80, 68, 75],
-  fill: false,
-  backgroundColor: bgColor[2],
-  borderColor: color[2],
-}];
-var scoreHistoryChart = new Chart($("#score-history"), {
-  type: 'line',
-  data: {
-    labels: ["X-I", "X-II", "XI-I", "XI-II", "XII-I", "XII-II"],
-    datasets: scoreHistoryDataset
-  },
-  options: options
-});
+// var scoreHistoryDataset = [{
+//   label: 'Matematika',
+//   data: [70, 0, 0, 76, 82, 90],
+//   fill: false,
+//   backgroundColor: bgColor[0],
+//   borderColor: color[0],
+// }, {
+//   label: 'Bahasa Indonesia',
+//   data: [80, 90, 87, 76, 63, 93],
+//   fill: false,
+//   backgroundColor: bgColor[1],
+//   borderColor: color[1],
+// }, {
+//   label: 'Fisika',
+//   data: [55, 72, 36, 80, 68, 75],
+//   fill: false,
+//   backgroundColor: bgColor[2],
+//   borderColor: color[2],
+// }];
+// var scoreHistoryChart = new Chart($("#score-history"), {
+//   type: 'line',
+//   data: {
+//     labels: ["X-I", "X-II", "XI-I", "XI-II", "XII-I", "XII-II"],
+//     datasets: scoreHistoryDataset
+//   },
+//   options: options
+// });
 
 function fillArray(arr, times)
 {
