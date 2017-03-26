@@ -9,32 +9,11 @@
     </div>
     <div class="ui hidden divider"></div>
   </div>
-  <div class="item">
-    <div class="title">
-      <i class="dropdown icon"></i>
-        <i class="users icon"></i>Kelas
-    </div>
-    <div class="content active menu">
-      <a class="item" href="{{ url('teacher/class') }}">Kelas X-1 (Wali Kelas)</a>
-      <a class="item">Kelas X-2</a>
-      <a class="item">Kelas X-3</a>
-      <a class="item">Kelas XI-1</a>
-      <a class="item">Kelas XI-2</a>
-      <a class="item">Kelas XII-1</a>
-      <a class="item">Kelas XII-2</a>
-    </div>
-  </div>
-  <div class="item">
-    <div class="title">
-      <i class="dropdown icon"></i>
-      <i class="book icon"></i>Mata Pelajaran
-    </div>
-    <div class="content menu">
-      <a class="item" href="{{ url('teacher/course') }}">Matematika</a>
-      <a class="item">Fisika</a>
-      <a class="item">Kimia</a>
-    </div>
-  </div>
+  <a class="teal item" href="{{ url('teacher/score') }}">
+    <span>
+      <i class="student icon"></i>Manajemen Nilai
+    </span>
+  </a>
   <a class="teal item" href="{{ url('teacher/individu') }}">
     <span>
       <i class="child icon"></i>Performansi Individu

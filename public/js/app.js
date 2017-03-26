@@ -83,6 +83,23 @@ $(document).ready(function(){
     window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
   });
 
+  // Teacher score management: add page
+  $('div#score').hide();
+  $('.steps#add-score .step').click(function(){
+    $(this).addClass('active');
+    var id = $(this).attr('id');
+    if(id == 'exam'){
+      $('#score').removeClass('active');
+      $('div#score').hide();
+      $('div#exam').show();
+    } else if(id == 'score'){
+      $('#exam').removeClass('active');
+      $('div#exam').hide();
+      $('div#score').show();
+      // TODO: Panggil ajax buat daftar siswa di sini
+    };
+  });
+
   // Teacher individu page
   // Right menu on individu detail
   $('div#semester').hide();

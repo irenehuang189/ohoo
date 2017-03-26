@@ -42,19 +42,15 @@ Route::group(['middleware' => 'student'], function() {
 });
 
 Route::group(['middleware' => 'teacher'], function() {
-	/* Class */
-	Route::get('/teacher/class', function() {
-	  return view('teacher/class');
+	/* Score */
+	Route::get('/teacher/score', function() {
+	  return view('teacher/score');
 	});
-	Route::get('/teacher/class/add', function() {
-	  return view('teacher/class/add');
+	Route::get('/teacher/score/add', function() {
+	  return view('teacher/score/add');
 	});
-	Route::get('/teacher/class/detail', function() {
-	  return view('teacher/class/detail');
-	});
-
-	Route::get('/teacher/course', function() {
-	  return view('teacher/course');
+	Route::get('/teacher/score/detail', function() {
+	  return view('teacher/score/detail');
 	});
 
 	/* Individu */

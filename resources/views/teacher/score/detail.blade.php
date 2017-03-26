@@ -34,12 +34,12 @@
 <div class="ui grid">
   <div class="ten wide column">
     <h2 class="ui header">
-      Tambah Nilai Kelas X-1
+      Daftar Nilai Kelas X-1
       <div class="sub header">Mata Pelajaran Matematika</div>
     </h2>
   </div>
   <div class="six wide right aligned column">
-    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/class/add') }}">
+    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/add') }}">
       <i class="pencil icon"></i>Ubah
     </a>
     <a class="ui labeled icon compact red button" id="delete">
@@ -113,7 +113,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/class') }}">
+    <a class="ui red ok inverted button" href="{{ url('teacher/score') }}">
       <i class="checkmark icon"></i>
       Ya
     </a>

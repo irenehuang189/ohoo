@@ -13,9 +13,17 @@
 @section('right-column')
 <div class="ui small form">
   <div class="field">
+    <label>Kelas</label>
+    <select class="ui dropdown" id="choose-class">
+      <option value="-1" selected>Semua</option>
+      <option value="">Kelas XI-IPA2</option>
+    </select>
+  </div>
+  <div class="field">
     <label>Mata Pelajaran</label>
     <select class="ui dropdown" id="choose-course">
-      <option value="-1" disabled selected>-- Pilih Mata Pelajaran --</option>
+      <option value="-1" selected>Semua</option>
+      <option value="">Matematika</option>
     </select>
   </div>
   <div class="row">
@@ -30,14 +38,14 @@
 @endsection
 
 @section('left-column')
-<h2 class="ui dividing header">Nilai Kelas X-1</h2>
+<h2 class="ui dividing header">Daftar Nilai</h2>
 <!-- Exam score table -->
 <div class="ui grid">
   <div class="twelve wide column">
     <div class="ui teal big ribbon label">Nilai Ujian</div>
   </div>
   <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/class/add') }}">
+    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/add') }}">
       <i class="plus icon"></i>Tambah
     </a>
   </div>
@@ -45,15 +53,19 @@
 <table class="ui structured selectable celled table" id="exam-score">
   <thead class="center aligned">
   <tr>
-    <th>Jenis Penilaian<i class="sort content ascending small icon" id="1"></i></th>
-    <th>Materi<i class="sort content ascending small icon" id="2"></i></th>
-    <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" id="3"></i></th>
-    <th>Rata-rata Kelas <i class="sort content ascending small icon" id="4"></th>
+    <th>Kelas<i class="sort content ascending small icon" id="1"></i></th>
+    <th>Mata Pelajaran<i class="sort content ascending small icon" id="2"></i></th>
+    <th>Jenis Penilaian<i class="sort content ascending small icon" id="3"></i></th>
+    <th>Materi<i class="sort content ascending small icon" id="4"></i></th>
+    <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" id="5"></i></th>
+    <th>Rata-rata Kelas <i class="sort content ascending small icon" id="6"></th>
     <th>Aksi</th>
   </tr>
   </thead>
   <tbody>
     <tr>
+      <td>XI-IPA2</td>
+      <td>Matematika</td>
       <td>$exam->name</td>
       <td>$exam->materi</td>
       <td>$exam->tanggal</td>
@@ -62,8 +74,8 @@
       </td>
       <td>
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/class/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
-          <a href="{{ url('teacher/class/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
+          <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
         </div>
       </td>
@@ -78,7 +90,7 @@
     <div class="ui teal big ribbon label">Nilai Tugas</div>
   </div>
   <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/class/add') }}">
+    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/add') }}">
       <i class="plus icon"></i>Tambah
     </a>
   </div>
@@ -86,23 +98,27 @@
 <table class="ui structured selectable celled table" id="assignment-score">
   <thead class="center aligned">
   <tr>
-    <th>Jenis Penilaian<i class="sort content ascending small icon" id="1"></i></th>
-    <th>Materi<i class="sort content ascending small icon" id="2"></i></th>
-    <th>Tanggal Pengumpulan<i class="sort content ascending small icon" id="3"></i></th>
-    <th>Rata-rata Kelas<i class="sort content ascending small icon" id="4"></i></th>
+    <th>Kelas<i class="sort content ascending small icon" id="1"></i></th>
+    <th>Mata Pelajaran<i class="sort content ascending small icon" id="2"></i></th>
+    <th>Jenis Penilaian<i class="sort content ascending small icon" id="3"></i></th>
+    <th>Materi<i class="sort content ascending small icon" id="4"></i></th>
+    <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" id="5"></i></th>
+    <th>Rata-rata Kelas <i class="sort content ascending small icon" id="6"></th>
     <th>Aksi</th>
   </tr>
   </thead>
   <tbody>
     <tr>
+      <td>XI-IPA2</td>
+      <td>Matematika</td>
       <td>$assigment->name</td>
       <td>$assigment->materi</td>
       <td>$assigment->tanggal</td>
-      <td class="center aligned">round($assignment_averages[$i - 1]->avg)</td>
+      <td class="center aligned">36</td>
       <td>
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/class/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
-          <a href="{{ url('teacher/class/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
+          <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
         </div>
       </td>
@@ -125,7 +141,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/class') }}">
+    <a class="ui red ok inverted button" href="{{ url('teacher/score') }}">
       <i class="checkmark icon"></i>
       Ya
     </a>
