@@ -56,7 +56,7 @@
 @if($blank == 1)
   Anda belum memilih kelas dan mata pelajaran.
 @elseif($blank == 0)
-  <!-- Score table -->
+  <!-- Exam score table -->
   <h3 class="ui header">Nilai Ujian</h3>
   @if(count($exams) == 0)
     Tidak ada ujian
@@ -94,7 +94,7 @@
       </tbody>
     </table>
   @endif
-  <!-- /Score Ujian table -->
+  <!-- /Exam score table -->
   <!-- Assignment score table -->
   <h3 class="ui header">Nilai Tugas</h3>
   @if(count($assignments) == 0)

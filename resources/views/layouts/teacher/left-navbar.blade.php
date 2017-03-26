@@ -14,8 +14,8 @@
       <i class="dropdown icon"></i>
         <i class="users icon"></i>Kelas
     </div>
-    <div class="content menu">
-      <a class="item" href="{{ url('teacher/class') }}">Kelas X-1</a>
+    <div class="content active menu">
+      <a class="item" href="{{ url('teacher/class') }}">Kelas X-1 (Wali Kelas)</a>
       <a class="item">Kelas X-2</a>
       <a class="item">Kelas X-3</a>
       <a class="item">Kelas XI-1</a>

@@ -69,4 +69,12 @@ $(document).ready(function(){
     var courseId = $("#choose-course :selected").val();
     window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
   });
+
+  // Teacher individu
+  $('#semester').click(function(e){
+      // $(this).parent().siblings('.ui.tab[data-tab="semester"]').html('lalala');
+      window.location.href = 'tes';
+    // $.get('/tes', function(data, status){
+    // });
+  });
 });

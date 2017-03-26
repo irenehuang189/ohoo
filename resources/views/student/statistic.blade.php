@@ -14,7 +14,7 @@
     <h2 class="ui header">Statistik Nilai</h2>
 
     <!-- Overview -->
-    <div class="ui three column grid">
+    <div class="ui three column center aligned grid">
       <div class="column">
         <div class="ui fluid card">
           <div class="content">

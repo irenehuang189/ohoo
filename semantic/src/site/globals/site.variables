@@ -6,7 +6,7 @@
 @pageFont : "Open Sans", "Helvetica Neue", Arial, Helvetica, sans-serif;
 
 /* Colors */
-@blue: #80A6CD;
+@blue: #0099CC;
 @green: #78CB5B;
 @orange: #D26911;
 @black: #333333;
