@@ -137,24 +137,38 @@ class StudentStatisticController extends Controller
     public function getHistoryCoursesStatistic($data) {
         $studentId = 1;
         $courses = json_decode($data);
-        $response = [];
+        $classes = $this->getPastClasses($studentId);
         $courseScore = Student::find($studentId)->kelas()
                         ->join('courses', 'classes.id', '=', 'courses.class_id')
                         ->join('course_score', 'courses.id', '=', 'course_score.course_id')
                         ->where('course_score.student_id', '=', $studentId)
                         ->select(DB::raw('courses.name as course_name'), DB::raw('classes.name as kelas'), 'semester', 'nilai')
                         ->get();
+        $course_scores = [];
         foreach ($courses as $course) {
-            $i = 0;
-
+            $scores = [];
             foreach ($courseScore as $n) {
-
                 if ($n->course_name == $course) {
-                    $temp = array("kelas" => $n->kelas, "semester" => $n->semester, "nilai" => $n->nilai);
+                    array_push($scores, $n->nilai);
                 }
-                $i++;
             }
+            $temp = array('course_name' => $course, 'scores' => $scores);
+            array_push($course_scores, $temp);
         }
-        return $response;
+        $response = new \stdClass();
+        $response->classes = $classes;
+        $response->course_scores = $course_scores;
+        return json_encode($response);
+    }
+
+    private function getPastClasses($studentId) {
+        $classes = Student::find($studentId)->kelas()
+            ->join('courses', 'classes.id', '=', 'courses.class_id')
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('course_score.student_id', '=', $studentId)
+            ->groupBy('courses.class_id')
+            ->select('classes.name', 'classes.semester')
+            ->get();
+        return $classes;
     }
 }
