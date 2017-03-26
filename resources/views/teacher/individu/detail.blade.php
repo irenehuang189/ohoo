@@ -105,22 +105,16 @@
 </h2>
 <div class="ui segment">
   <div class="ui pointing secondary teal menu">
-    <a class="active item" data-tab="overview" id="overview">Overview</a>
+    <a class="item" data-tab="overview" id="overview">Overview</a>
     <a class="item" data-tab="semester" id="semester">Rapor Semester</a>
     <a class="item" data-tab="midterm" id="midterm">Rapor Bayangan</a>
     <a class="item" data-tab="detail" id="detail">Rincian Nilai</a>
   </div>
   
   @include('teacher.individu.overview')
-  <div class="ui tab" data-tab="semester">
-    semester
-  </div>
-  <div class="ui tab" data-tab="midterm">
-    midterm
-  </div>
-  <div class="ui tab" data-tab="detail">
-    semester
-  </div>
+  <!-- include('teacher.individu.semester') -->
+  @include('teacher.individu.midterm')
+  @include('teacher.individu.detail-report')
 
 </div>
 @endsection

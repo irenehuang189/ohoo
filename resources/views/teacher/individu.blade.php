@@ -48,18 +48,18 @@
   </tr></thead>
   <tbody>
     <tr class="center aligned">
-      <td class="center aligned">1</td>
-      <td class="center aligned">13232</td>
+      <td>1</td>
+      <td>13232</td>
       <td>Wina Aryasubedjo</td>
-      <td class="center aligned">
+      <td>
         <a href="{{ url('teacher/individu/detail') }}" class="ui blue basic icon mini button"><i class="eye icon"></i></a>
       </td>
     </tr>
     <tr class="center aligned">
-      <td class="center aligned">2</td>
-      <td class="center aligned">13233</td>
+      <td>2</td>
+      <td>13233</td>
       <td>Bekti Regan</td>
-      <td class="center aligned">
+      <td>
         <a href="{{ url('teacher/individu/detail') }}" class="ui blue basic icon mini button"><i class="eye icon"></i></a>
       </td>
     </tr>

@@ -2,14 +2,14 @@
   <!-- Identity -->
   <div class="ui container grid">
     <div class="three wide column">
-      Nama<br />
-      Nomor Induk<br />
-      Kelas<br />
+      Nama<br/>
+      Nomor Induk<br/>
+      Kelas<br/>
     </div>
     <div class="thirteen wide column">
-      : Siti Nurjaenah<br />
+      : Siti Nurjaenah<br/>
       : 13232<br/>
-      : XI-IPA2<br />
+      : XI-IPA2<br/>
     </div>
   </div>
 

@@ -64,10 +64,10 @@
     <table class="ui structured selectable celled table">
       <thead class="center aligned">
       <tr>
-        <th>Nama<i class="sort content ascending icon"></i></th>
-        <th>Materi<i class="sort content ascending icon"></i></th>
-        <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
-        <th>Nilai<i class="sort content ascending icon"></i></th>
+        <th>Jenis<i class="sort content ascending small icon"></i></th>
+        <th>Materi<i class="sort content ascending small icon"></i></th>
+        <th>Tanggal Pelaksanaan<i class="sort content ascending small icon"></i></th>
+        <th>Nilai<i class="sort content ascending small icon"></i></th>
         <th>Rata-rata Kelas</th>
       </tr>
       </thead>
@@ -103,10 +103,10 @@
     <table class="ui structured selectable celled table">
       <thead class="center aligned">
       <tr>
-        <th>Nama<i class="sort content ascending icon"></i></th>
-        <th>Materi<i class="sort content ascending icon"></i></th>
-        <th>Tanggal Pengumpulan<i class="sort content ascending icon"></i></th>
-        <th>Nilai<i class="sort content ascending icon"></i></th>
+        <th>Jenis<i class="sort content ascending small icon"></i></th>
+        <th>Materi<i class="sort content ascending small icon"></i></th>
+        <th>Tanggal Pengumpulan<i class="sort content ascending small icon"></i></th>
+        <th>Nilai<i class="sort content ascending small icon"></i></th>
         <th>Rata-rata Kelas</th>
       </tr>
       </thead>
