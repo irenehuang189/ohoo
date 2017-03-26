@@ -61,13 +61,13 @@
   @if(count($exams) == 0)
     Tidak ada ujian
   @else
-    <table class="ui structured selectable celled table">
+    <table class="ui structured selectable celled table" id="nilai-ujian">
       <thead class="center aligned">
       <tr>
-        <th>Nama<i class="sort content ascending icon"></i></th>
-        <th>Materi<i class="sort content ascending icon"></i></th>
-        <th>Tanggal Pelaksanaan<i class="sort content ascending icon"></i></th>
-        <th>Nilai<i class="sort content ascending icon"></i></th>
+        <th>Nama<i class="sort content ascending icon" onclick="sortTable(0, 'nilai-ujian')"></i></th>
+        <th>Materi<i class="sort content ascending icon" onclick="sortTable(1, 'nilai-ujian')"></i></th>
+        <th>Tanggal Pelaksanaan<i class="sort content ascending icon" onclick="sortTable(2, 'nilai-ujian')"></i></th>
+        <th>Nilai<i class="sort content ascending icon" onclick="sortTable(3, 'nilai-ujian')"></i></th>
         <th>Rata-rata Kelas</th>
       </tr>
       </thead>
@@ -100,13 +100,13 @@
   @if(count($assignments) == 0)
     Tidak ada tugas
   @else
-    <table class="ui structured selectable celled table">
+    <table class="ui structured selectable celled table" id="nilai-tugas">
       <thead class="center aligned">
       <tr>
-        <th>Nama<i class="sort content ascending icon"></i></th>
-        <th>Materi<i class="sort content ascending icon"></i></th>
-        <th>Tanggal Pengumpulan<i class="sort content ascending icon"></i></th>
-        <th>Nilai<i class="sort content ascending icon"></i></th>
+        <th>Nama<i class="sort content ascending icon" onclick="sortTable(0, 'nilai-tugas')"></i></th>
+        <th>Materi<i class="sort content ascending icon" onclick="sortTable(1, 'nilai-tugas')"></i></th>
+        <th>Tanggal Pengumpulan<i class="sort content ascending icon" onclick="sortTable(2, 'nilai-tugas')"></i></th>
+        <th>Nilai<i class="sort content ascending icon" onclick="sortTable(3, 'nilai-tugas')"></i></th>
         <th>Rata-rata Kelas</th>
       </tr>
       </thead>
@@ -135,6 +135,10 @@
   @endif
   <!-- /Assignment score table -->
 @endif
+
+<script>
+
+</script>
 
 
 @endsection

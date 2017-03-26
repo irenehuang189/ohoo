@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Student;
 use App\Course;
-use App\CourseScore;
-use App\ExamScore;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
