@@ -77,8 +77,28 @@ $(document).ready(function(){
   });
 
   // Teacher individu
-  $('#semester').click(function(e){
-      // $(this).parent().siblings('.ui.tab[data-tab="semester"]').html('lalala');
-      window.location.href = 'tes';
+  $('div#semester').hide();
+  $('div#midterm').hide();
+  $('div#detail').hide();
+  $('.item#overview').click(function(){
+    $('div#midterm').hide();
+    $('div#detail').hide();
+    $('div#semester').hide();
   });
+  $('.item#semester').click(function(){
+    $('div#midterm').hide();
+    $('div#detail').hide();
+    $('div#semester').show();
+  });
+  $('.item#midterm').click(function(){
+    $('div#semester').hide();
+    $('div#detail').hide();
+    $('div#midterm').show();
+  });
+  $('.item#detail').click(function(){
+    $('div#semester').hide();
+    $('div#midterm').hide();
+    $('div#detail').show();
+  });
+
 });

@@ -159,35 +159,6 @@ $("#histori-nilai").change(function(){
 
 });
 
-// histori nilai mata pelajaran
-// var scoreHistoryDataset = [{
-//   label: 'Matematika',
-//   data: [70, 0, 0, 76, 82, 90],
-//   fill: false,
-//   backgroundColor: bgColor[0],
-//   borderColor: color[0],
-// }, {
-//   label: 'Bahasa Indonesia',
-//   data: [80, 90, 87, 76, 63, 93],
-//   fill: false,
-//   backgroundColor: bgColor[1],
-//   borderColor: color[1],
-// }, {
-//   label: 'Fisika',
-//   data: [55, 72, 36, 80, 68, 75],
-//   fill: false,
-//   backgroundColor: bgColor[2],
-//   borderColor: color[2],
-// }];
-// var scoreHistoryChart = new Chart($("#score-history"), {
-//   type: 'line',
-//   data: {
-//     labels: ["X-I", "X-II", "XI-I", "XI-II", "XII-I", "XII-II"],
-//     datasets: scoreHistoryDataset
-//   },
-//   options: options
-// });
-
 function fillArray(arr, times)
 {
   var result = arr;
