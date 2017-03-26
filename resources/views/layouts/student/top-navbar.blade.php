@@ -25,14 +25,14 @@
   <a 
     class="item {{ Request::is('*statistic*') ? 'active' : '' }}" 
     href="{{ url('student/statistic') }}">
-    Statistik
+    Dashboard
   </a>
   <div class="ui right dropdown item">
     <i class="user icon"></i>
     @yield('user-name')
     <div class="menu">
-    <a class="item">Ubah Password</a>
-    <a class="item" href="{{ url('/logout') }}">Keluar</a>
+      <a class="item" href="{{ url('password/edit') }}">Ubah Password</a>
+      <a class="item" href="{{ url('/logout') }}">Keluar</a>
     </div>
   </div>
 </div>

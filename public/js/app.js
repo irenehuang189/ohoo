@@ -15,6 +15,12 @@ $(document).ready(function(){
   });
   $('.ui.accordion').accordion();
 
+  // Edit password form popup
+  $('input.popup').popup({
+    on      : 'focus',
+    position: 'right center'
+  });
+
   // Before delete modal
   $('#delete').click(function(){
     $('.ui.basic.modal').modal({blurring: true}).modal('show');

@@ -3,9 +3,11 @@
   <div class="item">
     <img class="ui image" src="{{ asset('images/logo.png') }}">
     <div class="ui hidden divider"></div>
-    <div class="ui center aligned grid">
-      <h5>@yield('user-name')</h5>
-      @yield('user-tid')
+    <div class="ui center aligned one column grid">
+      <div class="column">
+        <h5>@yield('user-name')</h5>
+        @yield('user-tid')
+      </div>
     </div>
     <div class="ui hidden divider"></div>
   </div>
@@ -21,10 +23,10 @@
   </a>
   <a class="teal item" href="{{ url('teacher/statistic') }}">
     <span>
-      <i class="line chart icon"></i>Statistik
+      <i class="line chart icon"></i>Dashboard
     </span>
   </a>
-  <a class="teal item">
+  <a class="teal item" href="{{ url('password/edit') }}">
     <span>
       <i class="privacy icon"></i>Ubah Password
     </span>
