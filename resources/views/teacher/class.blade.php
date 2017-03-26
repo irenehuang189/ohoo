@@ -42,13 +42,13 @@
     </a>
   </div>
 </div>
-<table class="ui structured selectable celled table">
+<table class="ui structured selectable celled table" id="exam-score">
   <thead class="center aligned">
   <tr>
-    <th>Jenis Penilaian<i class="sort content ascending small icon"></i></th>
-    <th>Materi<i class="sort content ascending small icon"></i></th>
-    <th>Tanggal Pelaksanaan<i class="sort content ascending small icon"></i></th>
-    <th>Rata-rata Kelas <i class="sort content ascending small icon"></th>
+    <th>Jenis Penilaian<i class="sort content ascending small icon" id="1"></i></th>
+    <th>Materi<i class="sort content ascending small icon" id="2"></i></th>
+    <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" id="3"></i></th>
+    <th>Rata-rata Kelas <i class="sort content ascending small icon" id="4"></th>
     <th>Aksi</th>
   </tr>
   </thead>
@@ -83,13 +83,13 @@
     </a>
   </div>
 </div>
-<table class="ui structured selectable celled table">
+<table class="ui structured selectable celled table" id="assignment-score">
   <thead class="center aligned">
   <tr>
-    <th>Jenis Penilaian<i class="sort content ascending small icon"></i></th>
-    <th>Materi<i class="sort content ascending small icon"></i></th>
-    <th>Tanggal Pengumpulan<i class="sort content ascending small icon"></i></th>
-    <th>Rata-rata Kelas<i class="sort content ascending small icon"></i></th>
+    <th>Jenis Penilaian<i class="sort content ascending small icon" id="1"></i></th>
+    <th>Materi<i class="sort content ascending small icon" id="2"></i></th>
+    <th>Tanggal Pengumpulan<i class="sort content ascending small icon" id="3"></i></th>
+    <th>Rata-rata Kelas<i class="sort content ascending small icon" id="4"></i></th>
     <th>Aksi</th>
   </tr>
   </thead>

@@ -17,7 +17,7 @@ Route::get('', function() {
 	} else if (isset(Auth::user()->teacher)) {
 		return redirect('teacher/statistic');
 	}
-    return redirect('logout');
+  return redirect('logout');
 });
 
 /* Login */
@@ -42,8 +42,7 @@ Route::group(['middleware' => 'student'], function() {
 });
 
 Route::group(['middleware' => 'teacher'], function() {
-	/* Teacher */
-	// Class
+	/* Class */
 	Route::get('/teacher/class', function() {
 	  return view('teacher/class');
 	});
@@ -58,7 +57,7 @@ Route::group(['middleware' => 'teacher'], function() {
 	  return view('teacher/course');
 	});
 
-	// Individu
+	/* Individu */
 	Route::get('/teacher/individu', function() {
 	  return view('teacher/individu');
 	});

@@ -61,13 +61,13 @@
   @if(count($exams) == 0)
     Tidak ada ujian
   @else
-    <table class="ui structured selectable celled table" id="nilai-ujian">
+    <table class="ui structured selectable celled table" id="exam-score">
       <thead class="center aligned">
       <tr>
-        <th>Nama<i class="sort content ascending small icon" onclick="sortTable(0, 'nilai-ujian')"></i></th>
-        <th>Materi<i class="sort content ascending small icon" onclick="sortTable(1, 'nilai-ujian')"></i></th>
-        <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" onclick="sortTable(2, 'nilai-ujian')"></i></th>
-        <th>Nilai<i class="sort content ascending small icon" onclick="sortTable(3, 'nilai-ujian')"></i></th>
+        <th>Nama<i class="sort content ascending small icon" id="1"></i></th>
+        <th>Materi<i class="sort content ascending small icon" id="2"></i></th>
+        <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" id="3"></i></th>
+        <th>Nilai<i class="sort content ascending small icon" id="4"></i></th>
         <th>Rata-rata Kelas</th>
       </tr>
       </thead>
@@ -100,13 +100,13 @@
   @if(count($assignments) == 0)
     Tidak ada tugas
   @else
-    <table class="ui structured selectable celled table" id="nilai-tugas">
+    <table class="ui structured selectable celled table" id="assignment-score">
       <thead class="center aligned">
       <tr>
-        <th>Nama<i class="sort content ascending small icon" onclick="sortTable(0, 'nilai-tugas')"></i></th>
-        <th>Materi<i class="sort content ascending small icon" onclick="sortTable(1, 'nilai-tugas')"></i></th>
-        <th>Tanggal Pengumpulan<i class="sort content ascending small icon" onclick="sortTable(2, 'nilai-tugas')"></i></th>
-        <th>Nilai<i class="sort content ascending small icon" onclick="sortTable(3, 'nilai-tugas')"></i></th>
+        <th>Nama<i class="sort content ascending small icon" id="1"></i></th>
+        <th>Materi<i class="sort content ascending small icon" id="2"></i></th>
+        <th>Tanggal Pengumpulan<i class="sort content ascending small icon" id="3"></i></th>
+        <th>Nilai<i class="sort content ascending small icon" id="4"></i></th>
         <th>Rata-rata Kelas</th>
       </tr>
       </thead>

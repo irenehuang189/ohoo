@@ -1,15 +1,15 @@
 <div class="ui tab" data-tab="detail">
   <!-- Exam score table -->
   <h3 class="ui header">Nilai Ujian</h3>
-    <table class="ui structured selectable celled table">
+    <table class="ui structured selectable celled table" id="exam-score">
       <thead class="center aligned">
       <tr>
-        <th>Kelas<i class="sort content ascending small icon"></i></th>
-        <th>Mata Pelajaran<i class="sort content ascending small icon"></i></th>
-        <th>Jenis<i class="sort content ascending small icon"></i></th>
-        <th>Materi<i class="sort content ascending small icon"></i></th>
-        <th>Tanggal Pelaksanaan<i class="sort content ascending small icon"></i></th>
-        <th>Nilai<i class="sort content ascending small icon"></i></th>
+        <th>Kelas<i class="sort content ascending small icon" id="1"></i></th>
+        <th>Mata Pelajaran<i class="sort content ascending small icon" id="2"></i></th>
+        <th>Jenis<i class="sort content ascending small icon" id="3"></i></th>
+        <th>Materi<i class="sort content ascending small icon" id="4"></i></th>
+        <th>Tanggal Pelaksanaan<i class="sort content ascending small icon" id="5"></i></th>
+        <th>Nilai<i class="sort content ascending small icon" id="6"></i></th>
         <th>Rata-rata Kelas</th>
         <th></th>
       </tr>
@@ -34,15 +34,15 @@
   <!-- /Exam score table -->
   <!-- Assignment score table -->
   <h3 class="ui header">Nilai Tugas</h3>
-    <table class="ui structured selectable celled table">
+    <table class="ui structured selectable celled table" id="assignment-score">
       <thead class="center aligned">
       <tr>
-        <th>Kelas<i class="sort content ascending small icon"></i></th>
-        <th>Mata Pelajaran<i class="sort content ascending small icon"></i></th>
-        <th>Jenis<i class="sort content ascending small icon"></i></th>
-        <th>Materi<i class="sort content ascending small icon"></i></th>
-        <th>Tanggal Pengumpulan<i class="sort content ascending small icon"></i></th>
-        <th>Nilai<i class="sort content ascending small icon"></i></th>
+        <th>Kelas<i class="sort content ascending small icon" id="1"></i></th>
+        <th>Mata Pelajaran<i class="sort content ascending small icon" id="2"></i></th>
+        <th>Jenis<i class="sort content ascending small icon" id="3"></i></th>
+        <th>Materi<i class="sort content ascending small icon" id="4"></i></th>
+        <th>Tanggal Pengumpulan<i class="sort content ascending small icon" id="4"></i></th>
+        <th>Nilai<i class="sort content ascending small icon" id="5"></i></th>
         <th>Rata-rata Kelas</th>
         <th></th>
       </tr>

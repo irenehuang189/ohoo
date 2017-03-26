@@ -20,6 +20,13 @@ $(document).ready(function(){
     $('.ui.basic.modal').modal({blurring: true}).modal('show');
   });
 
+  // Sort table
+  $('i.ascending.icon').click(function(){
+    var id = $(this).attr('id');
+    var tableId = $(this).parents('table').attr('id');
+    sortTable(id, tableId);
+  });
+
   // Login page
   $('#login-role a').click(function(){
     // Reset CSS
