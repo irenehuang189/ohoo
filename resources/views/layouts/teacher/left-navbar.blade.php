@@ -35,22 +35,22 @@
       <a class="item">Kimia</a>
     </div>
   </div>
-  <a class="item" href="{{ url('teacher/individu') }}">
+  <a class="teal item" href="{{ url('teacher/individu') }}">
     <span>
       <i class="child icon"></i>Performansi Individu
     </span>
   </a>
-  <a class="item" href="{{ url('teacher/statistic') }}">
+  <a class="teal item" href="{{ url('teacher/statistic') }}">
     <span>
       <i class="line chart icon"></i>Statistik
     </span>
   </a>
-  <a class="item">
+  <a class="teal item">
     <span>
       <i class="privacy icon"></i>Ubah Password
     </span>
   </a>
-  <a class="item" href="{{ url('/logout') }}">
+  <a class="teal item" href="{{ url('/logout') }}">
     <span>
       <i class="sign out icon"></i>Keluar
     </span>

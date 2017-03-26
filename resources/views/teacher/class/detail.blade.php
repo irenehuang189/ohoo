@@ -99,6 +99,7 @@
 </table>
 <!-- /Tabel Daftar Siswa -->
 
+<!-- Modal Hapus -->
 <div class="ui basic modal">
   <div class="ui icon header">
     <i class="archive icon"></i>
@@ -118,5 +119,6 @@
     </a>
   </div>
 </div>
+<!-- /Modal Hapus -->
 
 @endsection

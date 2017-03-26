@@ -54,6 +54,9 @@ Route::get('/teacher/course', function() {
 Route::get('/teacher/individu', function() {
   return view('teacher/individu');
 });
+Route::get('/teacher/individu/detail', function() {
+  return view('teacher/individu/detail');
+});
 
 Route::get('/teacher/statistic', function() {
   return view('teacher/statistic');
