@@ -15,13 +15,14 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Student;
 use App\Kelas;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class StudentStatisticController extends Controller
 {
     public function showStatistic() {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $student = Student::find($studentId);
         $courseScore = CourseScore::where('student_id', '=', $studentId)
                                     ->orderBy('course_id', 'desc')
@@ -31,7 +32,7 @@ class StudentStatisticController extends Controller
         $averageScore = $this->getAverageScore($studentId, $class);
         $nilaiMerah = $this->getNilaiMerah($studentId, $class);
         $rank = $this->getRank($studentId, $class);
-        $studentId = 1;
+        
         $courses = Student::find($studentId)->kelas()
             ->join('courses', 'classes.id', '=', 'courses.class_id')
             ->join('course_score', 'courses.id', '=', 'course_score.course_id')
@@ -87,7 +88,7 @@ class StudentStatisticController extends Controller
     }
 
     public function getMeanStatistic() {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $courses = Student::find($studentId)->kelas()
             ->join('courses', 'classes.id', '=', 'courses.class_id')
             ->join('course_score', 'courses.id', '=', 'course_score.course_id')
@@ -99,7 +100,7 @@ class StudentStatisticController extends Controller
     }
 
     public function getRankStatistic() {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $classes = Student::find($studentId)->kelas;
         $data = array();
         foreach ($classes as $class) {
@@ -123,7 +124,7 @@ class StudentStatisticController extends Controller
     }
 
     public function getCapabilityStatistic() {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $courses = Student::find($studentId)->kelas()
                 ->join('courses', 'classes.id', '=', 'courses.class_id')
                 ->join('course_score', 'courses.id', '=', 'course_score.course_id')
@@ -135,7 +136,7 @@ class StudentStatisticController extends Controller
     }
     
     public function getHistoryCoursesStatistic($data) {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $courses = json_decode($data);
         $classes = $this->getPastClasses($studentId);
         $courseScore = Student::find($studentId)->kelas()

@@ -9,12 +9,13 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use App\Student;
 use App\Kelas;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class StudentReportController extends Controller
 {
     public function showReport() {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $blank = 1;
         $student = Student::find($studentId);
         $classes = $student->kelas;
@@ -32,7 +33,7 @@ class StudentReportController extends Controller
     }
 
     public function showReportByClassId($classId) {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $blank = 0;
         $student = Student::find($studentId);
         $classes = $student->kelas;
@@ -49,7 +50,7 @@ class StudentReportController extends Controller
     }
 
     public function showDetailedReport() {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $blank = 1;
         $courses = [];
         $student = Student::find($studentId);
@@ -60,7 +61,7 @@ class StudentReportController extends Controller
     }
 
     public function showDetailedReportByCourseId($classId, $courseId) {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $blank = 0;
         $courses = Kelas::find($classId)->courses;
         $student = Student::find($studentId);
@@ -94,7 +95,7 @@ class StudentReportController extends Controller
     }
     
     public function getCoursesByClassId($classId) {
-        $studentId = 1;
+        $studentId = Auth::user()->student_id;
         $class = Kelas::find($classId);
         $courses = $class->courses;
         return $courses;
