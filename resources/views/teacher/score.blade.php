@@ -67,14 +67,15 @@
   </tr>
   </thead>
   <tbody>
+  @foreach ($exams as $exam)
     <tr>
-      <td>XI-IPA2</td>
-      <td>Matematika</td>
-      <td>$exam->name</td>
-      <td>$exam->materi</td>
-      <td>$exam->tanggal</td>
+      <td>{{ $exam->course->kelas->name }}</td>
+      <td>{{ $exam->course->name }}</td>
+      <td>{{ $exam->name }}</td>
+      <td>{{ $exam->materi }}</td>
+      <td>{{ $exam->tanggal }}</td>
       <td class="center aligned">
-        71
+        {{ $exam->students->avg('pivot.score') }}
       </td>
       <td>
         <div class="ui icon mini buttons">
@@ -84,6 +85,7 @@
         </div>
       </td>
     </tr>
+  @endforeach
   </tbody>
 </table>
 <!-- /Exam score table -->

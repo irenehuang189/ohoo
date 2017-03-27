@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Student extends Model
 {
 	public function exams() {
-		return $this->belongsToMany('App\Exam', 'exam_score');
+		return $this->belongsToMany('App\Exam', 'exam_score')->withPivot('score');
 	}
 
     public function kelas() {
