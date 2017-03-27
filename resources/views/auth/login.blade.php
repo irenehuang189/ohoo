@@ -3,6 +3,7 @@
 <head>
   <title>Ohoo</title>
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Favicon -->
   <link rel="shortcut icon" href="{{{ asset('images/favicon.ico') }}}" type="image/x-icon">
   <link rel="icon" href="{{{ asset('images/favicon.ico') }}}" type="image/x-icon">
@@ -11,7 +12,7 @@
   <link rel="stylesheet" type="text/css" href="{{{ asset('css/semantic.min.css') }}}" />
   <link rel="stylesheet" type="text/css" href="{{{ asset('css/app.css') }}}" />
 </head>
-<body style="background-image:url({{ asset('images/login-bg.jpg') }})">
+<body style="background-image:url({{ asset('images/login-bg.jpg') }});">
 <p><br /><br /></p>
 <!-- LOGIN ON MOBILE -->
 <div class="ui mobile only tablet only container grid">
@@ -69,7 +70,7 @@
   <div class="ui centered fluid card">
     <div class="ui grid">
       <div class="eleven wide column" id="login-banner">
-        <img class="ui fluid image" src="{{ asset('images/login-banner.jpg') }}" />
+        <img class="ui fluid image" src="{{ asset('images/login-banner.jpg') }}"/>
       </div>
       <div class="ui five wide column" id="login-form">
         <img src="{{ asset('images/logo.png') }}" class="ui fluid image"/>

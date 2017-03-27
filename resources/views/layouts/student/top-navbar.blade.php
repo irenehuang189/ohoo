@@ -1,15 +1,16 @@
 <!-- Navbar -->
 <div class="ui borderless stackable grid fixed inverted  huge menu">
-  <a class="item" id="sidebar-trigger">
+  <!--<a class="item" id="sidebar-trigger">
     <i class="sidebar icon"></i>
+  </a>-->
+  <a class="header item" href="{{ url('/') }}">
     <img src="{{ asset('images/logo.png') }}" />
   </a>
-  <!-- <div class="ui dropdown item">
+  <div class="ui dropdown item">
     <a>Rapor</a>
     <div class="menu">
       <a 
-        class="item {{ Request::is('student/report*') ? 'active' : '' }}" 
-        href="{{ url('student/report') }}">
+        class="item {{ Request::is('student/report*') ? 'active' : '' }}"href="{{ url('student/report') }}">
         Semester
       </a>
       <a class="item">Bayangan</a>
@@ -32,6 +33,6 @@
       <a class="item" href="{{ url('password/edit') }}">Ubah Password</a>
       <a class="item" href="{{ url('/logout') }}">Keluar</a>
     </div>
-  </div> -->
+  </div>
 </div>
 <!-- /Navbar -->
