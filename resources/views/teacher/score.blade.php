@@ -3,11 +3,11 @@
 @section('title', 'Nilai Kelas')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
@@ -16,14 +16,18 @@
     <label>Kelas</label>
     <select class="ui dropdown" id="choose-class">
       <option value="-1" selected>Semua</option>
-      <option value="">Kelas XI-IPA2</option>
+      @foreach ($classes as $class)
+        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @endforeach
     </select>
   </div>
   <div class="field">
     <label>Mata Pelajaran</label>
     <select class="ui dropdown" id="choose-course">
       <option value="-1" selected>Semua</option>
-      <option value="">Matematika</option>
+      @foreach ($courses as $course)
+        <option value="{{ $course->id }}">{{ $course->name }} - Semester {{ $course->kelas->semester }} - {{ $course->kelas->year }}</option>
+      @endforeach
     </select>
   </div>
   <div class="row">
@@ -63,14 +67,15 @@
   </tr>
   </thead>
   <tbody>
+  @foreach ($exams as $exam)
     <tr>
-      <td>XI-IPA2</td>
-      <td>Matematika</td>
-      <td>$exam->name</td>
-      <td>$exam->materi</td>
-      <td>$exam->tanggal</td>
+      <td>{{ $exam->course->kelas->name }}</td>
+      <td>{{ $exam->course->name }}</td>
+      <td>{{ $exam->name }}</td>
+      <td>{{ $exam->materi }}</td>
+      <td>{{ $exam->tanggal }}</td>
       <td class="center aligned">
-        71
+        {{ $exam->students->avg('pivot.score') }}
       </td>
       <td>
         <div class="ui icon mini buttons">
@@ -80,6 +85,7 @@
         </div>
       </td>
     </tr>
+  @endforeach
   </tbody>
 </table>
 <!-- /Exam score table -->
@@ -108,13 +114,14 @@
   </tr>
   </thead>
   <tbody>
+  @foreach ($assignments as $assignment)
     <tr>
-      <td>XI-IPA2</td>
-      <td>Matematika</td>
-      <td>$assigment->name</td>
-      <td>$assigment->materi</td>
-      <td>$assigment->tanggal</td>
-      <td class="center aligned">36</td>
+      <td>{{ $assignment->course->kelas->name }}</td>
+      <td>{{ $assignment->course->name }}</td>
+      <td>{{ $assignment->name }}</td>
+      <td>{{ $assignment->materi }}</td>
+      <td>{{ $assignment->tanggal }}</td>
+      <td class="center aligned">{{ $assignment->students->avg('pivot.score') }}</td>
       <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
@@ -123,6 +130,7 @@
         </div>
       </td>
     </tr>
+  @endforeach
   </tbody>
 </table>
 <!-- /Assignment score table -->

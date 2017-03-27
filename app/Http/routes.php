@@ -48,9 +48,7 @@ Route::group(['middleware' => 'student'], function() {
 
 Route::group(['middleware' => 'teacher'], function() {
 	/* Score */
-	Route::get('/teacher/score', function() {
-	  return view('teacher/score');
-	});
+	Route::get('/teacher/score', 'Teacher\ScoreController@showScores');
 	Route::get('/teacher/score/add', function() {
 	  return view('teacher/score/add');
 	});

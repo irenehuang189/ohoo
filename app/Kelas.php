@@ -6,15 +6,14 @@ class Kelas extends Model
     protected $table = 'classes';
 
     public function students() {
-        return $this->belongsToMany('App\Student', 'student_class', 'class_id', 'student_id');
+        return $this->belongsToMany('App\Student', 'student_class', 'class_id');
     }
 
     public function teacher() {
-        return $this->hasOne('App\Teacher', 'id', 'teacher_id');
+        return $this->belongsTo('App\Teacher');
     }
 
     public function courses() {
-        return $this->hasMany('App\Course', 'class_id', 'id');
+        return $this->hasMany('App\Course', 'class_id');
     }
-
 }

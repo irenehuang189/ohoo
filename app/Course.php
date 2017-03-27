@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Course extends Model
 {
     public function kelas() {
-		return $this->hasOne('App\Kelas', 'id', 'class_id');
+		return $this->belongsTo('App\Kelas', 'class_id');
 	}
 
 	public function teacher() {
-		return $this->hasOne('App\Teacher', 'id', 'teacher_id');
+		return $this->belongsTo('App\Teacher');
 	}
 
 	public function exams() {

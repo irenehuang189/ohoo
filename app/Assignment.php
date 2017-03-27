@@ -6,6 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Assignment extends Model
 {
-    protected $table = "assignments";
-    
+    public function course() {
+    	return $this->belongsTo('App\Course');
+    }
+
+    public function students() {
+    	return $this->belongsToMany('App\Student', 'assignment_score')->withPivot('score');
+    }
 }
