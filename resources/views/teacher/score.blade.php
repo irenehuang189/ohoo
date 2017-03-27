@@ -3,11 +3,11 @@
 @section('title', 'Nilai Kelas')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
@@ -16,14 +16,18 @@
     <label>Kelas</label>
     <select class="ui dropdown" id="choose-class">
       <option value="-1" selected>Semua</option>
-      <option value="">Kelas XI-IPA2</option>
+      @foreach ($classes as $class)
+        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @endforeach
     </select>
   </div>
   <div class="field">
     <label>Mata Pelajaran</label>
     <select class="ui dropdown" id="choose-course">
       <option value="-1" selected>Semua</option>
-      <option value="">Matematika</option>
+      @foreach ($courses as $course)
+        <option value="{{ $course->id }}">{{ $course->name }} - Semester {{ $course->kelas->semester }} - {{ $course->kelas->year }}</option>
+      @endforeach
     </select>
   </div>
   <div class="row">
