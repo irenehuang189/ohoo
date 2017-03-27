@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+	public function exams() {
+		return $this->belongsToMany('App\Exam', 'exam_score');
+	}
+
     public function kelas() {
         return $this->belongsToMany('App\Kelas', 'student_class', 'student_id', 'class_id');
     }

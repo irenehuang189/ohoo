@@ -9,4 +9,8 @@ class Exam extends Model
     public function course() {
 		return $this->belongsTo('App\Course');
 	}
+
+	public function students() {
+		return $this->belongsToMany('App\Student', 'exam_score');
+	}
 }
