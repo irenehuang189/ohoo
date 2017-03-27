@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model
 {
+	public function assignments() {
+		return $this->belongsToMany('App\Assignment', 'assignment_score')->withPivot('score');
+	}
+
 	public function exams() {
 		return $this->belongsToMany('App\Exam', 'exam_score')->withPivot('score');
 	}

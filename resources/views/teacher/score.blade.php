@@ -114,13 +114,14 @@
   </tr>
   </thead>
   <tbody>
+  @foreach ($assignments as $assignment)
     <tr>
-      <td>XI-IPA2</td>
-      <td>Matematika</td>
-      <td>$assigment->name</td>
-      <td>$assigment->materi</td>
-      <td>$assigment->tanggal</td>
-      <td class="center aligned">36</td>
+      <td>{{ $assignment->course->kelas->name }}</td>
+      <td>{{ $assignment->course->name }}</td>
+      <td>{{ $assignment->name }}</td>
+      <td>{{ $assignment->materi }}</td>
+      <td>{{ $assignment->tanggal }}</td>
+      <td class="center aligned">{{ $assignment->students->avg('pivot.score') }}</td>
       <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
@@ -129,6 +130,7 @@
         </div>
       </td>
     </tr>
+  @endforeach
   </tbody>
 </table>
 <!-- /Assignment score table -->

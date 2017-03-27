@@ -22,13 +22,13 @@ class ScoreController extends Controller
     	$classes = $this->getClassesByTeacher();
     	$courses = $this->getCoursesByTeacher();
         $exams = $this->getExamsByTeacher();
+        $assignments = $this->getAssignmentsByTeacher();
 
-    	return view('teacher/score', compact('classes', 'courses', 'teacher', 'exams'));
+    	return view('teacher/score', compact('assignments', 'classes', 'courses', 'teacher', 'exams'));
     }
 
     private function getClassesByTeacher() {
-    	$teacher = $this->teacher;
-    	$classes = $teacher->kelas;
+    	$classes = $this->teacher->kelas;
     	$courses = $this->getCoursesByTeacher();
 
     	foreach ($courses as $course) {
@@ -41,8 +41,7 @@ class ScoreController extends Controller
     }
 
     private function getCoursesByTeacher() {
-    	$teacher = $this->teacher;
-        $courses = $teacher->courses;
+        $courses = $this->teacher->courses;
     	
     	return $courses->sortByDesc(function ($course) {
     		return $course->kelas->year;
@@ -63,8 +62,25 @@ class ScoreController extends Controller
             return $exam->course->kelas->year;
         })->sortByDesc(function ($exam) {
             return $exam->course->kelas->semester;
-        })->sortBy(function ($exam) {
+        })->sortByDesc('tanggal')->sortBy(function ($exam) {
             return $exam->course->name;
-        })->sortByDesc('tanggal');
+        });
+    }
+
+    private function getAssignmentsByTeacher() {
+        $courses = $this->getCoursesByTeacher();
+
+        $assignments = collect();
+        foreach ($courses as $course) {
+            $assignments = $assignments->merge($course->assignments);
+        }
+
+        return $assignments->sortByDesc(function ($assignment) {
+            return $assignment->course->kelas->year;
+        })->sortByDesc(function ($assignment) {
+            return $assignment->course->kelas->semester;
+        })->sortByDesc('tanggal')->sortBy(function ($assignment) {
+            return $assignment->course->name;
+        });
     }
 }
