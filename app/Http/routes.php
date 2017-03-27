@@ -66,4 +66,15 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/statistic', function() {
 	  return view('teacher/statistic');
 	});
+
+	/* Score */
+	Route::get('/teacher/score/semester', function(){
+		return view('teacher/semester-score');
+	});
+	Route::get('/teacher/score/semester/add', function() {
+	  return view('teacher/semester-score/add');
+	});
+	Route::get('/teacher/score/semester/detail', function() {
+	  return view('teacher/semester-score/detail');
+	});
 });
