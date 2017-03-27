@@ -15,6 +15,12 @@ $(document).ready(function(){
   });
   $('.ui.accordion').accordion();
 
+  // Edit password form popup
+  $('input.popup').popup({
+    on      : 'focus',
+    position: 'right center'
+  });
+
   // Before delete modal
   $('#delete').click(function(){
     $('.ui.basic.modal').modal({blurring: true}).modal('show');
@@ -28,22 +34,25 @@ $(document).ready(function(){
   });
 
   // Login page
+  $('#login-role a').css({
+    'color': 'grey'
+  });
   $('#login-role a').click(function(){
     // Reset CSS
     $('#login-role a img').css({
       'border': 'none'
     });
     $('#login-role a').css({
-      'color': 'blue'
+      'color': 'grey'
     });
 
     // Add CSS to selected
     $(this).find('img').css({
-      'border':'5px solid red',
+      'border':'5px solid #47B7B3',
       'border-radius': '100%'
     });
     $(this).css({
-      'color': 'red'
+      'color': '#47B7B3'
     });
   });
 

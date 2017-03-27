@@ -1,9 +1,13 @@
 @extends('layouts.master')
 
-@section('title', 'Statistik Nilai')
+@section('title', 'Dashboard Nilai')
 
 @section('user-name')
   NAMA DI SINI
+@endsection
+
+@section('user-tid')
+  1209727
 @endsection
 
 @section('content')

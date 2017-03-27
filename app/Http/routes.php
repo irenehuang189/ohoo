@@ -25,6 +25,11 @@ Route::get('login', 'Auth\AuthController@showLoginForm');
 Route::post('login', 'Auth\AuthController@login');
 Route::get('logout', 'Auth\AuthController@logout');
 
+/* Ubah Password */
+Route::get('password/edit', function(){
+	return view('edit-password');
+});
+
 Route::group(['middleware' => 'student'], function() {
 	/* Student report */
 	Route::get('/student/report', 'Student\StudentReportController@showReport');

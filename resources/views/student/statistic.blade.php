@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('title', 'Statistik Nilai')
+@section('title', 'Dashboard Nilai')
 
 @section('user-name')
   {{ $student->name }}
