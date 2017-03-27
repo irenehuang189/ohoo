@@ -24,7 +24,11 @@ class ScoreController extends Controller
 
     	$teacher = $this->teacher;
     	$classes = $this->getClassesByTeacher();
-    	$courses = $this->getCoursesByTeacher();
+        if ($classId) {
+            $courses = $this->getCoursesByTeacherClassId($classId);
+        } else {
+            $courses = collect();
+        }
         $exams = $this->getExamsByTeacherWithFilter($classId, $courseId);
         $assignments = $this->getAssignmentsByTeacherWithFilter($classId, $courseId);
 
@@ -166,5 +170,19 @@ class ScoreController extends Controller
     	})->sortByDesc(function ($course) {
     		return $course->kelas->semester;
     	})->sortBy('name');
+    }
+
+    public function getCoursesByTeacherClassId($classId) {
+        $class = Kelas::find($classId);
+        $course_list = $class->courses;
+
+        $courses = collect();
+        foreach ($course_list as $course) {
+            if ($course->teacher_id == $this->teacher->id) {
+                $courses = $courses->push($course);
+            }
+        }
+
+        return $courses;
     }
 }

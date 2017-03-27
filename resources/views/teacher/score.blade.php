@@ -14,7 +14,7 @@
 <div class="ui small form">
   <div class="field">
     <label>Kelas</label>
-    <select class="ui dropdown" id="choose-class">
+    <select class="ui dropdown" id="choose-class-teacher">
     @if (!isset($classId))
       <option value="-1" selected>Semua</option>
       @foreach ($classes as $class)
@@ -34,7 +34,7 @@
   </div>
   <div class="field">
     <label>Mata Pelajaran</label>
-    <select class="ui dropdown" id="choose-course">
+    <select class="ui dropdown" id="choose-course-teacher">
     @if (!isset($courseId))
       <option value="-1" selected>Semua</option>
       @foreach ($courses as $course)

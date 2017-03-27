@@ -66,4 +66,7 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/statistic', function() {
 	  return view('teacher/statistic');
 	});
+
+	/* Filter */
+	Route::get('teacher/courses/{classId}', 'Teacher\ScoreController@getCoursesByTeacherClassId');
 });
