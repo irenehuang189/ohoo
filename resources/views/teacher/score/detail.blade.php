@@ -3,11 +3,11 @@
 @section('title', 'Tambah Nilai Kelas')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
@@ -34,8 +34,8 @@
 <div class="ui grid">
   <div class="ten wide column">
     <h2 class="ui header">
-      Daftar Nilai Kelas X-1
-      <div class="sub header">Mata Pelajaran Matematika</div>
+      Daftar Nilai Kelas {{ $task->course->kelas->name }}
+      <div class="sub header">Mata Pelajaran {{ $task->course->name }}</div>
     </h2>
   </div>
   <div class="six wide right aligned column">
@@ -53,19 +53,19 @@
 <div class="ui grid">
   <div class="row">
     <div class="four wide column">Jenis Penilaian</div>
-    <div class="twelve wide column">: Ujian Tengah Semester</div>
+    <div class="twelve wide column">: {{ $task->name }}</div>
   </div>
   <div class="row">
     <div class="four wide column">Materi</div>
-    <div class="twelve wide column">: Persamaan Linear</div>
+    <div class="twelve wide column">: {{ $task->materi }}</div>
   </div>
   <div class="row">
     <div class="four wide column">Tanggal Pelaksanaan</div>
-    <div class="twelve wide column">: 25-03-2017</div>
+    <div class="twelve wide column">: {{ date('d-m-Y', strtotime($task->tanggal)) }}</div>
   </div>
   <div class="row">
     <div class="four wide column">SKBM</div>
-    <div class="twelve wide column">: 65</div>
+    <div class="twelve wide column">: {{ $task->course->skbm }}</div>
   </div>
 </div>
 <!-- /Rincian Penilaian -->
@@ -80,21 +80,22 @@
     <th class="two wide">Nilai</th>
   </tr></thead>
   <tbody>
+  @foreach ($students as $num => $student)
+  @if ($student->pivot->score >= $task->course->skbm)
     <tr>
-      <td class="center aligned">1</td>
-      <td>Wina Aryasubedjo</td>
-      <td class="center aligned">80</td>
-    </tr>
+  @else
     <tr class="negative">
-      <td class="center aligned">2</td>
-      <td>Bekti Hutama</td>
-      <td class="center aligned">40</td>
+  @endif
+      <td class="center aligned">{{ $num + 1 }}</td>
+      <td>{{ $student->name }}</td>
+      <td class="center aligned">{{ $student->pivot->score }}</td>
     </tr>
+  @endforeach
   </tbody>
   <tfoot><tr>
     <th></th>
     <th><b>Rata-rata Kelas</b></th>
-    <th class="center aligned"><b>75</b></th>
+    <th class="center aligned"><b>{{ $students->avg('pivot.score') }}</b></th>
   </tr></tfoot>
 </table>
 <!-- /Tabel Daftar Siswa -->

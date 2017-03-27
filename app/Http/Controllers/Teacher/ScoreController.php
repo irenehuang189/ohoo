@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Assignment;
 use App\Course;
+use App\Exam;
 use App\Kelas;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,6 +35,22 @@ class ScoreController extends Controller
         $assignments = $this->getAssignmentsByTeacherWithFilter($classId, $courseId);
 
     	return view('teacher/score', compact('assignments', 'classId', 'classes', 'courseId', 'courses', 'teacher', 'exams'));
+    }
+
+    public function showExamDetail($id) {
+        $exam = Exam::find($id);
+        return $this->showDetail($exam);
+    }
+
+    public function showAssignmentDetail($id) {
+        $assignment = Assignment::find($id);
+        return $this->showDetail($assignment);
+    }
+
+    private function showDetail($task) {
+        $teacher = $this->teacher;
+        $students = $task->students;
+        return view('teacher/score/detail', compact('students', 'task', 'teacher'));
     }
 
     private function getExamsByTeacher() {
