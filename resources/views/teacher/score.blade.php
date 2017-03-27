@@ -38,15 +38,15 @@
     @if (!isset($courseId))
       <option value="-1" selected>Semua</option>
       @foreach ($courses as $course)
-        <option value="{{ $course->id }}">{{ $course->name }} - Semester {{ $course->kelas->semester }} - {{ $course->kelas->year }}</option>
+        <option value="{{ $course->id }}">{{ $course->name }}</option>
       @endforeach
     @else
       <option value="-1">Semua</option>
       @foreach ($courses as $course)
       @if ($course->id == $courseId)
-        <option value="{{ $course->id }}" selected>{{ $course->name }} - Semester {{ $course->kelas->semester }} - {{ $course->kelas->year }}</option>
+        <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
       @else
-        <option value="{{ $course->id }}">{{ $course->name }} - Semester {{ $course->kelas->semester }} - {{ $course->kelas->year }}</option>
+        <option value="{{ $course->id }}">{{ $course->name }}</option>
       @endif
       @endforeach
     @endif
