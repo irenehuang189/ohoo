@@ -102,8 +102,10 @@
       <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
+        @if ($exam->course->kelas->is_current)
           <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
+        @endif
         </div>
       </td>
     </tr>
