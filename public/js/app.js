@@ -92,6 +92,26 @@ $(document).ready(function(){
     window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
   });
 
+  // Teacher score management page ajax
+  $(".show-score").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    if (classId < 1 && courseId < 1) {
+      window.location.href = 'score';
+    } else if (classId >= 1 && courseId < 1) {
+      window.location.href = 'score?class=' + classId;
+    } else if (classId < 1 && courseId >= 1) {
+      window.location.href = 'score?course=' + courseId;
+    } else {
+      window.location.href = 'score?class=' + classId + '&course=' + courseId;
+    }
+  });
+  // $(".show-score").click(function(){
+  //   var classId = $("#choose-class :selected").val();
+  //   var courseId = $("#choose-course :selected").val();
+  //   window.location.href = classId;
+  // });
+
   // Teacher score management: add page
   $('div#score').hide();
   $('.steps#add-score .step').click(function(){
