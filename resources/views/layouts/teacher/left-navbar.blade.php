@@ -16,6 +16,11 @@
       <i class="student icon"></i>Manajemen Nilai
     </span>
   </a>
+  <a class="teal item" href="{{ url('teacher/score/semester') }}">
+    <span>
+      <i class="calculator icon"></i>Manajemen Nilai Akhir
+    </span>
+  </a>
   <a class="teal item" href="{{ url('teacher/individu') }}">
     <span>
       <i class="child icon"></i>Performansi Individu

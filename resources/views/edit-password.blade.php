@@ -18,7 +18,7 @@
     <div class="ui center aligned two column grid">
       <div class="left aligned column">
         <form class="ui large form">
-          <div class="ui stacked segment">
+          <div class="ui segment">
             <h2 class="ui dividing header">Ubah Password</h2>
             <div class="field">
               <label>Password Saat Ini</label>

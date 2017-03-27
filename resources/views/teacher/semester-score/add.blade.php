@@ -1,6 +1,6 @@
 @extends('layouts.teacher.two-column-content')
 
-@section('title', 'Tambah Nilai Kelas')
+@section('title', 'Perhitungan Nilai Akhir')
 
 @section('user-name')
   NAMA DI SINI
@@ -13,13 +13,8 @@
 @section('right-column')
 <div class="ui hidden divider"></div>
 <div class="row">
-  <a href="{{ url('teacher/score') }}" class="ui fluid right labeled icon teal button">
+  <a href="{{ url('teacher/score/semester') }}" class="ui fluid right labeled icon teal button">
     Simpan & Selesai<i class="save icon"></i>
-  </a>
-</div>
-<div class="row">
-  <a href="{{ url('teacher/score/add') }}" class="ui fluid right labeled icon button">
-    Simpan & Lanjutkan<i class="pencil icon"></i>
   </a>
 </div>
 <div class="row">
@@ -37,15 +32,15 @@
   <a class="active step" id="exam">
     <i class="file text icon"></i>
     <div class="content">
-      <div class="title">Rincian Penilaian</div>
-      <div class="description">Tambahkan rincian ujian/ulangan/tugas</div>
+      <div class="title">Persentase</div>
+      <div class="description">Masukan persentase nilai</div>
     </div>
   </a>
   <a class="step" id="score">
     <i class="child icon"></i>
     <div class="content">
-      <div class="title">Nilai</div>
-      <div class="description">Masukan nilai siswa</div>
+      <div class="title">Review</div>
+      <div class="description">Tinjau hasil penilaian</div>
     </div>
   </a>
 </div>
@@ -54,17 +49,19 @@
 <div class="ui grid" id="exam">
   <div class="ui hidden divider"></div>
   <div class="row">
-    <div class="four wide column">Kelas</div>
-    <div class="twelve wide column">
+    <div class="five wide column">Kelas</div>
+    <div class="eleven wide column">
       <select class="ui fluid dropdown">
         <option value="" selected>-- Pilih Kelas --</option>
-        <option value="1">Kelas XI-IPA2</option>
+        <option value="1">Kelas X</option>
+        <option value="1">Kelas XI</option>
+        <option value="1">Kelas XII</option>
       </select>
     </div>
   </div>
   <div class="row">
-    <div class="four wide column">Mata Pelajaran</div>
-    <div class="twelve wide column">
+    <div class="five wide column">Mata Pelajaran</div>
+    <div class="eleven wide column">
       <select class="ui fluid dropdown">
         <option value="" selected>-- Pilih Mata Pelajaran --</option>
         <option value="1">Matematika</option>
@@ -72,25 +69,39 @@
     </div>
   </div>
   <div class="row">
-    <div class="four wide column">Jenis Penilaian</div>
-    <div class="twelve wide column">
-      <div class="ui fluid input">
-        <input type="text" placeholder="Ujian Tengah Semester" />
+    <div class="five wide column">Ujian Akhir Semester</div>
+    <div class="eleven wide column">
+      <div class="ui fluid right labeled input">
+        <input type="text" placeholder="25">
+        <div class="ui basic label">%</div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="four wide column">Materi</div>
-    <div class="twelve wide column">
-      <div class="ui fluid input">
-        <input type="text" placeholder="Persamaan Linear" />
+    <div class="five wide column">Ujian Tengah Semester</div>
+    <div class="eleven wide column">
+      <div class="ui fluid right labeled input">
+        <input type="text" placeholder="25">
+        <div class="ui basic label">%</div>
       </div>
     </div>
   </div>
   <div class="row">
-    <div class="four wide column">Tanggal Pelaksanaan</div>
-    <div class="twelve wide column">
-      <div class="ui fluid input"><input type="date" /></div>
+    <div class="five wide column">Ulangan Harian</div>
+    <div class="eleven wide column">
+      <div class="ui fluid right labeled input">
+        <input type="text" placeholder="25">
+        <div class="ui basic label">%</div>
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="five wide column">Tugas</div>
+    <div class="eleven wide column">
+      <div class="ui fluid right labeled input">
+        <input type="text" placeholder="25">
+        <div class="ui basic label">%</div>
+      </div>
     </div>
   </div>
 </div>
@@ -100,32 +111,33 @@
 <div class="ui hidden divider"></div>
 <div id="score">
   <div class="ui hidden divider"></div>
-  <table class="ui striped very compact table">
+  <table class="ui selectable striped table">
     <thead class="center aligned"><tr>
       <th class="one wide">No.</th>
+      <th>No. Induk</th>
       <th>Nama Lengkap</th>
-      <th class="two wide">Nilai</th>
+      <th class="two wide">Nilai Akhir</th>
     </tr></thead>
     <tbody>
-      <tr>
+      <tr class="negative">
         <td class="center aligned">1</td>
+        <td class="center aligned">13232</td>
         <td>Wina Aryasubedjo</td>
-        <td>
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
+        <td class="center aligned">87</td>
       </tr>
       <tr>
         <td class="center aligned">2</td>
+        <td class="center aligned">13233</td>
         <td>Bekti Hutama</td>
-        <td>
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
+        <td class="center aligned">74</td>
       </tr>
     </tbody>
+    <tfoot><tr>
+      <th></th>
+      <th></th>
+      <th><b>Rata-rata Kelas</b></th>
+      <th class="center aligned"><b>75</b></th>
+    </tr></tfoot>
   </table>
   <div class="ui hidden divider"></div>
 </div>
@@ -145,7 +157,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/score') }}">
+    <a class="ui red ok inverted button" href="{{ url('teacher/score/semester') }}">
       <i class="checkmark icon"></i>
       Ya
     </a>
