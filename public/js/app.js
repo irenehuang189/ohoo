@@ -170,8 +170,9 @@ $(document).ready(function(){
       url = baseUrl + "/teacher/students/" + classId;
       $.get(url, function (data, status) {
         $.each(data, function (i, student) {
-          $('#student-list').append($('<tr>')
-            .append($('<td>', {
+          $('#student-list').append($('<tr>', {
+            id: "id-" + student.id
+          }).append($('<td>', {
               class: "center aligned",
               text: i + 1
             }))
@@ -181,16 +182,45 @@ $(document).ready(function(){
             .append($('<td>')
               .append($('<div>', {
                 class: "ui input"
-              }).append("<input type='number' placeholder='0' />"))
+              }).append("<input id= 'student-score' type='number' placeholder='0' />"))
             )
           );
         });
       });
     }
   });
-  // $("#add-task").click(function() {
-  //   var 
-  // });
+  $("#add-task").click(function() {
+    var classId = $("#choose-class-add").val();
+    var courseId = $("#choose-course-add").val();
+    var taskName = $("#task-name").val();
+    var taskMatter = $("#task-matter").val();
+    var taskDate = $("#task-date").val();
+    var studentIds = [];
+    var studentScores = [];
+    $("#student-list tr").each(function () {
+      studentIds.push($(this).attr("id").split("-")[1]);
+      studentScores.push($(this).find("input").val());
+    });
+    var object = new Object();
+    object.classId = classId;
+    object.courseId = courseId;
+    object.taskName = taskName;
+    object.taskMatter = taskMatter;
+    object.taskDate = taskDate;
+    object.studentIds = studentIds;
+    object.studentScores = studentScores;
+    var data = JSON.stringify(object);
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    var url = baseUrl + window.location.pathname;
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function (data) {
+        window.location.href = data;
+      }
+    });
+  });
 
   // Teacher individu page
   // Right menu on individu detail

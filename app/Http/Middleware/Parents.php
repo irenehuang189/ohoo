@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Support\Facades\Auth;
 
-class Student
+class Parents
 {
     /**
      * Handle an incoming request.
@@ -16,9 +16,7 @@ class Student
      */
     public function handle($request, Closure $next)
     {
-        if (!Auth::guest() && isset(Auth::user()->student)) {
-            return $next($request);
-        } elseif (!Auth::guest() && isset(Auth::user()->parent)) {
+        if (!Auth::guest() && isset(Auth::user()->parents)) {
             return $next($request);
         }
         return back()->withInput();

@@ -10,6 +10,7 @@
   {{ $teacher->registration_number }}
 @endsection
 
+{{ csrf_field() }}
 @section('right-column')
 <div class="ui hidden divider"></div>
 <div class="row">
@@ -38,7 +39,11 @@
     <i class="file text icon"></i>
     <div class="content">
       <div class="title">Rincian Penilaian</div>
-      <div class="description">Tambahkan rincian ujian/ulangan/tugas</div>
+    @if ($taskType == 'assignment')
+      <div class="description">Tambahkan rincian tugas</div>
+    @else
+      <div class="description">Tambahkan rincian ujian/ulangan</div>
+    @endif
     </div>
   </a>
   <a class="step" id="score">
@@ -76,7 +81,11 @@
     <div class="four wide column">Jenis Penilaian</div>
     <div class="twelve wide column">
       <div class="ui fluid input">
+      @if ($taskType == "assignment")
+        <input id="task-name" type="text" placeholder="Tugas Makalah" />
+      @else
         <input id="task-name" type="text" placeholder="Ujian Tengah Semester" />
+      @endif
       </div>
     </div>
   </div>
@@ -91,7 +100,7 @@
   <div class="row">
     <div class="four wide column">Tanggal Pelaksanaan</div>
     <div class="twelve wide column">
-      <div class="ui fluid input"><input id="task-date" type="date" /></div>
+      <div class="ui fluid input"><input id="task-date" type="date" value="{{ date('Y-m-d') }}" /></div>
     </div>
   </div>
 </div>
