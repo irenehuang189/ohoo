@@ -53,6 +53,33 @@ class ScoreController extends Controller
         return view('teacher/score/detail', compact('students', 'task', 'teacher'));
     }
 
+    public function showAddExamForm() {
+        return $this->showAddTaskForm('exam');
+    }
+
+    public function showAddAssignmentForm() {
+        return $this->showAddTaskForm('assignment');
+    }
+
+    private function showAddTaskForm($taskType) {
+        $teacher = $this->teacher;
+        $classes = $this->getCurrentClassesByTeacher();
+
+        return view('teacher/score/add', compact('classes', 'taskType', 'teacher'));
+    }
+
+    public function addExam(Request $request) {
+        return $this->addTask($request);
+    }
+
+    public function addAssignment(Request $request) {
+        return $this->addTask($request);
+    }
+
+    private function addTask($task) {
+        return $task;
+    }
+
     private function getExamsByTeacher() {
         $courses = $this->getCoursesByTeacher();
 
@@ -180,6 +207,17 @@ class ScoreController extends Controller
     	return $classes->sortByDesc('year')->sortByDesc('semester')->sortBy('name');
     }
 
+    private function getCurrentClassesByTeacher() {
+        $class_list = $this->getClassesByTeacher();
+        $classes = collect();
+        foreach ($class_list as $class) {
+            if ($class->is_current) {
+                $classes = $classes->push($class);
+            }
+        }
+        return $classes;
+    }
+
     private function getCoursesByTeacher() {
         $courses = $this->teacher->courses;
     	
@@ -202,5 +240,11 @@ class ScoreController extends Controller
         }
 
         return $courses;
+    }
+
+    public function getStudentsByClassId($classId) {
+        $class = Kelas::find($classId);
+        $students = $class->students;
+        return $students;
     }
 }
