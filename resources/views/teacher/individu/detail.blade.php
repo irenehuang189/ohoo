@@ -1,27 +1,21 @@
 @extends('layouts.teacher.two-column-content')
 
 @section('title')
-  Siti Nurjaenah
+  {{ $student->name }}
 @endsection
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
 
 <!-- Fields semester -->
 <div id="semester">
-  <div class="ui fluid vertical inverted menu">
-    <a class="active teal item">Nilai Akademik</a>
-    <a class="teal item">Ekstrakurikuler</a>
-    <a class="teal item">Kehadiran/Kepribadian</a>
-  </div>
-  <div class="ui hidden section divider"></div>
   <div class="ui small form">
     <div class="field">
       <label>Kelas</label>
@@ -101,7 +95,7 @@
 @section('left-column')
 <h2 class="ui dividing header">
   Nilai Individu
-  <div class="sub header">Siti Nurjaenah / XI-IPA2</div>
+  <div class="sub header">{{ $student->name }} / {{ $class->name }} - Sem. {{ $class->semester }}</div>
 </h2>
 <div class="ui segment">
   <div class="ui pointing secondary teal menu">

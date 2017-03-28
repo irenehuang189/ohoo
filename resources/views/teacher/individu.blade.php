@@ -3,29 +3,18 @@
 @section('title', 'Performansi Individu')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
 <div class="ui small form">
   <div class="field">
     <label>Nama Siswa</label>
-    <select class="ui search dropdown">
-      <option selected>Semua</option>
-      <option>Wina Aryasubedjo</option>
-    </select>
-  </div>
-  <div class="row">
-    <button class="ui horizontal animated teal large fluid button show-detailed-report-blank" tabindex="0">
-      <div class="visible content">Search</div>
-      <div class="hidden content">
-        <i class="search icon"></i>
-      </div>
-    </button>
+    <input type="text" placeholder="Masukan nama siswa.." id="searchName" onkeyup="searchTable()">
   </div>
 </div>
 @endsection
@@ -39,7 +28,7 @@
 <!-- Tabel Daftar Siswa -->
 <div class="ui two column centered grid">
   <div class="column">
-<table class="ui selectable striped table">
+<table class="ui selectable striped table" id="student_name">
   <thead class="center aligned"><tr>
     <th class="one wide">No.</th>
     <th class="three wide">No. Induk</th>
@@ -47,25 +36,45 @@
     <th></th>
   </tr></thead>
   <tbody>
-    <tr class="center aligned">
-      <td>1</td>
-      <td>13232</td>
-      <td>Wina Aryasubedjo</td>
-      <td>
-        <a href="{{ url('teacher/individu/detail') }}" class="ui blue basic icon mini button"><i class="eye icon"></i></a>
-      </td>
-    </tr>
-    <tr class="center aligned">
-      <td>2</td>
-      <td>13233</td>
-      <td>Bekti Regan</td>
-      <td>
-        <a href="{{ url('teacher/individu/detail') }}" class="ui blue basic icon mini button"><i class="eye icon"></i></a>
-      </td>
-    </tr>
+    <?php $i = 0 ?>
+    @foreach($students as $student)
+      <?php $i++ ?>
+      <tr class="center aligned">
+        <td>{{ $i }}</td>
+        <td>{{ $student->registration_number }}</td>
+        <td>{{ $student->name }}</td>
+        <td>
+          <a href="{{ url('teacher/individu/detail/' . $student->id) }}" class="ui blue basic icon mini button"><i class="eye icon"></i></a>
+        </td>
+      </tr>
+    @endforeach
   </tbody>
 </table>
 </div>
 </div>
 <!-- /Tabel Daftar Siswa -->
+
+<script>
+  function searchTable() {
+    // Declare variables
+    var input, filter, table, tr, td, i;
+    input = document.getElementById("searchName");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("student_name");
+    tr = table.getElementsByTagName("tr");
+
+    // Loop through all table rows, and hide those who don't match the search query
+    for (i = 0; i < tr.length; i++) {
+      td = tr[i].getElementsByTagName("td")[2];
+      if (td) {
+        if (td.innerHTML.toUpperCase().indexOf(filter) > -1) {
+          tr[i].style.display = "";
+        } else {
+          tr[i].style.display = "none";
+        }
+      }
+    }
+  }
+</script>
+
 @endsection

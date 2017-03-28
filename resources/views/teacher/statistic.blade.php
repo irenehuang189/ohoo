@@ -31,17 +31,23 @@
               <div class="inline field">
                 <label>Kelas</label>
                 <select class="ui dropdown" id="choose-class-history">
-                  <option value="AF">X-1</option>
-                  <option value="AX">X-2</option>
-                  <option value="AL">XI-1</option>
+                  @foreach($class_names as $name)
+                    @if($name->id == $currentClassId)
+                      <option value="{{ $name->id }}" selected>{{ $name->name }}</option>
+                    @else
+                      <option value="{{ $name->id }}">{{ $name->name }}</option>
+                    @endif
+                  @endforeach
                 </select>
                 <label>Mata Pelajaran</label>
                 <select class="ui dropdown" id="choose-mapel-history">
-                  <option value="AF">Bahasa Indonesia</option>
-                  <option value="AX">Bahasa Iggris</option>
-                  <option value="AL">Matematika</option>
-                  <option value="AO">Fisika</option>
-                  <option value="AI">Kimia</option>
+                  @foreach($courses as $course)
+                    @if($course->id == $currentCourseId)
+                      <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
+                    @else
+                      <option value="{{ $course->id }}">{{ $course->name }}</option>
+                    @endif
+                  @endforeach
                 </select>
               </div>
             </div>
@@ -49,32 +55,32 @@
           </div>
         </div>
       </div>
-      <div class="column">
-        <div class="ui fluid card">
-          <div class="content">
-            <div class="header">Frekuensi Nilai pada Ujian/Ulangan/Tugas</div>
-            <div class="meta">Per Rentang Nilai (0-10)</div>
-          </div>
-          <div class="content">
-            <div class="ui form">
-              <div class="fields">
-                <div class="inline field">
-                  <label>Mata Pelajaran</label>
-                  <select class="ui dropdown">
-                    <option>Semua</option>
-                    <option>Bahasa Indonesia</option>
-                    <option>Bahasa Iggris</option>
-                    <option>Matematika</option>
-                    <option>Fisika</option>
-                    <option>Kimia</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <canvas id="score-frequency"></canvas>
-          </div>
-        </div>
-      </div>
+      {{--<div class="column">--}}
+        {{--<div class="ui fluid card">--}}
+          {{--<div class="content">--}}
+            {{--<div class="header">Frekuensi Nilai pada Ujian/Ulangan/Tugas</div>--}}
+            {{--<div class="meta">Per Rentang Nilai (0-10)</div>--}}
+          {{--</div>--}}
+          {{--<div class="content">--}}
+            {{--<div class="ui form">--}}
+              {{--<div class="fields">--}}
+                {{--<div class="inline field">--}}
+                  {{--<label>Mata Pelajaran</label>--}}
+                  {{--<select class="ui dropdown">--}}
+                    {{--<option>Semua</option>--}}
+                    {{--<option>Bahasa Indonesia</option>--}}
+                    {{--<option>Bahasa Iggris</option>--}}
+                    {{--<option>Matematika</option>--}}
+                    {{--<option>Fisika</option>--}}
+                    {{--<option>Kimia</option>--}}
+                  {{--</select>--}}
+                {{--</div>--}}
+              {{--</div>--}}
+            {{--</div>--}}
+            {{--<canvas id="score-frequency"></canvas>--}}
+          {{--</div>--}}
+        {{--</div>--}}
+      {{--</div>--}}
       <div class="column">
         <div class="ui fluid card">
           <div class="content">
