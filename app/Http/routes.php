@@ -63,7 +63,5 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/individu/detail', function() {
 	  return view('teacher/individu/detail');
 	});
-	Route::get('/teacher/statistic', function() {
-	  return view('teacher/statistic');
-	});
+	Route::get('/teacher/statistic', 'Teacher\StatisticController@showStatistic');
 });

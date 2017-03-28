@@ -3,11 +3,11 @@
 @section('title', 'Dashboard Nilai')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  1209727
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('content')
@@ -29,9 +29,14 @@
             <!-- Course selection -->
             <div class="ui form">
               <div class="inline field">
+                <label>Kelas</label>
+                <select class="ui dropdown" id="choose-class-history">
+                  <option value="AF">X-1</option>
+                  <option value="AX">X-2</option>
+                  <option value="AL">XI-1</option>
+                </select>
                 <label>Mata Pelajaran</label>
-                <select multiple="" class="ui dropdown">
-                  <option value="">Semua</option>
+                <select class="ui dropdown" id="choose-mapel-history">
                   <option value="AF">Bahasa Indonesia</option>
                   <option value="AX">Bahasa Iggris</option>
                   <option value="AL">Matematika</option>
