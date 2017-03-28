@@ -91,14 +91,20 @@ Route::group(['middleware' => 'teacher'], function() {
 	/* Individu */
 	Route::get('/teacher/individu', 'Teacher\IndividualController@showStudentList');
 	Route::get('/teacher/individu/detail/{id}', 'Teacher\IndividualController@showStudent');
+	Route::get('/teacher/individu/report/{id}', 'Teacher\IndividualController@showReport');
+	Route::get('/teacher/individu/report-bayangan/{id}', 'Teacher\IndividualController@showReportBayangan');
+	Route::get('/teacher/individu/detailed-report/{id}', 'Teacher\IndividualController@showDetailedReport');
+	/* Individu chart */
+	Route::get('/teacher/individu/getMeanStatistic/{id}', 'Teacher\IndividualController@getMeanStatistic');
+	Route::get('/teacher/individu/getRankStatistic/{id}', 'Teacher\IndividualController@getRankStatistic');
+	Route::get('/teacher/individu/getCapabilityStatistic/{id}', 'Teacher\IndividualController@getCapabilityStatistic');
+	Route::get('/teacher/individu/getHistoryCoursesStatistic/{id}/{request}', 'Teacher\IndividualController@getHistoryCoursesStatistic');
+
 
 	/* Statistik */
 	Route::get('/teacher/statistic', 'Teacher\StatisticController@showStatistic');
 	Route::get('/teacher/getHistoryStatistic/{classId}/{courseName}', 'Teacher\StatisticController@getHistoryStatistic');
 	Route::get('/teacher/getCoursesByClassId/{classId}', 'Teacher\StatisticController@getCoursesByClassId');
-
-	/* Individual performance */
-
 
 	/* Others */
 	Route::get('teacher/courses/{classId}', 'Teacher\ScoreController@getCoursesByTeacherClassId');

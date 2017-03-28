@@ -14,82 +14,6 @@
 
 @section('right-column')
 
-<!-- Fields semester -->
-<div id="semester">
-  <div class="ui small form">
-    <div class="field">
-      <label>Kelas</label>
-      <select class="ui dropdown" id="classes">
-        <option selected value="$class->id">$class->name - Semester $class->semester</option>
-      </select>
-    </div>
-    <div class="row">
-      <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
-        <div class="visible content">Search</div>
-        <div class="hidden content">
-          <i class="search icon"></i>
-        </div>
-      </button>
-    </div>
-  </div>
-</div>
-<!-- /Fields semester -->
-
-<!-- Fields mid term -->
-<div id="midterm">
-  <div class="ui fluid vertical inverted menu">
-    <a class="active teal item">Nilai Akademik</a>
-    <a class="teal item">Ekstrakurikuler</a>
-    <a class="teal item">Kehadiran/Kepribadian</a>
-  </div>
-  <div class="ui hidden section divider"></div>
-  <div class="ui small form">
-    <div class="field">
-      <label>Kelas</label>
-      <select class="ui dropdown" id="classes">
-        <option selected value="$class->id">$class->name - Semester $class->semester</option>
-      </select>
-    </div>
-    <div class="row">
-      <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
-        <div class="visible content">Search</div>
-        <div class="hidden content">
-          <i class="search icon"></i>
-        </div>
-      </button>
-    </div>
-  </div>
-</div>
-<!-- /Fields mid term -->
-
-<!-- Fields rincian nilai -->
-<div id="detail">
-  <div class="ui small form">
-    <div class="field">
-      <label>Kelas</label>
-      <select class="ui dropdown" id="choose-class">
-        <option value="-1" disabled selected>-- Pilih Kelas --</option>
-        <option value="$class->id" selected>$class->name - Semester $class->semester</option>
-      </select>
-    </div>
-    <div class="field">
-      <label>Mata Pelajaran</label>
-      <select class="ui dropdown" id="choose-course">
-        <option value="-1" disabled selected>-- Pilih Mata Pelajaran --</option>
-        <option value="$course->id">$course->name</option>
-      </select>
-    </div>
-    <div class="row">
-      <button class="ui horizontal animated teal large fluid button show-detailed-report-blank" tabindex="0">
-        <div class="visible content">Search</div>
-        <div class="hidden content">
-          <i class="search icon"></i>
-        </div>
-      </button>
-    </div>
-  </div>
-</div>
-<!-- /Fields rincian nilai -->
 @endsection
 
 @section('left-column')
@@ -99,16 +23,145 @@
 </h2>
 <div class="ui segment">
   <div class="ui pointing secondary teal menu">
-    <a class="item" data-tab="overview" id="overview">Overview</a>
-    <a class="item" data-tab="semester" id="semester">Rapor Semester</a>
-    <a class="item" data-tab="midterm" id="midterm">Rapor Bayangan</a>
-    <a class="item" data-tab="detail" id="detail">Rincian Nilai</a>
+    <a class="item active" id="overview" href="{{ url('teacher/individu/detail/' . $student->id) }}">Overview</a>
+    <a class="item" id="semester" href="{{ url('teacher/individu/report/' . $student->id) }}">Rapor Semester</a>
+    <a class="item" id="midterm" href="{{ url('teacher/individu/report-bayangan/' . $student->id) }}">Rapor Bayangan</a>
+    <a class="item" id="detail" href="{{ url('teacher/individu/detailed-report/' . $student->id) }}">Rincian Nilai</a>
   </div>
-  
-  @include('teacher.individu.overview')
-  <!-- include('teacher.individu.semester') -->
-  @include('teacher.individu.midterm')
-  @include('teacher.individu.detail-report')
+
+  <div class="ui active tab" data-tab="overview">
+    <!-- Identity -->
+    <input id="student-id" value="{{ $student->id }}" hidden>
+    <div class="ui container grid">
+      <div class="three wide column">
+        Nama<br/>
+        Nomor Induk<br/>
+        Kelas<br/>
+      </div>
+      <div class="thirteen wide column">
+        : {{ $student->name }}<br/>
+        : {{ $student->registration_number }}<br/>
+        : {{ $class->name }} - Sem. {{ $class->semester }}<br/>
+      </div>
+    </div>
+    <!-- Overview Statistics -->
+    <div class="ui three column center aligned grid">
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="ui blue statistic">
+              <div class="value">{{ round($average)  }}</div>
+              <div class="label">Rata-rata Nilai</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="ui red statistic">
+              <div class="value">{{ $nilaiMerah }}</div>
+              <div class="label">Nilai Merah</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="ui teal statistic">
+              <div class="value"><i class="trophy icon"></i> {{ $rank }}</div>
+              <div class="label">Peringkat</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- /Overview Statistics -->
+
+    <!-- Statistics -->
+    <div class="ui grid">
+      <div class="column">
+        <!-- Peta Kemampuan Siswa Card -->
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Kemampuan Siswa</div>
+            <div class="meta">Per Mata Pelajaran</div>
+          </div>
+          <div class="content">
+            <canvas id="skill"></canvas>
+          </div>
+        </div>
+        <!-- /Peta Kemampuan Siswa Card -->
+      </div>
+    </div>
+
+    <div class="ui two column grid">
+      <div class="column">
+        <!-- Histori Nilai Keseluruhan Card -->
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Histori Nilai Keseluruhan</div>
+            <div class="meta">Per Semester</div>
+          </div>
+          <div class="content">
+            <canvas id="mean-score"></canvas>
+          </div>
+        </div>
+        <!-- /Histori Nilai Keseluruhan Card -->
+      </div>
+      <div class="column">
+        <!-- Histori Peringkat Kelas Card -->
+        <div class="ui fluid card">
+          <div class="content">
+            <div class="header">Histori Peringkat Kelas</div>
+            <div class="meta">Per Semester</div>
+          </div>
+          <div class="content">
+            <canvas id="rank"></canvas>
+          </div>
+        </div>
+        <!-- /Histori Peringkat Kelas Card -->
+      </div>
+    </div>
+
+  <div class="ui grid">
+    <div class="column">
+      <!-- Histori Nilai Mata Pelajaran Card -->
+      <div class="ui fluid card">
+        <div class="content">
+          <div class="header">Histori Nilai Mata Pelajaran</div>
+          <div class="meta">Per Semester</div>
+        </div>
+        <div class="content">
+          <!-- Course selection -->
+          <div class="ui form">
+            <div class="inline field">
+              <label>Mata Pelajaran</label>
+              <select multiple="" class="ui dropdown " id="histori-nilai">
+                <option value="">Pilih mata pelajaran</option>
+                <?php $id = 0 ?>
+                @foreach($courses as $course)
+                  <option value={{ $id }}>{{ $course->name }}</option>
+                  <?php $id++; ?>
+                @endforeach
+              </select>
+            </div>
+          </div>
+          <canvas id="score-history"></canvas>
+        </div>
+      </div>
+      <!-- /Histori Nilai Mata Pelajaran Card -->
+    </div>
+  </div>
+
+  <!-- /Statistics -->
+</div>
+
+@section('js')
+  <script src="{{ asset('js/individu-overview.js') }}"></script>
+@endsection
+
 
 </div>
 @endsection

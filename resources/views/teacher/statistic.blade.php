@@ -94,7 +94,7 @@
                 <div class="inline field">
                   <label>Mata Pelajaran</label>
                   <select class="ui dropdown">
-                    <option>Semua</option>
+                    <option selected disabled>-- Pilih mata pelajaran --</option>
                     <option>Bahasa Indonesia</option>
                     <option>Bahasa Iggris</option>
                     <option>Matematika</option>
@@ -104,7 +104,7 @@
                 </div>
               </div>
             </div>
-            <table class="ui celled table">
+            <table class="ui celled table" id="peringkat">
               <thead class="center aligned">
                 <th>No. Induk</th>
                 <th>Nama</th>

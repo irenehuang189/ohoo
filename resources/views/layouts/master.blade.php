@@ -35,6 +35,8 @@
     <script src="{{ asset('js/student-chart.js') }}"></script>
   @elseif(Request::is('parent/statistic'))
     <script src="{{ asset('js/parent-chart.js') }}"></script>
+  @elseif(Request::is('*teacher/individu/detail/*'))
+    <script src="{{ asset('js/teacher-student-chart.js') }}"></script>
   @endif
   <script src="{{ asset('js/app.js') }}"></script>
   @yield('js')
