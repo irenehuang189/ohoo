@@ -58,7 +58,7 @@
     <tr>
       <th rowspan="2" class="one wide">No.</th>
       <th rowspan="2">Nama Lengkap</th>
-      <th colspan="2" class="two wide">Nilai</th>
+      <th colspan="2" class="two wide">Nilai Akhir</th>
     </tr>
     <tr>
       <th>Konsep</th>

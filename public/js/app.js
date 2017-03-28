@@ -126,19 +126,30 @@ $(document).ready(function(){
 
   // Teacher score management: add page
   $('div#score').hide();
+  $('div#attitude').hide();
   $('.steps#add-score .step').click(function(){
     $(this).addClass('active');
     var id = $(this).attr('id');
     if(id == 'exam'){
       $('#score').removeClass('active');
+      $('#attitude').removeClass('active');
       $('div#score').hide();
+      $('div#attitude').hide();
       $('div#exam').show();
     } else if(id == 'score'){
       $('#exam').removeClass('active');
+      $('#attitude').removeClass('active');
       $('div#exam').hide();
+      $('div#attitude').hide();
       $('div#score').show();
       // TODO: Panggil ajax buat daftar siswa di sini
-    };
+    } else if(id == 'attitude'){
+      $('#exam').removeClass('active');
+      $('#score').removeClass('active');
+      $('div#exam').hide();
+      $('div#score').hide();
+      $('div#attitude').show();
+    }
   });
   $("#choose-class-add").change(function(){
     $('#choose-course-add').empty();

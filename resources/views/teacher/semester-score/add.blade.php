@@ -28,7 +28,7 @@
 <h2 class="ui dividing header">
   Tambah Nilai
 </h2>
-<div class="ui two steps" id="add-score">
+<div class="ui three steps" id="add-score">
   <a class="active step" id="exam">
     <i class="file text icon"></i>
     <div class="content">
@@ -37,10 +37,17 @@
     </div>
   </a>
   <a class="step" id="score">
-    <i class="child icon"></i>
+    <i class="eye icon"></i>
     <div class="content">
       <div class="title">Review</div>
       <div class="description">Tinjau hasil penilaian</div>
+    </div>
+  </a>
+  <a class="step" id="attitude">
+    <i class="child icon"></i>
+    <div class="content">
+      <div class="title">Afektif</div>
+      <div class="description">Tambahkan nilai afektif</div>
     </div>
   </a>
 </div>
@@ -112,23 +119,31 @@
 <div id="score">
   <div class="ui hidden divider"></div>
   <table class="ui selectable striped table">
-    <thead class="center aligned"><tr>
-      <th class="one wide">No.</th>
-      <th>No. Induk</th>
-      <th>Nama Lengkap</th>
-      <th class="two wide">Nilai Akhir</th>
-    </tr></thead>
+    <thead class="center aligned">
+      <tr>
+        <th rowspan="2" class="one wide">No.</th>
+        <th rowspan="2">No. Induk</th>
+        <th rowspan="2">Nama Lengkap</th>
+        <th colspan="2" class="two wide">Nilai Akhir</th>
+      </tr>
+      <tr>
+        <th>Konsep</th>
+        <th>Praktek</th>
+      </tr>
+    </thead>
     <tbody>
       <tr class="negative">
         <td class="center aligned">1</td>
         <td class="center aligned">13232</td>
         <td>Wina Aryasubedjo</td>
         <td class="center aligned">87</td>
+        <td class="center aligned">87</td>
       </tr>
       <tr>
         <td class="center aligned">2</td>
         <td class="center aligned">13233</td>
         <td>Bekti Hutama</td>
+        <td class="center aligned">74</td>
         <td class="center aligned">74</td>
       </tr>
     </tbody>
@@ -137,17 +152,57 @@
       <th></th>
       <th><b>Rata-rata Kelas</b></th>
       <th class="center aligned"><b>75</b></th>
+      <th class="center aligned"><b>75</b></th>
     </tr></tfoot>
   </table>
   <div class="ui hidden divider"></div>
 </div>
 <!-- /Tabel Daftar Siswa -->
 
+<!-- Nilai Afektif -->
+<div id="attitude">
+  <div class="ui hidden divider"></div>
+  <table class="ui selectable striped very compact table">
+    <thead class="center aligned">
+      <tr>
+        <th class="one wide">No.</th>
+        <th>No. Induk</th>
+        <th>Nama Lengkap</th>
+        <th class="two wide">Nilai</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="negative">
+        <td class="center aligned">1</td>
+        <td class="center aligned">13232</td>
+        <td>Wina Aryasubedjo</td>
+        <td class="center aligned">
+          <div class="ui input">
+            <input type="number" placeholder="0"/>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="center aligned">2</td>
+        <td class="center aligned">13233</td>
+        <td>Bekti Hutama</td>
+        <td class="center aligned">
+          <div class="ui input">
+            <input type="number" placeholder="0"/>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="ui hidden divider"></div>
+</div>
+<!-- /Nilai Afektif -->
+
 <!-- Modal Hapus -->
 <div class="ui basic modal">
   <div class="ui icon header">
     <i class="archive icon"></i>
-    Apakah Anda yakin ingin menghapus?
+    Apakah Anda yakin ingin membatalkan?
   </div>
   <div class="content">
     <p>Data akan dihapus segera. Anda tidak dapat mengembalikan data yang telah dihapus.</p>
