@@ -13,7 +13,7 @@
 @section('right-column')
 <div class="ui hidden divider"></div>
 <div class="row">
-  <a href="{{ url('teacher/score/' . $taskType . '/add') }}" class="ui fluid right labeled icon teal button" id="add-task">
+  <a class="ui fluid right labeled icon teal button" id="add-task">
     Simpan & Selesai<i class="save icon"></i>
   </a>
 </div>
@@ -107,25 +107,7 @@
       <th>Nama Lengkap</th>
       <th class="two wide">Nilai</th>
     </tr></thead>
-    <tbody>
-      <tr>
-        <td class="center aligned">1</td>
-        <td>Wina Aryasubedjo</td>
-        <td>
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="center aligned">2</td>
-        <td>Bekti Hutama</td>
-        <td>
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
-      </tr>
+    <tbody id="student-list">
     </tbody>
   </table>
   <div class="ui hidden divider"></div>

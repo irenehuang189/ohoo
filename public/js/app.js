@@ -143,6 +143,7 @@ $(document).ready(function(){
   $("#choose-class-add").change(function(){
     $('#choose-course-add').empty();
     $("#choose-course-add").prepend("<option value='' selected='selected'>Pilih Mata Pelajaran</option>").change();
+    $('#student-list').empty();
     var classId = $("#choose-class-add :selected").val();
     if (classId >= 1) {
       var baseUrl = window.location.protocol + "//" + window.location.host;
@@ -155,10 +156,29 @@ $(document).ready(function(){
           }));
         });
       });
+      url = baseUrl + "/teacher/students/" + classId;
+      $.get(url, function (data, status) {
+        $.each(data, function (i, student) {
+          $('#student-list').append($('<tr>')
+            .append($('<td>', {
+              class: "center aligned",
+              text: i + 1
+            }))
+            .append($('<td>', {
+              text: student.name
+            }))
+            .append($('<td>')
+              .append($('<div>', {
+                class: "ui input"
+              }).append("<input type='number' placeholder='0' />"))
+            )
+          );
+        });
+      });
     }
   });
   // $("#add-task").click(function() {
-  //   var classId = 
+  //   var 
   // });
 
   // Teacher individu page

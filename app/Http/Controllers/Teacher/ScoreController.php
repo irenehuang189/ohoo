@@ -64,6 +64,7 @@ class ScoreController extends Controller
     private function showAddTaskForm($taskType) {
         $teacher = $this->teacher;
         $classes = $this->getCurrentClassesByTeacher();
+
         return view('teacher/score/add', compact('classes', 'taskType', 'teacher'));
     }
 
@@ -239,5 +240,11 @@ class ScoreController extends Controller
         }
 
         return $courses;
+    }
+
+    public function getStudentsByClassId($classId) {
+        $class = Kelas::find($classId);
+        $students = $class->students;
+        return $students;
     }
 }

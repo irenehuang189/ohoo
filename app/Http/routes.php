@@ -76,7 +76,7 @@ Route::group(['middleware' => 'teacher'], function() {
 	  return view('teacher/statistic');
 	});
 
-	/* Filter */
+	/* Others */
 	Route::get('teacher/courses/{classId}', 'Teacher\ScoreController@getCoursesByTeacherClassId');
-	
+	Route::get('teacher/students/{classId}', 'Teacher\ScoreController@getStudentsByClassId');
 });
