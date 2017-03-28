@@ -53,6 +53,31 @@ class ScoreController extends Controller
         return view('teacher/score/detail', compact('students', 'task', 'teacher'));
     }
 
+    public function showAddExamForm() {
+        return $this->showAddTaskForm('exam');
+    }
+
+    public function showAddAssignmentForm() {
+        return $this->showAddTaskForm('assignment');
+    }
+
+    private function showAddTaskForm($taskType) {
+        $teacher = $this->teacher;
+        return view('teacher/score/add', compact('taskType', 'teacher'));
+    }
+
+    public function addExam(Request $request) {
+        return $this->addTask($request);
+    }
+
+    public function addAssignment(Request $request) {
+        return $this->addTask($request);
+    }
+
+    private function addTask($task) {
+        return $task;
+    }
+
     private function getExamsByTeacher() {
         $courses = $this->getCoursesByTeacher();
 

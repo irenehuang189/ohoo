@@ -49,11 +49,12 @@ Route::group(['middleware' => 'student'], function() {
 Route::group(['middleware' => 'teacher'], function() {
 	/* Score */
 	Route::get('/teacher/score', 'Teacher\ScoreController@showScores');
-	Route::get('/teacher/score/add', function() {
-	  return view('teacher/score/add');
-	});
-	Route::get('/teacher/score/exam/{id}', 'Teacher\ScoreController@showExamDetail');
-	Route::get('/teacher/score/assignment/{id}', 'Teacher\ScoreController@showAssignmentDetail');
+	Route::get('/teacher/score/exam/add', 'Teacher\ScoreController@showAddExamForm');
+	Route::post('/teacher/score/exam/add', 'Teacher\ScoreController@addExam');
+	Route::get('/teacher/score/assignment/add', 'Teacher\ScoreController@showAddAssignmentForm');
+	Route::post('/teacher/score/assignment/add', 'Teacher\ScoreController@addAssignment');
+	Route::get('/teacher/score/exam/detail/{id}', 'Teacher\ScoreController@showExamDetail');
+	Route::get('/teacher/score/assignment/detail/{id}', 'Teacher\ScoreController@showAssignmentDetail');
 	Route::get('/teacher/score/semester', function(){
 		return view('teacher/semester-score');
 	});

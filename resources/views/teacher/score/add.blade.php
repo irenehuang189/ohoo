@@ -3,17 +3,17 @@
 @section('title', 'Tambah Nilai Kelas')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
 <div class="ui hidden divider"></div>
 <div class="row">
-  <a href="{{ url('teacher/score') }}" class="ui fluid right labeled icon teal button">
+  <a href="{{ url('teacher/score/' . $taskType . '/add') }}" class="ui fluid right labeled icon teal button">
     Simpan & Selesai<i class="save icon"></i>
   </a>
 </div>
