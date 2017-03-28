@@ -45,6 +45,9 @@ Route::get('/parent/getMeanStatistic', 'Parent\StudentStatisticController@getMea
 Route::get('/parent/getRankStatistic', 'Parent\StudentStatisticController@getRankStatistic');
 Route::get('/parent/getCapabilityStatistic', 'Parent\StudentStatisticController@getCapabilityStatistic');
 Route::get('/parent/getHistoryCoursesStatistic/{request}', 'Parent\StudentStatisticController@getHistoryCoursesStatistic');
+Route::get('/parent/report-bayangan', 'Parent\StudentReportController@showReportBayangan');
+Route::get('/parent/report-bayangan/{id}', 'Parent\StudentReportController@showReportBayanganByClassId');
+
 Route::get('/student/getCoursesByClassId/{id}', 'Student\StudentReportController@getCoursesByClassId');
 
 Route::group(['middleware' => 'student'], function() {
@@ -53,6 +56,8 @@ Route::group(['middleware' => 'student'], function() {
 	Route::get('/student/report/{id}', 'Student\StudentReportController@showReportByClassId');
 	Route::get('/student/detailed-report', 'Student\StudentReportController@showDetailedReport');
 	Route::get('/student/detailed-report/{classId}/{courseId}', 'Student\StudentReportController@showDetailedReportByCourseId');
+	Route::get('/student/report-bayangan', 'Student\StudentReportController@showReportBayangan');
+	Route::get('/student/report-bayangan/{id}', 'Student\StudentReportController@showReportBayanganByClassId');
 
 	/* Student statistic */
 	Route::get('/student/statistic', 'Student\StudentStatisticController@showStatistic');

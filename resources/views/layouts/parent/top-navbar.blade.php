@@ -10,10 +10,14 @@
     <a>Rapor</a>
     <div class="menu">
       <a 
-        class="item {{ Request::is('parent/report*') ? 'active' : '' }}"href="{{ url('parent/report') }}">
+        class="item {{ Request::is('parent/report') ? 'active' : '' }}"href="{{ url('parent/report') }}">
         Semester
       </a>
-      <a class="item">Bayangan</a>
+      <a
+        class="item {{ Request::is('parent/report-bayangan*') ? 'active' : '' }}"
+        href="{{ url('parent/report-bayangan') }}">
+        Bayangan
+      </a>
       <a 
         class="item {{ Request::is('parent/detailed-report*') ? 'active' : '' }}"
         href="{{ url('parent/detailed-report') }}">

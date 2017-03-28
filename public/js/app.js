@@ -66,6 +66,16 @@ $(document).ready(function(){
     window.location.href = classId;
   });
 
+  // Report bayangan page
+  $(".show-report-bayangan-blank").click(function(){
+    var classId = $("#classes :selected").val();
+    window.location.href = 'report-bayangan/' + classId;
+  });
+  $(".show-report-bayangan").click(function(){
+    var classId = $("#classes :selected").val();
+    window.location.href = classId;
+  });
+
   // Detailed report page ajax
   $("#choose-class").change(function(){
     var classId = $("#choose-class :selected").val();

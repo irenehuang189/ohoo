@@ -98,4 +98,39 @@ class StudentReportController extends Controller
         $courses = $class->courses;
         return $courses;
     }
+
+    public function showReportBayangan() {
+        $studentId = Auth::user()->student_id;
+        $blank = 1;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courses = $classes[0]->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = $classes[0]->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        $classId = $classes[0]->id;
+        return view('student.report-bayangan', compact('student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+    }
+
+    public function showReportBayanganByClassId($classId) {
+        $studentId = Auth::user()->student_id;
+        $blank = 0;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courses = Kelas::find($classId)->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = Kelas::find($classId)->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        return view('student.report', compact('student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+    }
 }
