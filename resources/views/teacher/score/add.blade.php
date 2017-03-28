@@ -13,7 +13,7 @@
 @section('right-column')
 <div class="ui hidden divider"></div>
 <div class="row">
-  <a href="{{ url('teacher/score/' . $taskType . '/add') }}" class="ui fluid right labeled icon teal button">
+  <a href="{{ url('teacher/score/' . $taskType . '/add') }}" class="ui fluid right labeled icon teal button" id="add-task">
     Simpan & Selesai<i class="save icon"></i>
   </a>
 </div>
@@ -56,18 +56,19 @@
   <div class="row">
     <div class="four wide column">Kelas</div>
     <div class="twelve wide column">
-      <select class="ui fluid dropdown">
+      <select class="ui fluid dropdown" id="choose-class-add">
         <option value="" selected>-- Pilih Kelas --</option>
-        <option value="1">Kelas XI-IPA2</option>
+      @foreach ($classes as $class)
+        <option value="{{ $class->id }}">{{ $class->name }}</option>
+      @endforeach
       </select>
     </div>
   </div>
   <div class="row">
     <div class="four wide column">Mata Pelajaran</div>
     <div class="twelve wide column">
-      <select class="ui fluid dropdown">
+      <select class="ui fluid dropdown" id="choose-course-add">
         <option value="" selected>-- Pilih Mata Pelajaran --</option>
-        <option value="1">Matematika</option>
       </select>
     </div>
   </div>
@@ -75,7 +76,7 @@
     <div class="four wide column">Jenis Penilaian</div>
     <div class="twelve wide column">
       <div class="ui fluid input">
-        <input type="text" placeholder="Ujian Tengah Semester" />
+        <input id="task-name" type="text" placeholder="Ujian Tengah Semester" />
       </div>
     </div>
   </div>
@@ -83,14 +84,14 @@
     <div class="four wide column">Materi</div>
     <div class="twelve wide column">
       <div class="ui fluid input">
-        <input type="text" placeholder="Persamaan Linear" />
+        <input id="task-matter" type="text" placeholder="Persamaan Linear" />
       </div>
     </div>
   </div>
   <div class="row">
     <div class="four wide column">Tanggal Pelaksanaan</div>
     <div class="twelve wide column">
-      <div class="ui fluid input"><input type="date" /></div>
+      <div class="ui fluid input"><input id="task-date" type="date" /></div>
     </div>
   </div>
 </div>

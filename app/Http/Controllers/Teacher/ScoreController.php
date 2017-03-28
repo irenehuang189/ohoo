@@ -63,7 +63,8 @@ class ScoreController extends Controller
 
     private function showAddTaskForm($taskType) {
         $teacher = $this->teacher;
-        return view('teacher/score/add', compact('taskType', 'teacher'));
+        $classes = $this->getCurrentClassesByTeacher();
+        return view('teacher/score/add', compact('classes', 'taskType', 'teacher'));
     }
 
     public function addExam(Request $request) {
@@ -203,6 +204,17 @@ class ScoreController extends Controller
     	}
 
     	return $classes->sortByDesc('year')->sortByDesc('semester')->sortBy('name');
+    }
+
+    private function getCurrentClassesByTeacher() {
+        $class_list = $this->getClassesByTeacher();
+        $classes = collect();
+        foreach ($class_list as $class) {
+            if ($class->is_current) {
+                $classes = $classes->push($class);
+            }
+        }
+        return $classes;
     }
 
     private function getCoursesByTeacher() {
