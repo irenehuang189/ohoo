@@ -16,6 +16,8 @@ Route::get('', function() {
 		return redirect('student/statistic');
 	} else if (isset(Auth::user()->teacher)) {
 		return redirect('teacher/statistic');
+	}  else if (isset(Auth::user()->parents)) {
+		return redirect('parent/statistic');
 	}
   return redirect('logout');
 });
@@ -30,12 +32,26 @@ Route::get('password/edit', function(){
 	return view('edit-password');
 });
 
+/* Student report */
+Route::get('/parent/report', 'Parent\StudentReportController@showReport');
+Route::get('/parent/report/{id}', 'Parent\StudentReportController@showReportByClassId');
+Route::get('/parent/detailed-report', 'Parent\StudentReportController@showDetailedReport');
+Route::get('/parent/getCoursesByClassId/{id}', 'Parent\StudentReportController@getCoursesByClassId');
+Route::get('/parent/detailed-report/{classId}/{courseId}', 'Parent\StudentReportController@showDetailedReportByCourseId');
+
+/* Student statistic */
+Route::get('/parent/statistic', 'Parent\StudentStatisticController@showStatistic');
+Route::get('/parent/getMeanStatistic', 'Parent\StudentStatisticController@getMeanStatistic');
+Route::get('/parent/getRankStatistic', 'Parent\StudentStatisticController@getRankStatistic');
+Route::get('/parent/getCapabilityStatistic', 'Parent\StudentStatisticController@getCapabilityStatistic');
+Route::get('/parent/getHistoryCoursesStatistic/{request}', 'Parent\StudentStatisticController@getHistoryCoursesStatistic');
+Route::get('/student/getCoursesByClassId/{id}', 'Student\StudentReportController@getCoursesByClassId');
+
 Route::group(['middleware' => 'student'], function() {
 	/* Student report */
 	Route::get('/student/report', 'Student\StudentReportController@showReport');
 	Route::get('/student/report/{id}', 'Student\StudentReportController@showReportByClassId');
 	Route::get('/student/detailed-report', 'Student\StudentReportController@showDetailedReport');
-	Route::get('/student/getCoursesByClassId/{id}', 'Student\StudentReportController@getCoursesByClassId');
 	Route::get('/student/detailed-report/{classId}/{courseId}', 'Student\StudentReportController@showDetailedReportByCourseId');
 
 	/* Student statistic */
@@ -81,3 +97,4 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('teacher/courses/{classId}', 'Teacher\ScoreController@getCoursesByTeacherClassId');
 	Route::get('teacher/students/{classId}', 'Teacher\ScoreController@getStudentsByClassId');
 });
+
