@@ -59,4 +59,8 @@ class StatisticController extends Controller
         return $courses;
     }
 
+    public function getPeringkatStatistic() {
+        
+    }
+
 }
