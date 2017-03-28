@@ -46,11 +46,13 @@ Route::group(['middleware' => 'student'], function() {
 	Route::get('/student/getHistoryCoursesStatistic/{request}', 'Student\StudentStatisticController@getHistoryCoursesStatistic');
 });
 
+Route::post('/teacher/score/exam/add', 'Teacher\ScoreController@addExam');
+
 Route::group(['middleware' => 'teacher'], function() {
 	/* Score */
 	Route::get('/teacher/score', 'Teacher\ScoreController@showScores');
 	Route::get('/teacher/score/exam/add', 'Teacher\ScoreController@showAddExamForm');
-	Route::post('/teacher/score/exam/add', 'Teacher\ScoreController@addExam');
+	
 	Route::get('/teacher/score/assignment/add', 'Teacher\ScoreController@showAddAssignmentForm');
 	Route::post('/teacher/score/assignment/add', 'Teacher\ScoreController@addAssignment');
 	Route::get('/teacher/score/exam/detail/{id}', 'Teacher\ScoreController@showExamDetail');

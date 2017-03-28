@@ -3,12 +3,15 @@
 namespace App\Http\Controllers\Teacher;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Assignment;
+use App\AssignmentScore;
 use App\Course;
 use App\Exam;
+use App\ExamScore;
 use App\Kelas;
 use Illuminate\Support\Facades\Auth;
 
@@ -69,15 +72,65 @@ class ScoreController extends Controller
     }
 
     public function addExam(Request $request) {
-        return $this->addTask($request);
+        $requestBody = json_decode($request->getContent());
+        $classId = $requestBody->classId;
+        $courseId = $requestBody->courseId;
+
+        if ($classId && $courseId) {
+            $exam = new Exam;
+            $exam->course_id = $courseId;
+            $exam->name = $requestBody->taskName;
+            $exam->materi = $requestBody->taskMatter;
+            $exam->tanggal = $requestBody->taskDate;
+            $exam->save();
+
+            $studentIds = $requestBody->studentIds;
+            $studentScores = $requestBody->studentScores;
+            foreach($studentIds as $index => $studentId) {
+                $studentScore = $studentScores[$index];
+                if (!$studentScore) {
+                    $studentScore = 0;
+                }
+
+                $examScore = new ExamScore;
+                $examScore->exam_id = $exam->id;
+                $examScore->student_id = $studentId;
+                $examScore->score = $studentScore;
+                $examScore->save();
+            }
+        }
+
+        return url('teacher/score');
     }
 
     public function addAssignment(Request $request) {
-        return $this->addTask($request);
-    }
+        $requestBody = json_decode($request->getContent());
+        $classId = $requestBody->classId;
+        $courseId = $requestBody->courseId;
 
-    private function addTask($task) {
-        return $task;
+        if ($classId && $courseId) {
+            $assignment = new Assignment;
+            $assignment->course_id = $courseId;
+            $assignment->name = $requestBody->taskName;
+            $assignment->materi = $requestBody->taskMatter;
+            $assignment->tanggal = $requestBody->taskDate;
+            $assignment->save();
+
+            $studentIds = $requestBody->studentIds;
+            $studentScores = $requestBody->studentScores;
+            foreach($studentIds as $index => $studentId) {
+                $studentScore = $studentScores[$index];
+                if (!$studentScore) {
+                    $studentScore = 0;
+                }
+
+                $assignmentScore = new ExamScore;
+                $assignmentScore->assignment_id = $assignment->id;
+                $assignmentScore->student_id = $studentId;
+                $assignmentScore->score = $studentScore;
+                $assignmentScore->save();
+            }
+        }
     }
 
     private function getExamsByTeacher() {
