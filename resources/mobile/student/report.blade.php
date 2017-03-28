@@ -38,90 +38,64 @@
 @section('header-left-column', 'Rapor')
 
 @section('left-column')
-<div class="ui attached tabular teal menu">
-  <a class="item active" data-tab="first">Nilai Akademik</a>
-  <a class="item" data-tab="second">Ekstrakurikuler</a>
-  <a class="item" data-tab="third">Ketidakhadiran/Kepribadian</a>
-</div>
-<div class="ui attached tab segment active" data-tab="first">
-  <!-- Score table -->
-  @if(count($courses) == 0)
-      Belum ada nilai
-  @else
-    <table class="ui structured selectable celled teal table">
+<!-- Isi Rapor -->
+@if(count($courses) == 0)
+  <div class="ui segment">
+    Belum ada nilai
+  </div>
+@else
+<div class="ui styled accordion segment">
+  <div class="title active">
+    Nilai Akademik
+  </div>
+  <div class="content active">
+    <table class="ui single line very basic unstackable table">
       <thead class="center aligned">
-      <tr>
-        <th rowspan="3">No.</th>
-        <th rowspan="3">Mata Pelajaran</th>
-        <th rowspan="2">SKBM</th>
-        <th colspan="5">Nilai Hasil Belajar</th>
-        <th rowspan="3">Rata-rata<br />Kelas</th>
-      </tr>
-      <tr>
-        <th colspan="2">Pengetahuan/Pemahaman Konsep</th>
-        <th colspan="2">Praktek</th>
-        <th>Sikap</th>
-      </tr>
-      <tr>
-        <th>Angka</th>
-        <th>Angka</th>
-        <th>Huruf</th>
-        <th>Angka</th>
-        <th>Huruf</th>
-        <th>Predikat</th>
-      </tr>
+        <tr>
+          <th>Pelajaran</th>
+          <th>Konsep</th>
+          <th>Praktek</th>
+          <th>Sikap</th>
+        </tr>
       </thead>
       <tbody>
-      <?php $i = 0; ?>
-      @foreach($courses as $course)
+        <?php $i = 0; ?>
+        @foreach($courses as $course)
         <?php $i++ ?>
-        <tr>
-          <td>{{ $i }}</td>
+        <tr class="center aligned">
           <td>{{ $course->name }}</td>
-          <td class="center aligned">{{ $course->skbm }}</td>
+          <!-- Nilai Konsep -->
           @if($course->nilai < $course->skbm)
             <td class="negative center aligned">{{ $course->nilai }}</td>
-            <td class="negative center aligned">{{ Terbilang($course->nilai) }}</td>
           @else
             <td class="center aligned">{{ $course->nilai }}</td>
-            <td class="center aligned">{{ Terbilang($course->nilai) }}</td>
           @endif
+          <!-- Nilai Praktek -->
           @if($course->nilai_praktik < $course->skbm)
             <td class="negative center aligned">{{ $course->nilai_praktik }}</td>
-            <td class="negative center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
           @else
             <td class="center aligned">{{ $course->nilai_praktik }}</td>
-            <td class="center aligned">{{ Terbilang($course->nilai_praktik) }}</td>
           @endif
+
           <td class="center aligned">{{ $course->sikap }}</td>
-          <td class="center aligned">{{ round($averages[$i - 1]->avg) }}</td>
         </tr>
-      @endforeach
+        @endforeach
       </tbody>
     </table>
-  @endif
-  <!-- /Score table -->
-</div>
-<div class="ui attached tab segment" data-tab="second">
-  Second
-</div>
-<div class="ui attached tab segment" data-tab="third">
-  Third
-</div>
-@endsection
+  </div>
+  <div class="title">
+    Ekstrakurikuler
+  </div>
+  <div class="content">
 
-<!-- Fungsi php -->
-<?php
-function Terbilang($x)
-{
-  $abil = array("", "Satu", "Dua", "Tiga", "Empat", "Lima", "Enam", "Tujuh", "Delapan", "Sembilan", "Sepuluh", "Sebelas");
-  if ($x < 12)
-    return " " . $abil[$x];
-  elseif ($x < 20)
-    return Terbilang($x - 10) . "Belas";
-  elseif ($x < 100)
-    return Terbilang($x / 10) . " Puluh" . Terbilang($x % 10);
-  elseif ($x < 200)
-    return " Seratus" . Terbilang($x - 100);
-}
-?>
+  </div>
+  <div class="title">
+    Ketidakhadiran/Kepribadian
+  </div>
+  <div class="content">
+
+  </div>
+</div>
+@endif
+
+@endsection
