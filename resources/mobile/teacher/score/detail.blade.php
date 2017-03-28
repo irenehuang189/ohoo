@@ -3,11 +3,11 @@
 @section('title', 'Tambah Nilai Kelas')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
@@ -31,21 +31,41 @@
 @endsection
 
 @section('left-column')
-<h2 class="ui header">
-  Daftar Nilai Semester Kelas X-1
-  <div class="sub header">Mata Pelajaran Matematika</div>
-</h2>
+<div class="ui grid">
+  <div class="ten wide column">
+    <h2 class="ui header">
+      Daftar Nilai Kelas {{ $task->course->kelas->name }}
+      <div class="sub header">Mata Pelajaran {{ $task->course->name }}</div>
+    </h2>
+  </div>
+  <div class="six wide right aligned column">
+    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/add') }}">
+      <i class="pencil icon"></i>Ubah
+    </a>
+    <a class="ui labeled icon compact red button" id="delete">
+      <i class="trash icon"></i>Hapus
+    </a>
+  </div>
+</div>
 <div class="ui divider"></div>
 
 <!-- Rincian Penilaian -->
 <div class="ui grid">
   <div class="row">
-    <div class="four wide column">Tahun Ajaran</div>
-    <div class="twelve wide column">: 2016/2017</div>
+    <div class="four wide column">Jenis Penilaian</div>
+    <div class="twelve wide column">: {{ $task->name }}</div>
+  </div>
+  <div class="row">
+    <div class="four wide column">Materi</div>
+    <div class="twelve wide column">: {{ $task->materi }}</div>
+  </div>
+  <div class="row">
+    <div class="four wide column">Tanggal Pelaksanaan</div>
+    <div class="twelve wide column">: {{ date('d-m-Y', strtotime($task->tanggal)) }}</div>
   </div>
   <div class="row">
     <div class="four wide column">SKBM</div>
-    <div class="twelve wide column">: 65</div>
+    <div class="twelve wide column">: {{ $task->course->skbm }}</div>
   </div>
 </div>
 <!-- /Rincian Penilaian -->
@@ -54,36 +74,28 @@
 <div class="ui hidden section divider"></div>
 <div class="ui teal big ribbon label">Nilai Siswa</div>
 <table class="ui selectable striped table">
-  <thead class="center aligned">
-    <tr>
-      <th rowspan="2" class="one wide">No.</th>
-      <th rowspan="2">Nama Lengkap</th>
-      <th colspan="2" class="two wide">Nilai Akhir</th>
-    </tr>
-    <tr>
-      <th>Konsep</th>
-      <th>Praktek</th>
-    </tr>
-  </thead>
+  <thead class="center aligned"><tr>
+    <th class="one wide">No.</th>
+    <th>Nama Lengkap</th>
+    <th class="two wide">Nilai</th>
+  </tr></thead>
   <tbody>
+  @foreach ($students as $num => $student)
+  @if ($student->pivot->score >= $task->course->skbm)
     <tr>
-      <td class="center aligned">1</td>
-      <td>Wina Aryasubedjo</td>
-      <td class="center aligned">80</td>
-      <td class="center aligned">76</td>
-    </tr>
+  @else
     <tr class="negative">
-      <td class="center aligned">2</td>
-      <td>Bekti Hutama</td>
-      <td class="center aligned">40</td>
-      <td class="center aligned">40</td>
+  @endif
+      <td class="center aligned">{{ $num + 1 }}</td>
+      <td>{{ $student->name }}</td>
+      <td class="center aligned">{{ $student->pivot->score }}</td>
     </tr>
+  @endforeach
   </tbody>
   <tfoot><tr>
     <th></th>
     <th><b>Rata-rata Kelas</b></th>
-    <th class="center aligned"><b>75</b></th>
-    <th class="center aligned"><b>60</b></th>
+    <th class="center aligned"><b>{{ $students->avg('pivot.score') }}</b></th>
   </tr></tfoot>
 </table>
 <!-- /Tabel Daftar Siswa -->
@@ -102,7 +114,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/score/semester') }}">
+    <a class="ui red ok inverted button" href="{{ url('teacher/score') }}">
       <i class="checkmark icon"></i>
       Ya
     </a>

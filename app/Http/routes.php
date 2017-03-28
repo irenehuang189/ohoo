@@ -62,6 +62,8 @@ Route::group(['middleware' => 'student'], function() {
 	Route::get('/student/getHistoryCoursesStatistic/{request}', 'Student\StudentStatisticController@getHistoryCoursesStatistic');
 });
 
+Route::post('/teacher/score/exam/add', 'Teacher\ScoreController@addExam');
+
 Route::group(['middleware' => 'teacher'], function() {
 	/* Score */
 	Route::get('/teacher/score', 'Teacher\ScoreController@showScores');
