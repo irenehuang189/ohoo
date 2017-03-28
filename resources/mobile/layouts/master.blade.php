@@ -33,6 +33,7 @@
   <script src="{{ asset('js/student-chart.js') }}"></script>
   @endif
   <script src="{{ asset('js/app.js') }}"></script>
+  <script src="{{ asset('js/mobile.js') }}"></script>
   @yield('js')
 
 </body>
