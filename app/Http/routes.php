@@ -68,15 +68,16 @@ Route::group(['middleware' => 'teacher'], function() {
 	});
 
 	/* Individu */
-	Route::get('/teacher/individu', function() {
-	  return view('teacher/individu');
-	});
-	Route::get('/teacher/individu/detail', function() {
-	  return view('teacher/individu/detail');
-	});
-	Route::get('/teacher/statistic', function() {
-	  return view('teacher/statistic');
-	});
+	Route::get('/teacher/individu', 'Teacher\IndividualController@showStudentList');
+	Route::get('/teacher/individu/detail/{id}', 'Teacher\IndividualController@showStudent');
+
+	/* Statistik */
+	Route::get('/teacher/statistic', 'Teacher\StatisticController@showStatistic');
+	Route::get('/teacher/getHistoryStatistic/{classId}/{courseName}', 'Teacher\StatisticController@getHistoryStatistic');
+	Route::get('/teacher/getCoursesByClassId/{classId}', 'Teacher\StatisticController@getCoursesByClassId');
+
+	/* Individual performance */
+
 
 	/* Others */
 	Route::get('teacher/courses/{classId}', 'Teacher\ScoreController@getCoursesByTeacherClassId');
