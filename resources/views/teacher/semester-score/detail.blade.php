@@ -31,22 +31,10 @@
 @endsection
 
 @section('left-column')
-<div class="ui grid">
-  <div class="ten wide column">
-    <h2 class="ui header">
-      Daftar Nilai Semester Kelas X-1
-      <div class="sub header">Mata Pelajaran Matematika</div>
-    </h2>
-  </div>
-  <div class="six wide right aligned column">
-    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/semester/add') }}">
-      <i class="pencil icon"></i>Ubah
-    </a>
-    <a class="ui labeled icon compact red button" id="delete">
-      <i class="trash icon"></i>Hapus
-    </a>
-  </div>
-</div>
+<h2 class="ui header">
+  Daftar Nilai Semester Kelas X-1
+  <div class="sub header">Mata Pelajaran Matematika</div>
+</h2>
 <div class="ui divider"></div>
 
 <!-- Rincian Penilaian -->
@@ -66,20 +54,28 @@
 <div class="ui hidden section divider"></div>
 <div class="ui teal big ribbon label">Nilai Siswa</div>
 <table class="ui selectable striped table">
-  <thead class="center aligned"><tr>
-    <th class="one wide">No.</th>
-    <th>Nama Lengkap</th>
-    <th class="two wide">Nilai</th>
-  </tr></thead>
+  <thead class="center aligned">
+    <tr>
+      <th rowspan="2" class="one wide">No.</th>
+      <th rowspan="2">Nama Lengkap</th>
+      <th colspan="2" class="two wide">Nilai</th>
+    </tr>
+    <tr>
+      <th>Konsep</th>
+      <th>Praktek</th>
+    </tr>
+  </thead>
   <tbody>
     <tr>
       <td class="center aligned">1</td>
       <td>Wina Aryasubedjo</td>
       <td class="center aligned">80</td>
+      <td class="center aligned">76</td>
     </tr>
     <tr class="negative">
       <td class="center aligned">2</td>
       <td>Bekti Hutama</td>
+      <td class="center aligned">40</td>
       <td class="center aligned">40</td>
     </tr>
   </tbody>
@@ -87,6 +83,7 @@
     <th></th>
     <th><b>Rata-rata Kelas</b></th>
     <th class="center aligned"><b>75</b></th>
+    <th class="center aligned"><b>60</b></th>
   </tr></tfoot>
 </table>
 <!-- /Tabel Daftar Siswa -->

@@ -38,9 +38,11 @@
 @endsection
 
 @section('left-column')
+<h2 class="ui dividing header">Daftar Nilai Akhir</h2>
+<!-- Semester score table -->
 <div class="ui grid">
-  <div class="middle aligned twelve wide column">
-    <h2 class="ui header">Daftar Nilai Semester</h2>
+  <div class="twelve wide column">
+    <div class="ui teal big ribbon label">Nilai Semester</div>
   </div>
   <div class="four wide right aligned column">
     <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/semester/add') }}">
@@ -48,16 +50,18 @@
     </a>
   </div>
 </div>
-<div class="ui divider"></div>
-<!-- Semester score table -->
 <table class="ui structured selectable celled table" id="semester-score">
   <thead class="center aligned">
   <tr>
-    <th>Tahun Ajaran<i class="sort content ascending small icon" id="1"></i></th>
-    <th>Kelas<i class="sort content ascending small icon" id="2"></i></th>
-    <th>Mata Pelajaran<i class="sort content ascending small icon" id="3"></i></th>
-    <th>Rata-rata Kelas <i class="sort content ascending small icon" id="4"></th>
-    <th>Aksi</th>
+    <th rowspan="2">Tahun Ajaran<i class="sort content ascending small icon" id="1"></i></th>
+    <th rowspan="2">Kelas<i class="sort content ascending small icon" id="2"></i></th>
+    <th rowspan="2">Mata Pelajaran<i class="sort content ascending small icon" id="3"></i></th>
+    <th colspan="2">Rata-rata Kelas<i class="sort content ascending small icon" id="4"></th>
+    <th rowspan="2">Aksi</th>
+  </tr>
+  <tr>
+    <th>Konsep</th>
+    <th>Praktek</th>
   </tr>
   </thead>
   <tbody>
@@ -66,6 +70,7 @@
       <td>XI-IPA2</td>
       <td>Matematika</td>
       <td class="center aligned">73</td>
+      <td class="center aligned">80</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
@@ -76,26 +81,46 @@
 </table>
 <!-- /Semester score table -->
 
-<!-- Modal Hapus -->
-<div class="ui basic modal">
-  <div class="ui icon header">
-    <i class="archive icon"></i>
-    Apakah Anda yakin ingin menghapus?
+<div class="ui hidden divider"></div>
+<!-- Midterm score table -->
+<div class="ui grid">
+  <div class="twelve wide column">
+    <div class="ui teal big ribbon label">Nilai Bayangan</div>
   </div>
-  <div class="content">
-    <p>Nilai akan dihapus segera. Anda tidak dapat mengembalikan nilai yang telah dihapus.</p>
-  </div>
-  <div class="actions">
-    <div class="ui basic cancel inverted button">
-      <i class="remove icon"></i>
-      Tidak
-    </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/score/semester') }}">
-      <i class="checkmark icon"></i>
-      Ya
+  <div class="four wide right aligned column">
+    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/semester/add') }}">
+      <i class="plus icon"></i>Tambah
     </a>
   </div>
 </div>
-<!-- /Modal Hapus -->
-
+<table class="ui structured selectable celled table" id="midterm-score">
+  <thead class="center aligned">
+  <tr>
+    <th rowspan="2">Tahun Ajaran<i class="sort content ascending small icon" id="1"></i></th>
+    <th rowspan="2">Kelas<i class="sort content ascending small icon" id="2"></i></th>
+    <th rowspan="2">Mata Pelajaran<i class="sort content ascending small icon" id="3"></i></th>
+    <th colspan="2">Rata-rata Kelas<i class="sort content ascending small icon" id="4"></th>
+    <th rowspan="2">Aksi</th>
+  </tr>
+  <tr>
+    <th>Konsep</th>
+    <th>Praktek</th>
+  </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>2016/2017</td>
+      <td>XI-IPA2</td>
+      <td>Matematika</td>
+      <td class="center aligned">73</td>
+      <td class="center aligned">80</td>
+      <td class="center aligned">
+        <div class="ui icon mini buttons">
+          <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
+<!-- /Midterm score table -->
 @endsection
