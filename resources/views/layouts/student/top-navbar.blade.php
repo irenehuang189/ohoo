@@ -1,17 +1,16 @@
 <!-- Navbar -->
-<div class="ui top attached borderless stackable grid inverted huge menu">
-  <!-- <a class="item" id="sidebar-trigger">
+<div class="ui borderless stackable grid fixed inverted  huge menu">
+  <!--<a class="item" id="sidebar-trigger">
     <i class="sidebar icon"></i>
-  </a> -->
-  <div class="header item">
+  </a>-->
+  <a class="header item" href="{{ url('/') }}">
     <img src="{{ asset('images/logo.png') }}" />
-  </div>
+  </a>
   <div class="ui dropdown item">
-    <a href="{{ url('student/report') }}">Rapor</a>
+    <a>Rapor</a>
     <div class="menu">
       <a 
-        class="item {{ Request::is('student/report*') ? 'active' : '' }}" 
-        href="{{ url('student/report') }}">
+        class="item {{ Request::is('student/report*') ? 'active' : '' }}"href="{{ url('student/report') }}">
         Semester
       </a>
       <a class="item">Bayangan</a>

@@ -52,8 +52,16 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/score/add', function() {
 	  return view('teacher/score/add');
 	});
-	Route::get('/teacher/score/detail', function() {
-	  return view('teacher/score/detail');
+	Route::get('/teacher/score/exam/{id}', 'Teacher\ScoreController@showExamDetail');
+	Route::get('/teacher/score/assignment/{id}', 'Teacher\ScoreController@showAssignmentDetail');
+	Route::get('/teacher/score/semester', function(){
+		return view('teacher/semester-score');
+	});
+	Route::get('/teacher/score/semester/add', function() {
+	  return view('teacher/semester-score/add');
+	});
+	Route::get('/teacher/score/semester/detail', function() {
+	  return view('teacher/semester-score/detail');
 	});
 
 	/* Individu */
@@ -63,5 +71,11 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/individu/detail', function() {
 	  return view('teacher/individu/detail');
 	});
-	Route::get('/teacher/statistic', 'Teacher\StatisticController@showStatistic');
+	Route::get('/teacher/statistic', function() {
+	  return view('teacher/statistic');
+	});
+
+	/* Filter */
+	Route::get('teacher/courses/{classId}', 'Teacher\ScoreController@getCoursesByTeacherClassId');
+	
 });

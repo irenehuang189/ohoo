@@ -14,7 +14,7 @@
     <h2 class="ui header">Statistik Nilai</h2>
 
     <!-- Overview -->
-    <div class="ui three column center aligned grid">
+    <div class="ui three column center aligned stackable grid">
       <div class="column">
         <div class="ui fluid card">
           <div class="content">
@@ -49,7 +49,7 @@
     <!-- /Overview -->
 
     <!-- Statistics -->
-    <div class="ui two column grid">
+    <div class="ui two column stackable grid">
       <div class="ui column">
         <!-- Peta Kemampuan Siswa Card -->
         <div class="ui fluid card">

@@ -92,6 +92,36 @@ $(document).ready(function(){
     window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
   });
 
+  // Teacher score management page ajax
+  $(".show-score").click(function(){
+    var classId = $("#choose-class-teacher :selected").val();
+    var courseId = $("#choose-course-teacher :selected").val();
+    if (classId < 1 && courseId < 1) {
+      window.location.href = 'score';
+    } else if (classId >= 1 && courseId < 1) {
+      window.location.href = 'score?class=' + classId;
+    } else if (classId < 1 && courseId >= 1) {
+      window.location.href = 'score?course=' + courseId;
+    } else {
+      window.location.href = 'score?class=' + classId + '&course=' + courseId;
+    }
+  });
+  $("#choose-class-teacher").change(function(){
+    $('#choose-course-teacher').empty();
+    $("#choose-course-teacher").prepend("<option value='-1' selected='selected'>Semua</option>");
+    var classId = $("#choose-class-teacher :selected").val();
+    if (classId >= 1) {
+      $.get("courses/" + classId, function (data, status){
+        $.each(data, function(i, course) {
+          $('#choose-course-teacher').append($('<option>', {
+            value: course.id,
+            text: course.name
+          }));
+        });
+      });
+    }
+  });
+
   // Teacher score management: add page
   $('div#score').hide();
   $('.steps#add-score .step').click(function(){

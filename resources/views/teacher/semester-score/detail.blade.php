@@ -3,11 +3,11 @@
 @section('title', 'Tambah Nilai Kelas')
 
 @section('user-name')
-  {{ $teacher->name }}
+  NAMA DI SINI
 @endsection
 
 @section('user-tid')
-  {{ $teacher->registration_number }}
+  187290 1271 9276
 @endsection
 
 @section('right-column')
@@ -34,12 +34,12 @@
 <div class="ui grid">
   <div class="ten wide column">
     <h2 class="ui header">
-      Daftar Nilai Kelas {{ $task->course->kelas->name }}
-      <div class="sub header">Mata Pelajaran {{ $task->course->name }}</div>
+      Daftar Nilai Semester Kelas X-1
+      <div class="sub header">Mata Pelajaran Matematika</div>
     </h2>
   </div>
   <div class="six wide right aligned column">
-    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/add') }}">
+    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/semester/add') }}">
       <i class="pencil icon"></i>Ubah
     </a>
     <a class="ui labeled icon compact red button" id="delete">
@@ -52,20 +52,12 @@
 <!-- Rincian Penilaian -->
 <div class="ui grid">
   <div class="row">
-    <div class="four wide column">Jenis Penilaian</div>
-    <div class="twelve wide column">: {{ $task->name }}</div>
-  </div>
-  <div class="row">
-    <div class="four wide column">Materi</div>
-    <div class="twelve wide column">: {{ $task->materi }}</div>
-  </div>
-  <div class="row">
-    <div class="four wide column">Tanggal Pelaksanaan</div>
-    <div class="twelve wide column">: {{ date('d-m-Y', strtotime($task->tanggal)) }}</div>
+    <div class="four wide column">Tahun Ajaran</div>
+    <div class="twelve wide column">: 2016/2017</div>
   </div>
   <div class="row">
     <div class="four wide column">SKBM</div>
-    <div class="twelve wide column">: {{ $task->course->skbm }}</div>
+    <div class="twelve wide column">: 65</div>
   </div>
 </div>
 <!-- /Rincian Penilaian -->
@@ -80,22 +72,21 @@
     <th class="two wide">Nilai</th>
   </tr></thead>
   <tbody>
-  @foreach ($students as $num => $student)
-  @if ($student->pivot->score >= $task->course->skbm)
     <tr>
-  @else
-    <tr class="negative">
-  @endif
-      <td class="center aligned">{{ $num + 1 }}</td>
-      <td>{{ $student->name }}</td>
-      <td class="center aligned">{{ $student->pivot->score }}</td>
+      <td class="center aligned">1</td>
+      <td>Wina Aryasubedjo</td>
+      <td class="center aligned">80</td>
     </tr>
-  @endforeach
+    <tr class="negative">
+      <td class="center aligned">2</td>
+      <td>Bekti Hutama</td>
+      <td class="center aligned">40</td>
+    </tr>
   </tbody>
   <tfoot><tr>
     <th></th>
     <th><b>Rata-rata Kelas</b></th>
-    <th class="center aligned"><b>{{ $students->avg('pivot.score') }}</b></th>
+    <th class="center aligned"><b>75</b></th>
   </tr></tfoot>
 </table>
 <!-- /Tabel Daftar Siswa -->
@@ -114,7 +105,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/score') }}">
+    <a class="ui red ok inverted button" href="{{ url('teacher/score/semester') }}">
       <i class="checkmark icon"></i>
       Ya
     </a>

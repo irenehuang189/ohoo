@@ -14,24 +14,46 @@
 <div class="ui small form">
   <div class="field">
     <label>Kelas</label>
-    <select class="ui dropdown" id="choose-class">
+    <select class="ui dropdown" id="choose-class-teacher">
+    @if (!isset($classId))
       <option value="-1" selected>Semua</option>
       @foreach ($classes as $class)
         <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
       @endforeach
+    @else
+      <option value="-1">Semua</option>
+      @foreach ($classes as $class)
+      @if ($class->id == $classId)
+        <option value="{{ $class->id }}" selected>{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @else
+        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @endif
+      @endforeach
+    @endif
     </select>
   </div>
   <div class="field">
     <label>Mata Pelajaran</label>
-    <select class="ui dropdown" id="choose-course">
+    <select class="ui dropdown" id="choose-course-teacher">
+    @if (!isset($courseId))
       <option value="-1" selected>Semua</option>
       @foreach ($courses as $course)
-        <option value="{{ $course->id }}">{{ $course->name }} - Semester {{ $course->kelas->semester }} - {{ $course->kelas->year }}</option>
+        <option value="{{ $course->id }}">{{ $course->name }}</option>
       @endforeach
+    @else
+      <option value="-1">Semua</option>
+      @foreach ($courses as $course)
+      @if ($course->id == $courseId)
+        <option value="{{ $course->id }}" selected>{{ $course->name }}</option>
+      @else
+        <option value="{{ $course->id }}">{{ $course->name }}</option>
+      @endif
+      @endforeach
+    @endif
     </select>
   </div>
   <div class="row">
-    <button class="ui horizontal animated teal large fluid button show-detailed-report-blank" tabindex="0">
+    <button class="ui horizontal animated teal large fluid button show-score" tabindex="0">
       <div class="visible content">Search</div>
       <div class="hidden content">
         <i class="search icon"></i>
@@ -73,15 +95,17 @@
       <td>{{ $exam->course->name }}</td>
       <td>{{ $exam->name }}</td>
       <td>{{ $exam->materi }}</td>
-      <td>{{ $exam->tanggal }}</td>
+      <td>{{ date('d-m-Y', strtotime($exam->tanggal)) }}</td>
       <td class="center aligned">
         {{ $exam->students->avg('pivot.score') }}
       </td>
       <td>
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/exam/' . $exam->id) }}" class="ui blue basic button"><i class="eye icon"></i></a>
+        @if ($exam->course->kelas->is_current)
           <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
+        @endif
         </div>
       </td>
     </tr>
@@ -120,11 +144,11 @@
       <td>{{ $assignment->course->name }}</td>
       <td>{{ $assignment->name }}</td>
       <td>{{ $assignment->materi }}</td>
-      <td>{{ $assignment->tanggal }}</td>
+      <td>{{ date('d-m-Y', strtotime($assignment->tanggal)) }}</td>
       <td class="center aligned">{{ $assignment->students->avg('pivot.score') }}</td>
       <td>
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/score/detail') }}" class="ui blue basic button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/assignment/' . $assignment->id) }}" class="ui blue basic button"><i class="eye icon"></i></a>
           <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
         </div>
