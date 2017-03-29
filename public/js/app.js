@@ -191,6 +191,19 @@ $(document).ready(function(){
       window.location.href = 'score?class=' + classId + '&course=' + courseId;
     }
   });
+  $(".show-final").click(function(){
+    var classId = $("#choose-class-teacher :selected").val();
+    var courseId = $("#choose-course-teacher :selected").val();
+    if (classId < 1 && courseId < 1) {
+      window.location.href = 'final';
+    } else if (classId >= 1 && courseId < 1) {
+      window.location.href = 'final?class=' + classId;
+    } else if (classId < 1 && courseId >= 1) {
+      window.location.href = 'final?course=' + courseId;
+    } else {
+      window.location.href = 'final?class=' + classId + '&course=' + courseId;
+    }
+  });
 
   $("#choose-class-teacher").change(function(){
     $('#choose-course-teacher').empty();
