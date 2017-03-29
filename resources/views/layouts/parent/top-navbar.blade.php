@@ -10,24 +10,24 @@
     <a>Rapor</a>
     <div class="menu">
       <a 
-        class="item {{ Request::is('student/report') ? 'active' : '' }}"href="{{ url('student/report') }}">
+        class="item {{ Request::is('parent/report') ? 'active' : '' }}"href="{{ url('parent/report') }}">
         Semester
       </a>
       <a
-        class="item {{ Request::is('student/report-bayangan*') ? 'active' : '' }}"
-        href="{{ url('student/report-bayangan') }}">
+        class="item {{ Request::is('parent/report-bayangan*') ? 'active' : '' }}"
+        href="{{ url('parent/report-bayangan') }}">
         Bayangan
       </a>
       <a 
-        class="item {{ Request::is('student/detailed-report*') ? 'active' : '' }}" 
-        href="{{ url('student/detailed-report') }}">
+        class="item {{ Request::is('parent/detailed-report*') ? 'active' : '' }}"
+        href="{{ url('parent/detailed-report') }}">
         Rincian
       </a>
     </div>
   </div>
   <a 
     class="item {{ Request::is('*statistic*') ? 'active' : '' }}" 
-    href="{{ url('student/statistic') }}">
+    href="{{ url('parent/statistic') }}">
     Dashboard
   </a>
   <div class="ui right dropdown item">

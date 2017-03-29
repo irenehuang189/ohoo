@@ -3,7 +3,7 @@
 @section('title', 'Rincian Nilai')
 
 @section('user-name')
-  {{ $student->name }}
+  {{ $parent->name }}
 @endsection
 
 @section('right-column')

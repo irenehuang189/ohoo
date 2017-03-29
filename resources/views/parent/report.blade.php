@@ -3,7 +3,7 @@
 @section('title', 'Rapor Semester')
 
 @section('user-name')
-  {{ $student->name }}
+  {{ $parent->name }}
 @endsection
 
 @section('right-column')
@@ -40,6 +40,8 @@
 @section('left-column')
 <div class="ui attached tabular teal menu">
   <a class="item active" data-tab="first">Nilai Akademik</a>
+  <a class="item" data-tab="second">Ekstrakurikuler</a>
+  <a class="item" data-tab="third">Ketidakhadiran/Kepribadian</a>
 </div>
 <div class="ui attached tab segment active" data-tab="first">
   <!-- Score table -->

@@ -66,6 +66,16 @@ $(document).ready(function(){
     window.location.href = classId;
   });
 
+  // Report bayangan page
+  $(".show-report-bayangan-blank").click(function(){
+    var classId = $("#classes :selected").val();
+    window.location.href = 'report-bayangan/' + classId;
+  });
+  $(".show-report-bayangan").click(function(){
+    var classId = $("#classes :selected").val();
+    window.location.href = classId;
+  });
+
   // Detailed report page ajax
   $("#choose-class").change(function(){
     var classId = $("#choose-class :selected").val();
@@ -330,32 +340,6 @@ $(document).ready(function(){
         window.location.href = data;
       }
     });
-  });
-
-  // Teacher individu page
-  // Right menu on individu detail
-  $('div#semester').hide();
-  $('div#midterm').hide();
-  $('div#detail').hide();
-  $('.item#overview').click(function(){
-    $('div#midterm').hide();
-    $('div#detail').hide();
-    $('div#semester').hide();
-  });
-  $('.item#semester').click(function(){
-    $('div#midterm').hide();
-    $('div#detail').hide();
-    $('div#semester').show();
-  });
-  $('.item#midterm').click(function(){
-    $('div#semester').hide();
-    $('div#detail').hide();
-    $('div#midterm').show();
-  });
-  $('.item#detail').click(function(){
-    $('div#semester').hide();
-    $('div#midterm').hide();
-    $('div#detail').show();
   });
 
   // Show edit individu score modal

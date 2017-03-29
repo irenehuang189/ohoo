@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 23 Mar 2017 pada 19.17
+-- Generation Time: 29 Mar 2017 pada 11.51
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -87,15 +87,16 @@ CREATE TABLE IF NOT EXISTS `classes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `classes_teacher_id_foreign` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Dumping data untuk tabel `classes`
 --
 
 INSERT INTO `classes` (`id`, `teacher_id`, `name`, `semester`, `year`, `is_current`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Kelas X IPA', 1, 2016, 0, NULL, NULL),
-(2, 1, 'Kelas X IPA', 2, 2016, 1, NULL, NULL);
+(1, 1, 'X IPA', 1, 2016, 0, NULL, NULL),
+(2, 1, 'X IPA', 2, 2016, 1, NULL, NULL),
+(3, 1, 'X IPA', 1, 2015, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,7 +115,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   PRIMARY KEY (`id`),
   KEY `courses_teacher_id_foreign` (`teacher_id`),
   KEY `courses_class_id_foreign` (`class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data untuk tabel `courses`
@@ -124,7 +125,14 @@ INSERT INTO `courses` (`id`, `teacher_id`, `class_id`, `name`, `skbm`, `created_
 (1, 1, 1, 'Fisika', 60, NULL, NULL),
 (2, 1, 1, 'Kimia', 70, NULL, NULL),
 (3, 1, 2, 'Fisika', 70, NULL, NULL),
-(5, 1, 2, 'Matematika', 65, NULL, NULL);
+(5, 1, 2, 'Kimia', 65, NULL, NULL),
+(7, 1, 1, 'Matematika', 65, NULL, NULL),
+(8, 1, 1, 'Sejarah', 70, NULL, NULL),
+(9, 1, 1, 'Kewarganegaraan', 70, NULL, NULL),
+(10, 1, 2, 'Matematika', 70, NULL, NULL),
+(11, 1, 2, 'Sejarah', 70, NULL, NULL),
+(12, 1, 2, 'Kewarganegaraan', 75, NULL, NULL),
+(13, 1, 3, 'Fisika', 60, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -144,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `course_score` (
   PRIMARY KEY (`id`),
   KEY `course_score_course_id_foreign` (`course_id`),
   KEY `course_score_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=9 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
 
 --
 -- Dumping data untuk tabel `course_score`
@@ -158,7 +166,33 @@ INSERT INTO `course_score` (`id`, `course_id`, `student_id`, `nilai`, `nilai_pra
 (5, 3, 1, 70, 73, 'C', NULL, NULL),
 (6, 5, 1, 62, 74, 'B', NULL, NULL),
 (7, 3, 3, 76, 80, 'A', NULL, NULL),
-(8, 5, 3, 85, 90, 'A', NULL, NULL);
+(8, 5, 3, 85, 90, 'A', NULL, NULL),
+(9, 7, 1, 50, 80, 'C', NULL, NULL),
+(10, 8, 1, 75, 70, 'B', NULL, NULL),
+(11, 9, 1, 78, 82, 'A', NULL, NULL),
+(12, 10, 1, 65, 78, 'B', NULL, NULL),
+(13, 11, 1, 84, 73, 'A', NULL, NULL),
+(14, 12, 1, 77, 78, 'A', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `course_score_bayangan`
+--
+
+CREATE TABLE IF NOT EXISTS `course_score_bayangan` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `course_id` int(10) unsigned NOT NULL,
+  `student_id` int(10) unsigned NOT NULL,
+  `nilai` int(11) NOT NULL,
+  `nilai_praktik` int(11) NOT NULL,
+  `sikap` char(255) COLLATE utf8_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `course_score_bayangan_course_id_foreign` (`course_id`),
+  KEY `course_score_bayangan_student_id_foreign` (`student_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
@@ -251,7 +285,37 @@ INSERT INTO `migrations` (`migration`, `batch`) VALUES
 ('2017_03_23_154441_create_assignments_table', 9),
 ('2017_03_23_154515_create_assignments_score_table', 9),
 ('2017_03_23_160119_modify_exams_table', 10),
-('2017_03_23_160503_modify_assignments_table', 10);
+('2017_03_23_160503_modify_assignments_table', 10),
+('2017_03_26_043249_change_email_to_username_in_users_table', 11),
+('2017_03_26_052256_create_student_id_teacher_id_in_users_table', 11),
+('2017_03_26_131511_drop_name_from_users_table', 11),
+('2017_03_26_200522_modify_registration_number_in_teachers_table', 11),
+('2017_03_28_143615_create_parents_table', 12),
+('2017_03_28_152206_modify_users_table', 13),
+('2017_03_28_180939_create_course_score_bayangan', 14);
+
+-- --------------------------------------------------------
+
+--
+-- Struktur dari tabel `parents`
+--
+
+CREATE TABLE IF NOT EXISTS `parents` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `student_id` int(10) unsigned NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `parents_student_id_foreign` (`student_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data untuk tabel `parents`
+--
+
+INSERT INTO `parents` (`id`, `name`, `student_id`, `created_at`, `updated_at`) VALUES
+(1, 'Angela', 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -326,7 +390,7 @@ INSERT INTO `student_class` (`id`, `student_id`, `class_id`, `created_at`, `upda
 
 CREATE TABLE IF NOT EXISTS `teachers` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `registration_number` int(10) unsigned NOT NULL,
+  `registration_number` bigint(20) unsigned NOT NULL,
   `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
@@ -349,15 +413,29 @@ INSERT INTO `teachers` (`id`, `registration_number`, `name`, `created_at`, `upda
 
 CREATE TABLE IF NOT EXISTS `users` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `name` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-  `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `student_id` int(10) unsigned DEFAULT NULL,
+  `teacher_id` int(10) unsigned DEFAULT NULL,
+  `parent_id` int(10) unsigned DEFAULT NULL,
+  `username` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `users_email_unique` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+  UNIQUE KEY `users_email_unique` (`username`),
+  KEY `users_student_id_foreign` (`student_id`),
+  KEY `users_teacher_id_foreign` (`teacher_id`),
+  KEY `users_parent_id_foreign` (`parent_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+
+--
+-- Dumping data untuk tabel `users`
+--
+
+INSERT INTO `users` (`id`, `student_id`, `teacher_id`, `parent_id`, `username`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 1, NULL, NULL, 'william', '$2y$10$.3EOjjko8Ce4p9GOB87mBeXyqwSjAaPEyqp0SR2K.TwjtlHanmRWi', '68r9UyKxwdUJnQBoaj1BlQTTAvsZUvZdBqEpzk7ItmkDRbCuCB69NPpksdXC', NULL, '2017-03-28 11:37:41'),
+(2, NULL, 1, NULL, 'budi', '$2y$10$AERnWhT2sYMSMp0VaNNDuOT8qqxPQHuGRGUlLOqrn32MF2jlORkXG', '5szoaPrCDTVvOSzOnPTM6AKO60G9Zq8f7RIAxqQFtN9b5OEUK17Sk6OI7aok', NULL, '2017-03-28 11:17:49'),
+(3, NULL, NULL, 1, 'angela', '$2y$10$mmS0cBG25YsKYOk5/YWUSuwjZLPQfp3nsYXVcixt0gCyv8mvhZmPu', '0ZKrMzLQBWgbkotB3JRGy4ifoIEwEUjaOXzr0g3cOAfOf9WvdC4eaLihIBw0', NULL, '2017-03-28 11:02:59');
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)
@@ -373,8 +451,8 @@ ALTER TABLE `assignments`
 -- Ketidakleluasaan untuk tabel `assignment_score`
 --
 ALTER TABLE `assignment_score`
-  ADD CONSTRAINT `assignment_score_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
-  ADD CONSTRAINT `assignment_score_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE;
+  ADD CONSTRAINT `assignment_score_assignment_id_foreign` FOREIGN KEY (`assignment_id`) REFERENCES `assignments` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `assignment_score_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
 -- Ketidakleluasaan untuk tabel `classes`
@@ -397,6 +475,13 @@ ALTER TABLE `course_score`
   ADD CONSTRAINT `course_score_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
+-- Ketidakleluasaan untuk tabel `course_score_bayangan`
+--
+ALTER TABLE `course_score_bayangan`
+  ADD CONSTRAINT `course_score_bayangan_course_id_foreign` FOREIGN KEY (`course_id`) REFERENCES `courses` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `course_score_bayangan_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `exams`
 --
 ALTER TABLE `exams`
@@ -410,11 +495,25 @@ ALTER TABLE `exam_score`
   ADD CONSTRAINT `exam_score_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
 
 --
+-- Ketidakleluasaan untuk tabel `parents`
+--
+ALTER TABLE `parents`
+  ADD CONSTRAINT `parents_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
+
+--
 -- Ketidakleluasaan untuk tabel `student_class`
 --
 ALTER TABLE `student_class`
   ADD CONSTRAINT `student_class_class_id_foreign` FOREIGN KEY (`class_id`) REFERENCES `classes` (`id`) ON DELETE CASCADE,
   ADD CONSTRAINT `student_class_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE;
+
+--
+-- Ketidakleluasaan untuk tabel `users`
+--
+ALTER TABLE `users`
+  ADD CONSTRAINT `users_parent_id_foreign` FOREIGN KEY (`parent_id`) REFERENCES `parents` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `users_student_id_foreign` FOREIGN KEY (`student_id`) REFERENCES `students` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `users_teacher_id_foreign` FOREIGN KEY (`teacher_id`) REFERENCES `teachers` (`id`) ON DELETE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

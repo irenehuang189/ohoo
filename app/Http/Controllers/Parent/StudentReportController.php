@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Student;
+namespace App\Http\Controllers\Parent;
 use App\Course;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\DB;
 class StudentReportController extends Controller
 {
     public function showReport() {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $blank = 1;
         $student = Student::find($studentId);
         $classes = $student->kelas;
@@ -27,11 +28,12 @@ class StudentReportController extends Controller
                             ->select('course_id', DB::raw('AVG(nilai) as avg'))
                             ->get();
         $classId = $classes[0]->id;
-        return view('student.report', compact('student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+        return view('parent.report', compact('parent','student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
 
     public function showReportByClassId($classId) {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $blank = 0;
         $student = Student::find($studentId);
         $classes = $student->kelas;
@@ -44,22 +46,24 @@ class StudentReportController extends Controller
                             ->groupBy('course_id')
                             ->select('course_id', DB::raw('AVG(nilai) as avg'))
                             ->get();
-        return view('student.report', compact('student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+        return view('parent.report', compact('parent', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
 
     public function showDetailedReport() {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $blank = 1;
         $courses = [];
         $student = Student::find($studentId);
         $classes = $student->kelas;
         $courseId = -1;
         $classId = -1;
-        return view('student.detail-report', compact('blank', 'student', 'courses', 'classes','courseId', 'classId'));
+        return view('parent.detail-report', compact('parent', 'student', 'blank', 'courses', 'classes','courseId', 'classId'));
     }
 
     public function showDetailedReportByCourseId($classId, $courseId) {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $blank = 0;
         $courses = Kelas::find($classId)->courses;
         $student = Student::find($studentId);
@@ -85,7 +89,7 @@ class StudentReportController extends Controller
                                     ->groupBy('assignment_id')
                                     ->select('assignment_id', DB::raw('AVG(score) as avg'))
                                     ->get();
-        return view('student.detail-report', compact('blank', 'student', 'courses', 'classes', 'exams', 'assignments', 'exam_averages', 'assignment_averages', 'skbm', 'classId', 'courseId'));
+        return view('parent.detail-report', compact('parent','blank', 'student', 'courses', 'classes', 'exams', 'assignments', 'exam_averages', 'assignment_averages', 'skbm', 'classId', 'courseId'));
     }
 
     public function showStatistic() {
@@ -93,14 +97,16 @@ class StudentReportController extends Controller
     }
     
     public function getCoursesByClassId($classId) {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $class = Kelas::find($classId);
         $courses = $class->courses;
         return $courses;
     }
 
     public function showReportBayangan() {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $blank = 1;
         $student = Student::find($studentId);
         $classes = $student->kelas;
@@ -118,7 +124,8 @@ class StudentReportController extends Controller
     }
 
     public function showReportBayanganByClassId($classId) {
-        $studentId = Auth::user()->student_id;
+        $parent = Auth::user()->parents;
+        $studentId = $parent->student->id;
         $blank = 0;
         $student = Student::find($studentId);
         $classes = $student->kelas;
