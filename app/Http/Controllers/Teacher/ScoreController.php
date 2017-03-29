@@ -42,18 +42,18 @@ class ScoreController extends Controller
 
     public function showExamDetail($id) {
         $exam = Exam::find($id);
-        return $this->showDetail($exam);
+        return $this->showDetail($exam, 'exam');
     }
 
     public function showAssignmentDetail($id) {
         $assignment = Assignment::find($id);
-        return $this->showDetail($assignment);
+        return $this->showDetail($assignment, 'assignment');
     }
 
-    private function showDetail($task) {
+    private function showDetail($task, $taskType) {
         $teacher = $this->teacher;
         $students = $task->students;
-        return view('teacher/score/detail', compact('students', 'task', 'teacher'));
+        return view('teacher/score/detail', compact('students', 'task', 'taskType', 'teacher'));
     }
 
     public function showAddExamForm() {
@@ -69,6 +69,20 @@ class ScoreController extends Controller
         $classes = $this->getCurrentClassesByTeacher();
 
         return view('teacher/score/add', compact('classes', 'taskType', 'teacher'));
+    }
+
+    public function showEditExamForm($id) {
+        return $this->showEditTaskForm(Exam::find($id), 'exam');
+    }
+
+    public function showEditAssignmentForm($id) {
+        return $this->showEditTaskForm(Assignment::find($id), 'assignment');
+    }
+
+    private function showEditTaskForm($task, $taskType) {
+        $teacher = $this->teacher;
+
+        return view('teacher/score/add', compact('task', 'taskType', 'teacher'));
     }
 
     public function addExam(Request $request) {
@@ -100,7 +114,11 @@ class ScoreController extends Controller
             }
         }
 
-        return url('teacher/score');
+        if ($requestBody->taskStatus == 'finish') {
+            return url('teacher/score');
+        } else {
+            return url('teacher/score/exam/edit/' . $exam->id);
+        }
     }
 
     public function addAssignment(Request $request) {
@@ -130,6 +148,76 @@ class ScoreController extends Controller
                 $assignmentScore->score = $studentScore;
                 $assignmentScore->save();
             }
+        }
+
+        if ($requestBody->taskStatus == 'finish') {
+            return url('teacher/score');
+        } else {
+            return url('teacher/score/assignment/edit/' . $assignment->id);
+        }
+    }
+
+    public function editExam(Request $request) {
+        $requestBody = json_decode($request->getContent());
+        $courseId = $requestBody->courseId;
+        $examId = $requestBody->taskId;
+
+        $exam = Exam::find($examId);
+        $exam->course_id = $courseId;
+        $exam->name = $requestBody->taskName;
+        $exam->materi = $requestBody->taskMatter;
+        $exam->tanggal = $requestBody->taskDate;
+        $exam->save();
+
+        $taskScoreIds = $requestBody->taskScoreIds;
+        $studentScores = $requestBody->studentScores;
+        foreach($taskScoreIds as $index => $taskScoreId) {
+            $studentScore = $studentScores[$index];
+            if (!$studentScore) {
+                $studentScore = 0;
+            }
+
+            $examScore = ExamScore::find($taskScoreId);
+            $examScore->score = $studentScore;
+            $examScore->save();
+        }
+
+        if ($requestBody->taskStatus == 'finish') {
+            return url('teacher/score');
+        } else {
+            return url('teacher/score/exam/edit/' . $examId);
+        }
+    }
+
+    public function editAssignment(Request $request) {
+        $requestBody = json_decode($request->getContent());
+        $courseId = $requestBody->courseId;
+        $assignmentId = $requestBody->taskId;
+
+        $assignment = Assignment::find($assignmentId);
+        $assignment->course_id = $courseId;
+        $assignment->name = $requestBody->taskName;
+        $assignment->materi = $requestBody->taskMatter;
+        $assignment->tanggal = $requestBody->taskDate;
+        $assignment->save();
+
+        $taskScoreIds = $requestBody->taskScoreIds;
+        $studentScores = $requestBody->studentScores;
+        foreach($taskScoreIds as $index => $taskScoreId) {
+            $studentScore = $studentScores[$index];
+            if (!$studentScore) {
+                $studentScore = 0;
+            }
+
+            $assignmentScore = AssignmentScore::find($taskScoreId);
+            $assignmentScore->score = $studentScore;
+            $assignmentScore->save();
+        }
+
+        if ($requestBody->taskStatus == 'finish') {
+            return url('teacher/score');
+        } else {
+            return url('teacher/score/assignment/edit/' . $assignmentId);
         }
     }
 

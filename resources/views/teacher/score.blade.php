@@ -103,7 +103,7 @@
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/exam/detail/' . $exam->id) }}" class="ui blue basic button"><i class="eye icon"></i></a>
         @if ($exam->course->kelas->is_current)
-          <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
+          <a href="{{ url('teacher/score/exam/edit/' . $exam->id) }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
         @endif
         </div>
@@ -149,8 +149,10 @@
       <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/assignment/detail/' . $assignment->id) }}" class="ui blue basic button"><i class="eye icon"></i></a>
-          <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
+        @if ($assignment->course->kelas->is_current)
+          <a href="{{ url('teacher/score/assignment/edit/' . $assignment->id) }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
           <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
+        @endif
         </div>
       </td>
     </tr>
