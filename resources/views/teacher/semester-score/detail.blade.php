@@ -31,10 +31,19 @@
 @endsection
 
 @section('left-column')
-<h2 class="ui header">
-  Daftar Nilai Semester Kelas {{ $course->kelas->name }}
-  <div class="sub header">Mata Pelajaran {{ $course->name }}</div>
-</h2>
+<div class="ui grid">
+  <div class="twelve wide column">
+    <h2 class="ui header">
+      Daftar Nilai Semester Kelas {{ $course->kelas->name }}
+      <div class="sub header">Mata Pelajaran {{ $course->name }}</div>
+    </h2>
+  </div>
+  <div class="four wide right aligned column">
+    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/semester/download/1') }}">
+        <i class="download icon"></i>Download Rapor
+    </a>
+  </div>
+</div>
 <div class="ui divider"></div>
 
 <!-- Rincian Penilaian -->
