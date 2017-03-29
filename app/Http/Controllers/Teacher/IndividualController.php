@@ -189,17 +189,57 @@ class IndividualController extends Controller
     }
 
     public function showReport($id){
-        return view('teacher/individu/report');
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $class = $teacher->kelas()
+            ->where('is_current', '=', '1')
+            ->first();
+        $blank = 1;
+        $student = Student::find($id);
+        $classes = $student->kelas;
+        $courses = $classes[0]->courses()
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = $classes[0]->courses()
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        $classId = $classes[0]->id;
+        return view('teacher/individu/report', compact('class', 'student', 'classes', 'courses', 'classId', 'blank', 'averages', 'teacher'));
     }
 
     public function showReportBayangan($id) {
-        return view('teacher/individu/report-bayangan');
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $blank = 1;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courses = $classes[0]->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = $classes[0]->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        $classId = $classes[0]->id;
+        return view('teacher/individu/report-bayangan', compact('teacher', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
 
     public function showDetailedReport($id) {
-        return view('teacher/individu/detailed-report');
+        $teacher = $this->teacher;
+        $studentId = $id;
+        $blank = 1;
+        $courses = [];
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courseId = -1;
+        $classId = -1;
+        return view('teacher/individu/detailed-report', compact('teacher', 'blank', 'student', 'courses', 'classes','courseId', 'classId'));
     }
-
 
 
 }

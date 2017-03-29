@@ -15,81 +15,35 @@
 @section('right-column')
 
         <!-- Fields semester -->
-{{--<div id="semester">--}}
-{{--<div class="ui small form">--}}
-{{--<div class="field">--}}
-{{--<label>Kelas</label>--}}
-{{--<select class="ui dropdown" id="classes">--}}
-{{--<option selected value="$class->id">$class->name - Semester $class->semester</option>--}}
-{{--</select>--}}
-{{--</div>--}}
-{{--<div class="row">--}}
-{{--<button class="ui horizontal animated teal large fluid button show-report" tabindex="0">--}}
-{{--<div class="visible content">Search</div>--}}
-{{--<div class="hidden content">--}}
-{{--<i class="search icon"></i>--}}
-{{--</div>--}}
-{{--</button>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</div>--}}
-        <!-- /Fields semester -->
+<div id="semester">
+    <div class="ui small form">
+        <div class="field">
+            <label>Kelas</label>
+            <select class="ui dropdown" id="classes">
+                @foreach($classes as $class)
+                    @if($class->id == $classId)
+                        <option selected value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }}</option>
+                    @else
+                        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }}</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
+        <div class="row">
+            @if($blank == 1)
+                <button class="ui horizontal animated teal large fluid button show-report-blank" tabindex="0">
+            @elseif($blank == 0)
+                <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
+                    @endif
+                    <div class="visible content">Search</div>
+                    <div class="hidden content">
+                        <i class="search icon"></i>
+                    </div>
+                </button>
+        </div>
+    </div>
+</div>
 
-<!-- Fields mid term -->
-{{--<div id="midterm">--}}
-{{--<div class="ui fluid vertical inverted menu">--}}
-{{--<a class="active teal item">Nilai Akademik</a>--}}
-{{--<a class="teal item">Ekstrakurikuler</a>--}}
-{{--<a class="teal item">Kehadiran/Kepribadian</a>--}}
-{{--</div>--}}
-{{--<div class="ui hidden section divider"></div>--}}
-{{--<div class="ui small form">--}}
-{{--<div class="field">--}}
-{{--<label>Kelas</label>--}}
-{{--<select class="ui dropdown" id="classes">--}}
-{{--<option selected value="$class->id">$class->name - Semester $class->semester</option>--}}
-{{--</select>--}}
-{{--</div>--}}
-{{--<div class="row">--}}
-{{--<button class="ui horizontal animated teal large fluid button show-report" tabindex="0">--}}
-{{--<div class="visible content">Search</div>--}}
-{{--<div class="hidden content">--}}
-{{--<i class="search icon"></i>--}}
-{{--</div>--}}
-{{--</button>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</div>--}}
-        <!-- /Fields mid term -->
-
-<!-- Fields rincian nilai -->
-{{--<div id="detail">--}}
-{{--<div class="ui small form">--}}
-{{--<div class="field">--}}
-{{--<label>Kelas</label>--}}
-{{--<select class="ui dropdown" id="choose-class">--}}
-{{--<option value="-1" disabled selected>-- Pilih Kelas --</option>--}}
-{{--<option value="$class->id" selected>$class->name - Semester $class->semester</option>--}}
-{{--</select>--}}
-{{--</div>--}}
-{{--<div class="field">--}}
-{{--<label>Mata Pelajaran</label>--}}
-{{--<select class="ui dropdown" id="choose-course">--}}
-{{--<option value="-1" disabled selected>-- Pilih Mata Pelajaran --</option>--}}
-{{--<option value="$course->id">$course->name</option>--}}
-{{--</select>--}}
-{{--</div>--}}
-{{--<div class="row">--}}
-{{--<button class="ui horizontal animated teal large fluid button show-detailed-report-blank" tabindex="0">--}}
-{{--<div class="visible content">Search</div>--}}
-{{--<div class="hidden content">--}}
-{{--<i class="search icon"></i>--}}
-{{--</div>--}}
-{{--</button>--}}
-{{--</div>--}}
-{{--</div>--}}
-{{--</div>--}}
-        <!-- /Fields rincian nilai -->
 @endsection
 
 @section('left-column')
@@ -105,7 +59,7 @@
             <a class="item" id="detail" href="{{ url('teacher/individu/detailed-report/' . $student->id) }}">Rincian Nilai</a>
         </div>
 
-        <div class="ui tab" data-tab="semester">
+        <div class="ui active tab">
             <!-- Score table -->
             @if(count($courses) == 0)
                 Belum ada nilai
