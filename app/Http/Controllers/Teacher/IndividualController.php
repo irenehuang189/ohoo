@@ -247,6 +247,24 @@ class IndividualController extends Controller
         return view('teacher/individu/report-bayangan', compact('teacher', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
 
+    public function showReportBayanganByClassId($id, $classId) {
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $blank = 0;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courses = Kelas::find($classId)->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = Kelas::find($classId)->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        return view('teacher/individu/report-bayangan', compact('teacher', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+    }
+
     public function showDetailedReport($id) {
         $teacher = $this->teacher;
         $studentId = $id;

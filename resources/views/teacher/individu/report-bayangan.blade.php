@@ -16,6 +16,7 @@
 
 <!-- Fields mid term -->
 <div id="semester">
+    <input value="{{ $student->id }}" id="student-id" hidden>
     <div class="ui small form">
         <div class="field">
             <label>Kelas</label>
@@ -31,9 +32,9 @@
         </div>
         <div class="row">
             @if($blank == 1)
-                <button class="ui horizontal animated teal large fluid button show-report-blank" tabindex="0">
+                <button class="ui horizontal animated teal large fluid button show-individual-report-bayangan-blank" tabindex="0">
                     @elseif($blank == 0)
-                        <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
+                        <button class="ui horizontal animated teal large fluid button show-individual-report-bayangan" tabindex="0">
                             @endif
                             <div class="visible content">Search</div>
                             <div class="hidden content">
@@ -58,8 +59,7 @@
             <a class="item active" id="midterm" href="{{ url('teacher/individu/report-bayangan/' . $student->id) }}">Rapor Bayangan</a>
             <a class="item" id="detail" href="{{ url('teacher/individu/detailed-report/' . $student->id) }}">Rincian Nilai</a>
         </div>
-
-        <div class="ui tab" data-tab="semester">
+        <div class="ui tab active">
             <!-- Score table -->
             @if(count($courses) == 0)
                 Belum ada nilai

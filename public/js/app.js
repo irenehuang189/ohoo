@@ -90,6 +90,18 @@ $(document).ready(function(){
     window.location.href = classId;
   });
 
+  studentId = $("#student-id").val();
+  $(".show-individual-report-bayangan-blank").click(function(){
+    var classId = $("#classes :selected").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report-bayangan/" + studentId + '/' + classId;
+  });
+  $(".show-individual-report-bayangan").click(function(){
+    var classId = $("#classes :selected").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report-bayangan/" + studentId + '/' + classId;
+  });
+
   // Detailed report page ajax
   $("#choose-class").change(function(){
     var classId = $("#choose-class :selected").val();
