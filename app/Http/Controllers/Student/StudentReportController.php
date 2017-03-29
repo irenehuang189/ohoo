@@ -9,6 +9,7 @@ use App\Student;
 use App\Kelas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class StudentReportController extends Controller
 {
@@ -133,4 +134,5 @@ class StudentReportController extends Controller
             ->get();
         return view('student.report', compact('student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
+
 }

@@ -18,6 +18,7 @@ use App\Kelas;
 use Illuminate\Support\Facades\Auth;
 use App\CourseScore;
 use Illuminate\Support\Facades\DB;
+use Barryvdh\DomPDF\Facade as PDF;
 
 class IndividualController extends Controller
 {
@@ -306,6 +307,44 @@ class IndividualController extends Controller
             ->select('assignment_id', DB::raw('AVG(score) as avg'))
             ->get();
         return view('teacher/individu/detailed-report', compact('teacher', 'blank', 'student', 'courses', 'classes', 'exams', 'assignments', 'exam_averages', 'assignment_averages', 'skbm', 'classId', 'courseId'));
+    }
+
+    public function downloadReport($studentId, $classId){
+        $student = Student::find($studentId);
+        $class = Kelas::find($classId);
+        $courses = $class->courses()
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = $class->courses()
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        $filename = "Test";
+        $pdf = app('dompdf.wrapper');
+        $view = "";
+        $pdf->loadView($view, compact('student', 'class', 'courses', 'averages'));
+        return $pdf->download($filename . '.pdf');
+    }
+
+    public function downloadReportBayangan($studentId, $classId){
+        $student = Student::find($studentId);
+        $class = Kelas::find($classId);
+        $courses = $class->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = $class->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        $filename = "Test";
+        $pdf = app('dompdf.wrapper');
+        $view = "";
+        $pdf->loadView($view, compact('student', 'class', 'courses', 'averages'));
+        return $pdf->download($filename . '.pdf');
     }
 
 }
