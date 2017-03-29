@@ -88,7 +88,8 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/score/semester/add', function() {
 	  return view('teacher/semester-score/add');
 	});
-	Route::get('/teacher/score/semester/detail/{courseId}', 'Teacher\ScoreController@showCourseDetail');
+	Route::get('/teacher/score/semester/detail/{courseId}', 'Teacher\ScoreController@showSemesterDetail');
+	Route::get('/teacher/score/bayangan/detail/{courseId}', 'Teacher\ScoreController@showBayanganDetail');
 
 	/* Individu */
 	Route::get('/teacher/individu', 'Teacher\IndividualController@showStudentList');

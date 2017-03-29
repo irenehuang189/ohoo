@@ -32,7 +32,11 @@
 
 @section('left-column')
 <h2 class="ui header">
+@if ($scoreType == "semester")
   Daftar Nilai Semester Kelas {{ $course->kelas->name }}
+@else
+  Daftar Nilai Bayangan Kelas {{ $course->kelas->name }}
+@endif
   <div class="sub header">Mata Pelajaran {{ $course->name }}</div>
 </h2>
 <div class="ui divider"></div>
@@ -42,6 +46,10 @@
   <div class="row">
     <div class="four wide column">Tahun Ajaran</div>
     <div class="twelve wide column">: {{ $course->kelas->year }}/{{ $course->kelas->year + 1 }}</div>
+  </div>
+  <div class="row">
+    <div class="four wide column">Semester</div>
+    <div class="twelve wide column">: {{ $course->kelas->semester }}</div>
   </div>
   <div class="row">
     <div class="four wide column">SKBM</div>
@@ -66,24 +74,28 @@
     </tr>
   </thead>
   <tbody>
+  @foreach ($students as $index => $student)
     <tr>
-      <td class="center aligned">1</td>
-      <td>Wina Aryasubedjo</td>
-      <td class="center aligned">80</td>
-      <td class="center aligned">76</td>
+      <td class="center aligned">{{ $index + 1 }}</td>
+      <td>{{ $student->name }}</td>
+    @if ($student->pivot->nilai >= $course->skbm)
+      <td class="center aligned">{{ $student->pivot->nilai }}</td>
+    @else
+      <td class="center aligned negative">{{ $student->pivot->nilai }}</td>
+    @endif
+    @if ($student->pivot->nilai_praktik >= $course->skbm)
+      <td class="center aligned">{{ $student->pivot->nilai_praktik }}</td>
+    @else
+      <td class="center aligned negative">{{ $student->pivot->nilai_praktik }}</td>
+    @endif
     </tr>
-    <tr class="negative">
-      <td class="center aligned">2</td>
-      <td>Bekti Hutama</td>
-      <td class="center aligned">40</td>
-      <td class="center aligned">40</td>
-    </tr>
+  @endforeach
   </tbody>
   <tfoot><tr>
     <th></th>
     <th><b>Rata-rata Kelas</b></th>
-    <th class="center aligned"><b>75</b></th>
-    <th class="center aligned"><b>60</b></th>
+    <th class="center aligned"><b>{{ $students->avg('pivot.nilai') }}</b></th>
+    <th class="center aligned"><b>{{ $students->avg('pivot.nilai_praktik') }}</b></th>
   </tr></tfoot>
 </table>
 <!-- /Tabel Daftar Siswa -->
