@@ -16,7 +16,7 @@
 <div class="ui container">
   <div class="ui grid">
     <div class="two wide column">
-      <img src="{{ asset('images/logo.png') }}" class="ui fluid image">
+      <img src="{{ asset('images/school-logo.jpg') }}" class="ui fluid image">
     </div>
     <h2 class="fourteen wide column">
       LAPORAN HASIL BELAJAR PESERTA DIDIK<br/>
