@@ -42,18 +42,6 @@
           </div>
         </button>
     </div>
-    <div class="row">
-      @if($blank == 1)
-        <button class="ui horizontal animated teal large fluid button show-report-blank" tabindex="0">
-      @elseif($blank == 0)
-        <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
-          @endif
-          <div class="visible content">Search</div>
-          <div class="hidden content">
-            <i class="search icon"></i>
-          </div>
-        </button>
-    </div>
   </div>
 </div>
 
