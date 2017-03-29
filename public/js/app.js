@@ -232,32 +232,6 @@ $(document).ready(function(){
     });
   });
 
-  // Teacher individu page
-  // Right menu on individu detail
-  $('div#semester').hide();
-  $('div#midterm').hide();
-  $('div#detail').hide();
-  $('.item#overview').click(function(){
-    $('div#midterm').hide();
-    $('div#detail').hide();
-    $('div#semester').hide();
-  });
-  $('.item#semester').click(function(){
-    $('div#midterm').hide();
-    $('div#detail').hide();
-    $('div#semester').show();
-  });
-  $('.item#midterm').click(function(){
-    $('div#semester').hide();
-    $('div#detail').hide();
-    $('div#midterm').show();
-  });
-  $('.item#detail').click(function(){
-    $('div#semester').hide();
-    $('div#midterm').hide();
-    $('div#detail').show();
-  });
-
   // Show edit individu score modal
   $('.score-edit').click(function(){
     $('.ui.modal').modal({blurring: true}).modal('show');
