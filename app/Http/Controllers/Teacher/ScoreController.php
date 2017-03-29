@@ -40,6 +40,29 @@ class ScoreController extends Controller
     	return view('teacher/score', compact('assignments', 'classId', 'classes', 'courseId', 'courses', 'teacher', 'exams'));
     }
 
+    public function showSemesterScores(Request $request) {
+        $classId = $request->query('class');
+        $courseId = $request->query('course');
+
+        $teacher = $this->teacher;
+        $classes = $this->getClassesByTeacher();
+        if ($classId) {
+            $courseChoices = $this->getCoursesByTeacherClassId($classId);
+            if ($courseId) {
+                $courses = Course::where('id', $courseId)->get();
+            } else {
+                $courses = $this->getCoursesByTeacherClassId($classId);
+            }
+        } else {
+            $courseChoices = collect();
+            $courses = $this->getCoursesByTeacher();
+        }
+        $exams = $this->getExamsByTeacherWithFilter($classId, $courseId);
+        $assignments = $this->getAssignmentsByTeacherWithFilter($classId, $courseId);
+
+        return view('teacher/semester-score', compact('classId', 'classes', 'courseChoices', 'courseId', 'courses', 'teacher'));
+    }
+
     public function showExamDetail($id) {
         $exam = Exam::find($id);
         return $this->showDetail($exam, 'exam');
