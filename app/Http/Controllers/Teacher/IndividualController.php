@@ -210,6 +210,24 @@ class IndividualController extends Controller
         return view('teacher/individu/report', compact('class', 'student', 'classes', 'courses', 'classId', 'blank', 'averages', 'teacher'));
     }
 
+    public function showReportByClassId($id, $classId) {
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $blank = 0;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courses = Kelas::find($classId)->courses()
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = Kelas::find($classId)->courses()
+            ->join('course_score', 'courses.id', '=', 'course_score.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        return view('teacher/individu/report', compact('teacher', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+    }
+
     public function showReportBayangan($id) {
         $studentId = $id;
         $teacher = $this->teacher;
@@ -229,6 +247,24 @@ class IndividualController extends Controller
         return view('teacher/individu/report-bayangan', compact('teacher', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
     }
 
+    public function showReportBayanganByClassId($id, $classId) {
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $blank = 0;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $courses = Kelas::find($classId)->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $averages = Kelas::find($classId)->courses()
+            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
+            ->groupBy('course_id')
+            ->select('course_id', DB::raw('AVG(nilai) as avg'))
+            ->get();
+        return view('teacher/individu/report-bayangan', compact('teacher', 'student', 'classes', 'courses', 'classId', 'blank', 'averages'));
+    }
+
     public function showDetailedReport($id) {
         $teacher = $this->teacher;
         $studentId = $id;
@@ -241,5 +277,35 @@ class IndividualController extends Controller
         return view('teacher/individu/detailed-report', compact('teacher', 'blank', 'student', 'courses', 'classes','courseId', 'classId'));
     }
 
+    public function showDetailedReportByCourseId($id, $classId, $courseId) {
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $blank = 0;
+        $courses = Kelas::find($classId)->courses;
+        $student = Student::find($studentId);
+        $classes = $student->kelas;
+        $skbm = Course::find($courseId)->skbm;
+        $exams = Course::find($courseId)->exams()
+            ->join('exam_score', 'exams.id', '=', 'exam_score.exam_id')
+            ->where('course_id', '=', $courseId)
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $exam_averages = Course::find($courseId)->exams()
+            ->join('exam_score', 'exams.id', '=', 'exam_score.exam_id')
+            ->groupBy('exam_id')
+            ->select('exam_id', DB::raw('AVG(score) as avg'))
+            ->get();
+        $assignments = Course::find($courseId)->assignments()
+            ->join('assignment_score', 'assignments.id', '=', 'assignment_score.assignment_id')
+            ->where('course_id', '=', $courseId)
+            ->where('student_id', '=', $studentId)
+            ->get();
+        $assignment_averages = Course::find($courseId)->assignments()
+            ->join('assignment_score', 'assignments.id', '=', 'assignment_score.assignment_id')
+            ->groupBy('assignment_id')
+            ->select('assignment_id', DB::raw('AVG(score) as avg'))
+            ->get();
+        return view('teacher/individu/detailed-report', compact('teacher', 'blank', 'student', 'courses', 'classes', 'exams', 'assignments', 'exam_averages', 'assignment_averages', 'skbm', 'classId', 'courseId'));
+    }
 
 }

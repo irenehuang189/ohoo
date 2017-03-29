@@ -26,6 +26,29 @@ $(document).ready(function(){
     $('.ui.basic.modal').modal({blurring: true}).modal('show');
   });
 
+  // Before delete modal
+  // Score management delete from teacher/score
+  $('.exam-delete').click(function(){
+    var examId = $(this).attr('id');
+    $('.ui.basic.modal').modal({blurring: true}).modal('show');
+    $('#delete-task').click(function(){
+      $.get('/teacher/score/exam/delete/' + examId, function(data, status){
+        var baseUrl = window.location.protocol + "//" + window.location.host;
+        window.location.href = baseUrl + '/' + data;
+      });
+    });
+  });
+  $('.assignment-delete').click(function(){
+    var assignmentId = $(this).attr('id');
+    $('.ui.basic.modal').modal({blurring: true}).modal('show');
+    $('#delete-task').click(function(){
+      $.get('/teacher/score/assignment/delete/' + assignmentId, function(data, status){
+        var baseUrl = window.location.protocol + "//" + window.location.host;
+        window.location.href = baseUrl + '/' + data;
+      });
+    });
+  });
+
   // Sort table
   $('i.ascending.icon').click(function(){
     var id = $(this).attr('id');
@@ -66,6 +89,20 @@ $(document).ready(function(){
     window.location.href = classId;
   });
 
+  // Report page ajax
+  $(".show-individu-report-blank").click(function(){
+    var classId = $("#classes :selected").val();
+    var studentId = $("#student-id").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report/" + studentId + '/' + classId;
+  });
+  $(".show-individu-report").click(function(){
+    var classId = $("#classes :selected").val();
+    var studentId = $("#student-id").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report/" + studentId + '/' + classId;
+  });
+
   // Report bayangan page
   $(".show-report-bayangan-blank").click(function(){
     var classId = $("#classes :selected").val();
@@ -74,6 +111,18 @@ $(document).ready(function(){
   $(".show-report-bayangan").click(function(){
     var classId = $("#classes :selected").val();
     window.location.href = classId;
+  });
+
+  studentId = $("#student-id").val();
+  $(".show-individual-report-bayangan-blank").click(function(){
+    var classId = $("#classes :selected").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report-bayangan/" + studentId + '/' + classId;
+  });
+  $(".show-individual-report-bayangan").click(function(){
+    var classId = $("#classes :selected").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report-bayangan/" + studentId + '/' + classId;
   });
 
   // Detailed report page ajax
@@ -91,6 +140,18 @@ $(document).ready(function(){
       $('#choose-course').prop('selectedIndex',-1);
     });
   });
+
+  $(".show-detailed-report-blank").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    window.location.href = 'detailed-report/' + classId + '/' + courseId;
+  });
+  $(".show-detailed-report").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
+  });
+
   $(".show-detailed-report-blank").click(function(){
     var classId = $("#choose-class :selected").val();
     var courseId = $("#choose-course :selected").val();
@@ -116,6 +177,7 @@ $(document).ready(function(){
       window.location.href = 'score?class=' + classId + '&course=' + courseId;
     }
   });
+
   $("#choose-class-teacher").change(function(){
     $('#choose-course-teacher').empty();
     $("#choose-course-teacher").prepend("<option value='-1' selected='selected'>Semua</option>").change();
@@ -389,4 +451,5 @@ function sortTable(n, tableId) {
       }
     }
   }
+
 }

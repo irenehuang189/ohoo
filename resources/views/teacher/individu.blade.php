@@ -22,7 +22,7 @@
 @section('left-column')
 <h2 class="ui dividing header">
   Daftar Siswa
-  <div class="sub header">Kelas X-1</div>
+  <div class="sub header">{{ $class->name }} - Sem. {{ $class->semester }}</div>
 </h2>
 
 <!-- Tabel Daftar Siswa -->
