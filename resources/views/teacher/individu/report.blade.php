@@ -42,7 +42,6 @@
           </div>
         </button>
     </div>
-    </div>
     <div class="row">
       @if($blank == 1)
         <button class="ui horizontal animated teal large fluid button show-report-blank" tabindex="0">
@@ -106,7 +105,7 @@
           @foreach($courses as $course)
             <?php $i++ ?>
             <tr>
-              <td>{{ $i }}</td>
+              <td class="center aligned">{{ $i }}</td>
               <td>{{ $course->name }}</td>
               <td class="center aligned">{{ $course->skbm }}</td>
               @if($course->nilai < $course->skbm)
