@@ -66,6 +66,20 @@ $(document).ready(function(){
     window.location.href = classId;
   });
 
+  // Report page ajax
+  $(".show-individu-report-blank").click(function(){
+    var classId = $("#classes :selected").val();
+    var studentId = $("#student-id").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report/" + studentId + '/' + classId;
+  });
+  $(".show-individu-report").click(function(){
+    var classId = $("#classes :selected").val();
+    var studentId = $("#student-id").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/report/" + studentId + '/' + classId;
+  });
+
   // Report bayangan page
   $(".show-report-bayangan-blank").click(function(){
     var classId = $("#classes :selected").val();
@@ -91,6 +105,18 @@ $(document).ready(function(){
       $('#choose-course').prop('selectedIndex',-1);
     });
   });
+
+  $(".show-detailed-report-blank").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    window.location.href = 'detailed-report/' + classId + '/' + courseId;
+  });
+  $(".show-detailed-report").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
+  });
+
   $(".show-detailed-report-blank").click(function(){
     var classId = $("#choose-class :selected").val();
     var courseId = $("#choose-course :selected").val();
@@ -116,6 +142,7 @@ $(document).ready(function(){
       window.location.href = 'score?class=' + classId + '&course=' + courseId;
     }
   });
+
   $("#choose-class-teacher").change(function(){
     $('#choose-course-teacher').empty();
     $("#choose-course-teacher").prepend("<option value='-1' selected='selected'>Semua</option>").change();

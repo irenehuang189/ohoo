@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Mar 2017 pada 11.51
+-- Generation Time: 29 Mar 2017 pada 18.51
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -36,14 +36,19 @@ CREATE TABLE IF NOT EXISTS `assignments` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `assignments_course_id_foreign` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `assignments`
 --
 
 INSERT INTO `assignments` (`id`, `course_id`, `name`, `tanggal`, `materi`, `created_at`, `updated_at`) VALUES
-(1, 1, 'Tugas 1 - Makalah', '2017-03-30', 'Daya dan Energi', NULL, NULL);
+(1, 1, 'Tugas 1 - Makalah', '2017-03-30', 'Daya dan Energi', NULL, NULL),
+(2, 60, 'Tugas 1', '2017-03-06', 'Gravitasi dan percepatan', NULL, NULL),
+(3, 60, 'Tugas 2', '2017-04-10', 'Daya dan Energi', NULL, NULL),
+(4, 60, 'Tugas 3', '2017-04-18', 'Hukum Newton', NULL, NULL),
+(5, 60, 'Tugas 4', '2017-05-01', 'Mekanika Fluida', NULL, NULL),
+(6, 60, 'Tugas 5', '2017-05-24', 'Hukum Newton', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -61,14 +66,19 @@ CREATE TABLE IF NOT EXISTS `assignment_score` (
   PRIMARY KEY (`id`),
   KEY `assignment_score_assignment_id_foreign` (`assignment_id`),
   KEY `assignment_score_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=7 ;
 
 --
 -- Dumping data untuk tabel `assignment_score`
 --
 
 INSERT INTO `assignment_score` (`id`, `assignment_id`, `student_id`, `score`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, '90.00', NULL, NULL);
+(1, 1, 1, '90.00', NULL, NULL),
+(2, 2, 1, '80.00', NULL, NULL),
+(3, 3, 1, '60.00', NULL, NULL),
+(4, 4, 1, '85.00', NULL, NULL),
+(5, 5, 1, '76.00', NULL, NULL),
+(6, 6, 1, '80.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -87,16 +97,19 @@ CREATE TABLE IF NOT EXISTS `classes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `classes_teacher_id_foreign` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
 
 --
 -- Dumping data untuk tabel `classes`
 --
 
 INSERT INTO `classes` (`id`, `teacher_id`, `name`, `semester`, `year`, `is_current`, `created_at`, `updated_at`) VALUES
-(1, 1, 'X IPA', 1, 2016, 0, NULL, NULL),
-(2, 1, 'X IPA', 2, 2016, 1, NULL, NULL),
-(3, 1, 'X IPA', 1, 2015, 0, NULL, NULL);
+(1, 1, 'X IPA', 1, 2014, 0, NULL, NULL),
+(2, 1, 'X IPA', 2, 2014, 0, NULL, NULL),
+(4, 1, 'XI IPA', 1, 2015, 0, NULL, NULL),
+(5, 1, 'XI IPA', 2, 2015, 0, NULL, NULL),
+(6, 1, 'XII IPA', 1, 2016, 0, NULL, NULL),
+(7, 1, 'XII IPA', 2, 2016, 1, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -115,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   PRIMARY KEY (`id`),
   KEY `courses_teacher_id_foreign` (`teacher_id`),
   KEY `courses_class_id_foreign` (`class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
 
 --
 -- Dumping data untuk tabel `courses`
@@ -124,15 +137,58 @@ CREATE TABLE IF NOT EXISTS `courses` (
 INSERT INTO `courses` (`id`, `teacher_id`, `class_id`, `name`, `skbm`, `created_at`, `updated_at`) VALUES
 (1, 1, 1, 'Fisika', 60, NULL, NULL),
 (2, 1, 1, 'Kimia', 70, NULL, NULL),
-(3, 1, 2, 'Fisika', 70, NULL, NULL),
-(5, 1, 2, 'Kimia', 65, NULL, NULL),
-(7, 1, 1, 'Matematika', 65, NULL, NULL),
+(3, 1, 1, 'Matematika', 70, NULL, NULL),
+(5, 1, 1, 'Biologi', 65, NULL, NULL),
+(7, 1, 1, 'Pendidikan Agama', 65, NULL, NULL),
 (8, 1, 1, 'Sejarah', 70, NULL, NULL),
 (9, 1, 1, 'Kewarganegaraan', 70, NULL, NULL),
-(10, 1, 2, 'Matematika', 70, NULL, NULL),
-(11, 1, 2, 'Sejarah', 70, NULL, NULL),
-(12, 1, 2, 'Kewarganegaraan', 75, NULL, NULL),
-(13, 1, 3, 'Fisika', 60, NULL, NULL);
+(10, 1, 1, 'Bahasa Inggris', 70, NULL, NULL),
+(11, 1, 1, 'Bahasa Indonesia', 70, NULL, NULL),
+(14, 1, 2, 'Fisika', 65, NULL, NULL),
+(15, 1, 2, 'Kimia', 65, NULL, NULL),
+(16, 1, 2, 'Matematika', 65, NULL, NULL),
+(17, 1, 2, 'Biologi', 65, NULL, NULL),
+(18, 1, 2, 'Pendidikan Agama', 65, NULL, NULL),
+(19, 1, 2, 'Sejarah', 65, NULL, NULL),
+(20, 1, 2, 'Kewarganegaraan', 65, NULL, NULL),
+(21, 1, 2, 'Bahasa Inggris', 65, NULL, NULL),
+(22, 1, 2, 'Bahasa Indonesia', 65, NULL, NULL),
+(33, 1, 4, 'Fisika', 65, NULL, NULL),
+(34, 1, 4, 'Kimia', 65, NULL, NULL),
+(35, 1, 4, 'Matematika', 65, NULL, NULL),
+(36, 1, 4, 'Biologi', 65, NULL, NULL),
+(37, 1, 4, 'Pendidikan Agama', 65, NULL, NULL),
+(38, 1, 4, 'Sejarah', 65, NULL, NULL),
+(39, 1, 4, 'Kewarganegaraan', 65, NULL, NULL),
+(40, 1, 4, 'Bahasa Inggris', 65, NULL, NULL),
+(41, 1, 4, 'Bahasa Indonesia', 65, NULL, NULL),
+(42, 1, 5, 'Fisika', 65, NULL, NULL),
+(43, 1, 5, 'Kimia', 65, NULL, NULL),
+(44, 1, 5, 'Matematika', 65, NULL, NULL),
+(45, 1, 5, 'Biologi', 65, NULL, NULL),
+(46, 1, 5, 'Pendidikan Agama', 65, NULL, NULL),
+(47, 1, 5, 'Sejarah', 65, NULL, NULL),
+(48, 1, 5, 'Kewarganegaraan', 65, NULL, NULL),
+(49, 1, 5, 'Bahasa Inggris', 65, NULL, NULL),
+(50, 1, 5, 'Bahasa Indonesia', 65, NULL, NULL),
+(51, 1, 6, 'Fisika', 65, NULL, NULL),
+(52, 1, 6, 'Kimia', 65, NULL, NULL),
+(53, 1, 6, 'Matematika', 65, NULL, NULL),
+(54, 1, 6, 'Biologi', 65, NULL, NULL),
+(55, 1, 6, 'Pendidikan Agama', 65, NULL, NULL),
+(56, 1, 6, 'Sejarah', 65, NULL, NULL),
+(57, 1, 6, 'Kewarganegaraan', 65, NULL, NULL),
+(58, 1, 6, 'Bahasa Inggris', 65, NULL, NULL),
+(59, 1, 6, 'Bahasa Indonesia', 65, NULL, NULL),
+(60, 1, 7, 'Fisika', 65, NULL, NULL),
+(61, 1, 7, 'Kimia', 65, NULL, NULL),
+(62, 1, 7, 'Matematika', 65, NULL, NULL),
+(63, 1, 7, 'Biologi', 65, NULL, NULL),
+(64, 1, 7, 'Pendidikan Agama', 65, NULL, NULL),
+(65, 1, 7, 'Sejarah', 65, NULL, NULL),
+(66, 1, 7, 'Kewarganegaraan', 65, NULL, NULL),
+(67, 1, 7, 'Bahasa Inggris', 65, NULL, NULL),
+(68, 1, 7, 'Bahasa Indonesia', 65, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -152,27 +208,118 @@ CREATE TABLE IF NOT EXISTS `course_score` (
   PRIMARY KEY (`id`),
   KEY `course_score_course_id_foreign` (`course_id`),
   KEY `course_score_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=15 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=146 ;
 
 --
 -- Dumping data untuk tabel `course_score`
 --
 
 INSERT INTO `course_score` (`id`, `course_id`, `student_id`, `nilai`, `nilai_praktik`, `sikap`, `created_at`, `updated_at`) VALUES
-(1, 1, 1, 80, 68, 'A', NULL, NULL),
-(2, 2, 1, 70, 83, 'B', NULL, NULL),
-(3, 1, 3, 45, 74, 'A', NULL, NULL),
-(4, 2, 3, 84, 69, 'C', NULL, NULL),
-(5, 3, 1, 70, 73, 'C', NULL, NULL),
-(6, 5, 1, 62, 74, 'B', NULL, NULL),
-(7, 3, 3, 76, 80, 'A', NULL, NULL),
-(8, 5, 3, 85, 90, 'A', NULL, NULL),
-(9, 7, 1, 50, 80, 'C', NULL, NULL),
-(10, 8, 1, 75, 70, 'B', NULL, NULL),
-(11, 9, 1, 78, 82, 'A', NULL, NULL),
-(12, 10, 1, 65, 78, 'B', NULL, NULL),
-(13, 11, 1, 84, 73, 'A', NULL, NULL),
-(14, 12, 1, 77, 78, 'A', NULL, NULL);
+(15, 60, 1, 82, 75, 'A', NULL, NULL),
+(16, 61, 1, 52, 75, 'A', NULL, NULL),
+(17, 62, 1, 64, 70, 'B', NULL, NULL),
+(18, 63, 1, 86, 65, 'B', NULL, NULL),
+(19, 64, 1, 88, 78, 'B', NULL, NULL),
+(20, 65, 1, 73, 80, 'A', NULL, NULL),
+(21, 66, 1, 69, 75, 'C', NULL, NULL),
+(22, 67, 1, 72, 80, 'A', NULL, NULL),
+(23, 68, 1, 89, 85, 'A', NULL, NULL),
+(24, 1, 1, 80, 75, 'A', NULL, NULL),
+(25, 2, 1, 61, 75, 'A', NULL, NULL),
+(26, 3, 1, 59, 75, 'A', NULL, NULL),
+(53, 5, 1, 79, 75, 'A', NULL, NULL),
+(54, 7, 1, 85, 75, 'A', NULL, NULL),
+(55, 8, 1, 81, 75, 'A', NULL, NULL),
+(56, 9, 1, 86, 75, 'A', NULL, NULL),
+(57, 10, 1, 82, 75, 'A', NULL, NULL),
+(58, 11, 1, 52, 75, 'A', NULL, NULL),
+(59, 14, 1, 60, 75, 'A', NULL, NULL),
+(60, 15, 1, 84, 75, 'A', NULL, NULL),
+(61, 16, 1, 82, 75, 'A', NULL, NULL),
+(62, 17, 1, 81, 75, 'A', NULL, NULL),
+(63, 18, 1, 87, 75, 'A', NULL, NULL),
+(64, 19, 1, 72, 75, 'A', NULL, NULL),
+(65, 20, 1, 75, 75, 'A', NULL, NULL),
+(66, 21, 1, 79, 75, 'A', NULL, NULL),
+(67, 22, 1, 68, 75, 'A', NULL, NULL),
+(68, 33, 1, 83, 75, 'A', NULL, NULL),
+(69, 34, 1, 81, 75, 'A', NULL, NULL),
+(70, 35, 1, 60, 75, 'A', NULL, NULL),
+(71, 36, 1, 68, 75, 'A', NULL, NULL),
+(72, 37, 1, 72, 76, 'A', NULL, NULL),
+(73, 38, 1, 64, 75, 'A', NULL, NULL),
+(74, 39, 1, 73, 75, 'A', NULL, NULL),
+(75, 40, 1, 80, 75, 'A', NULL, NULL),
+(76, 41, 1, 81, 75, 'A', NULL, NULL),
+(77, 42, 1, 58, 71, 'A', NULL, NULL),
+(78, 43, 1, 90, 75, 'A', NULL, NULL),
+(79, 44, 1, 80, 75, 'A', NULL, NULL),
+(80, 45, 1, 92, 75, 'A', NULL, NULL),
+(81, 46, 1, 58, 75, 'A', NULL, NULL),
+(82, 47, 1, 65, 75, 'A', NULL, NULL),
+(83, 48, 1, 80, 75, 'A', NULL, NULL),
+(84, 49, 1, 82, 75, 'A', NULL, NULL),
+(85, 50, 1, 84, 72, 'A', NULL, NULL),
+(86, 51, 1, 81, 75, 'A', NULL, NULL),
+(87, 52, 1, 76, 75, 'A', NULL, NULL),
+(88, 53, 1, 73, 75, 'A', NULL, NULL),
+(89, 54, 1, 65, 75, 'A', NULL, NULL),
+(90, 55, 1, 80, 75, 'A', NULL, NULL),
+(91, 56, 1, 82, 75, 'A', NULL, NULL),
+(92, 57, 1, 80, 75, 'A', NULL, NULL),
+(93, 58, 1, 58, 77, 'A', NULL, NULL),
+(94, 59, 1, 82, 75, 'A', NULL, NULL),
+(95, 5, 2, 68, 75, 'A', NULL, NULL),
+(96, 7, 2, 69, 75, 'A', NULL, NULL),
+(97, 8, 2, 50, 75, 'A', NULL, NULL),
+(98, 9, 2, 82, 75, 'A', NULL, NULL),
+(99, 10, 2, 74, 75, 'A', NULL, NULL),
+(100, 11, 2, 59, 75, 'A', NULL, NULL),
+(101, 14, 2, 68, 75, 'A', NULL, NULL),
+(102, 15, 2, 75, 75, 'A', NULL, NULL),
+(103, 16, 2, 92, 75, 'A', NULL, NULL),
+(104, 17, 2, 80, 75, 'A', NULL, NULL),
+(105, 18, 2, 81, 75, 'A', NULL, NULL),
+(106, 19, 2, 78, 75, 'A', NULL, NULL),
+(107, 20, 2, 75, 75, 'A', NULL, NULL),
+(108, 21, 2, 79, 75, 'A', NULL, NULL),
+(109, 22, 2, 68, 75, 'A', NULL, NULL),
+(110, 33, 2, 83, 75, 'A', NULL, NULL),
+(111, 34, 2, 81, 75, 'A', NULL, NULL),
+(112, 35, 2, 60, 75, 'A', NULL, NULL),
+(113, 36, 2, 68, 75, 'A', NULL, NULL),
+(114, 37, 2, 72, 76, 'A', NULL, NULL),
+(115, 38, 2, 64, 75, 'A', NULL, NULL),
+(116, 39, 2, 73, 75, 'A', NULL, NULL),
+(117, 40, 2, 80, 75, 'A', NULL, NULL),
+(118, 41, 2, 81, 75, 'A', NULL, NULL),
+(119, 42, 2, 58, 71, 'A', NULL, NULL),
+(120, 43, 2, 90, 75, 'A', NULL, NULL),
+(121, 44, 2, 80, 75, 'A', NULL, NULL),
+(122, 45, 2, 92, 75, 'A', NULL, NULL),
+(123, 46, 2, 58, 75, 'A', NULL, NULL),
+(124, 47, 2, 65, 75, 'A', NULL, NULL),
+(125, 48, 2, 80, 75, 'A', NULL, NULL),
+(126, 49, 2, 82, 75, 'A', NULL, NULL),
+(127, 50, 2, 84, 72, 'A', NULL, NULL),
+(128, 51, 2, 81, 75, 'A', NULL, NULL),
+(129, 52, 2, 76, 75, 'A', NULL, NULL),
+(130, 53, 2, 73, 75, 'A', NULL, NULL),
+(131, 54, 2, 65, 75, 'A', NULL, NULL),
+(132, 55, 2, 80, 75, 'A', NULL, NULL),
+(133, 56, 2, 82, 75, 'A', NULL, NULL),
+(134, 57, 2, 80, 75, 'A', NULL, NULL),
+(135, 58, 2, 58, 77, 'A', NULL, NULL),
+(136, 59, 2, 82, 75, 'A', NULL, NULL),
+(137, 60, 2, 78, 75, 'A', NULL, NULL),
+(138, 61, 2, 89, 75, 'A', NULL, NULL),
+(139, 62, 2, 72, 75, 'A', NULL, NULL),
+(140, 63, 2, 72, 75, 'A', NULL, NULL),
+(141, 64, 2, 79, 75, 'A', NULL, NULL),
+(142, 65, 2, 89, 75, 'A', NULL, NULL),
+(143, 66, 2, 90, 75, 'A', NULL, NULL),
+(144, 67, 2, 77, 75, 'A', NULL, NULL),
+(145, 68, 2, 85, 75, 'A', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -192,7 +339,22 @@ CREATE TABLE IF NOT EXISTS `course_score_bayangan` (
   PRIMARY KEY (`id`),
   KEY `course_score_bayangan_course_id_foreign` (`course_id`),
   KEY `course_score_bayangan_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+
+--
+-- Dumping data untuk tabel `course_score_bayangan`
+--
+
+INSERT INTO `course_score_bayangan` (`id`, `course_id`, `student_id`, `nilai`, `nilai_praktik`, `sikap`, `created_at`, `updated_at`) VALUES
+(1, 60, 1, 70, 71, 'A', NULL, NULL),
+(2, 61, 1, 64, 77, 'B', NULL, NULL),
+(3, 62, 1, 45, 73, 'A', NULL, NULL),
+(4, 63, 1, 86, 65, 'B', NULL, NULL),
+(5, 64, 1, 82, 71, 'B', NULL, NULL),
+(6, 65, 1, 76, 83, 'A', NULL, NULL),
+(7, 66, 1, 63, 70, 'B', NULL, NULL),
+(8, 67, 1, 78, 85, 'B', NULL, NULL),
+(9, 68, 1, 81, 80, 'A', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -345,7 +507,7 @@ CREATE TABLE IF NOT EXISTS `students` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `students_registration_number_unique` (`registration_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=6 ;
 
 --
 -- Dumping data untuk tabel `students`
@@ -353,7 +515,10 @@ CREATE TABLE IF NOT EXISTS `students` (
 
 INSERT INTO `students` (`id`, `registration_number`, `name`, `created_at`, `updated_at`) VALUES
 (1, 13513026, 'William', NULL, NULL),
-(3, 13513002, 'Irene', NULL, NULL);
+(2, 11111, 'Waluyo Akbar', NULL, NULL),
+(3, 13513002, 'Irene', NULL, NULL),
+(4, 123412, 'Toni', NULL, NULL),
+(5, 123712, 'Jessica', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -370,7 +535,7 @@ CREATE TABLE IF NOT EXISTS `student_class` (
   PRIMARY KEY (`id`),
   KEY `student_class_student_id_foreign` (`student_id`),
   KEY `student_class_class_id_foreign` (`class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
 
 --
 -- Dumping data untuk tabel `student_class`
@@ -379,8 +544,10 @@ CREATE TABLE IF NOT EXISTS `student_class` (
 INSERT INTO `student_class` (`id`, `student_id`, `class_id`, `created_at`, `updated_at`) VALUES
 (3, 1, 1, NULL, NULL),
 (4, 1, 2, NULL, NULL),
-(6, 3, 2, NULL, NULL),
-(7, 3, 1, NULL, NULL);
+(6, 1, 4, NULL, NULL),
+(7, 1, 5, NULL, NULL),
+(8, 1, 6, NULL, NULL),
+(9, 1, 7, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -396,14 +563,15 @@ CREATE TABLE IF NOT EXISTS `teachers` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `teachers_registration_number_unique` (`registration_number`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=3 ;
 
 --
 -- Dumping data untuk tabel `teachers`
 --
 
 INSERT INTO `teachers` (`id`, `registration_number`, `name`, `created_at`, `updated_at`) VALUES
-(1, 123, 'Budi', NULL, NULL);
+(1, 123, 'Budi', NULL, NULL),
+(2, 123123, 'Santi', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -434,7 +602,7 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `student_id`, `teacher_id`, `parent_id`, `username`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 1, NULL, NULL, 'william', '$2y$10$.3EOjjko8Ce4p9GOB87mBeXyqwSjAaPEyqp0SR2K.TwjtlHanmRWi', '68r9UyKxwdUJnQBoaj1BlQTTAvsZUvZdBqEpzk7ItmkDRbCuCB69NPpksdXC', NULL, '2017-03-28 11:37:41'),
-(2, NULL, 1, NULL, 'budi', '$2y$10$AERnWhT2sYMSMp0VaNNDuOT8qqxPQHuGRGUlLOqrn32MF2jlORkXG', '5szoaPrCDTVvOSzOnPTM6AKO60G9Zq8f7RIAxqQFtN9b5OEUK17Sk6OI7aok', NULL, '2017-03-28 11:17:49'),
+(2, NULL, 1, NULL, 'budi', '$2y$10$AERnWhT2sYMSMp0VaNNDuOT8qqxPQHuGRGUlLOqrn32MF2jlORkXG', 'ZZRQEpckEEQFFnBZTaDDTwjnwDYvyrVdDnDVy6jnAEYLWuHXrTKvVXaey1eO', NULL, '2017-03-29 09:13:59'),
 (3, NULL, NULL, 1, 'angela', '$2y$10$mmS0cBG25YsKYOk5/YWUSuwjZLPQfp3nsYXVcixt0gCyv8mvhZmPu', '0ZKrMzLQBWgbkotB3JRGy4ifoIEwEUjaOXzr0g3cOAfOf9WvdC4eaLihIBw0', NULL, '2017-03-28 11:02:59');
 
 --

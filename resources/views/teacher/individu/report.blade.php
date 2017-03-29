@@ -14,7 +14,7 @@
 
 @section('right-column')
 
-        <!-- Fields semester -->
+<!-- Fields semester -->
 <div id="semester">
     <div class="ui small form">
         <div class="field">
@@ -29,11 +29,12 @@
                 @endforeach
             </select>
         </div>
+        <input value="{{ $student->id }}" id="student-id" hidden>
         <div class="row">
             @if($blank == 1)
-                <button class="ui horizontal animated teal large fluid button show-report-blank" tabindex="0">
+                <button class="ui horizontal animated teal large fluid button show-individu-report-blank" tabindex="0">
             @elseif($blank == 0)
-                <button class="ui horizontal animated teal large fluid button show-report" tabindex="0">
+                <button class="ui horizontal animated teal large fluid button show-individu-report" tabindex="0">
                     @endif
                     <div class="visible content">Search</div>
                     <div class="hidden content">
