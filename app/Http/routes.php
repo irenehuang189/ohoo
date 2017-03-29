@@ -98,8 +98,10 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/individu', 'Teacher\IndividualController@showStudentList');
 	Route::get('/teacher/individu/detail/{id}', 'Teacher\IndividualController@showStudent');
 	Route::get('/teacher/individu/report/{id}', 'Teacher\IndividualController@showReport');
+	Route::get('/teacher/individu/report/{id}/{classId}', 'Teacher\IndividualController@showReportByClassId');
 	Route::get('/teacher/individu/report-bayangan/{id}', 'Teacher\IndividualController@showReportBayangan');
 	Route::get('/teacher/individu/detailed-report/{id}', 'Teacher\IndividualController@showDetailedReport');
+	Route::get('/teacher/individu/detailed-report/{id}/{classId}/{courseId}', 'Teacher\IndividualController@showDetailedReportByCourseId');
 	/* Individu chart */
 	Route::get('/teacher/individu/getMeanStatistic/{id}', 'Teacher\IndividualController@getMeanStatistic');
 	Route::get('/teacher/individu/getRankStatistic/{id}', 'Teacher\IndividualController@getRankStatistic');
