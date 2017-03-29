@@ -84,9 +84,7 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/score/assignment/delete/{id}', 'Teacher\ScoreController@deleteAssignment');
 	Route::get('/teacher/score/exam/detail/{id}', 'Teacher\ScoreController@showExamDetail');
 	Route::get('/teacher/score/assignment/detail/{id}', 'Teacher\ScoreController@showAssignmentDetail');
-	Route::get('/teacher/score/semester', function(){
-		return view('teacher/semester-score');
-	});
+	Route::get('/teacher/score/semester', 'Teacher\ScoreController@showSemesterScores');
 	Route::get('/teacher/score/semester/add', function() {
 	  return view('teacher/semester-score/add');
 	});
