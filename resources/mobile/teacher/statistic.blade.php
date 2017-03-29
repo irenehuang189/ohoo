@@ -12,10 +12,11 @@
 
 @section('content')
 <div class="ui grid" id="context"> 
-  <div class="three wide column"></div>
-  <div class="twelve wide column">
+  <div class="column">
     <!-- Page Content -->
-    <h2 class="ui header">Statistik Nilai</h2>
+    <h3 class="ui teal header center aligned">
+      <i class="line chart icon"></i>Statistik Nilai
+    </h3>
 
     <!-- Statistics -->
     <div class="ui one column grid">
@@ -39,6 +40,7 @@
                     @endif
                   @endforeach
                 </select>
+                <br/>
                 <label>Mata Pelajaran</label>
                 <select class="ui dropdown" id="choose-mapel-history">
                   @foreach($courses as $course)

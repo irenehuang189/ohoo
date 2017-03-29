@@ -54,7 +54,9 @@
 @section('left-column')
 
 @if($blank == 1)
-  Anda belum memilih kelas dan mata pelajaran.
+  <div class="ui teal segment">
+    Anda belum memilih kelas dan mata pelajaran.
+  </div>
 @elseif($blank == 0)
   <!-- Exam score table -->
   <h3 class="ui header">Nilai Ujian</h3>

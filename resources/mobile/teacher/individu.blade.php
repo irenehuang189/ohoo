@@ -10,6 +10,10 @@
   {{ $teacher->registration_number }}
 @endsection
 
+@section('header-left-column')
+  <i class="calculator icon"></i>Daftar Siswa
+@endsection
+
 @section('right-column')
 <div class="ui small form">
   <div class="field">
@@ -20,10 +24,9 @@
 @endsection
 
 @section('left-column')
-<h2 class="ui dividing header">
-  Daftar Siswa
-  <div class="sub header">Kelas X-1</div>
-</h2>
+<h3 class="ui dividing header">
+  Kelas X-1
+</h3>
 
 <!-- Tabel Daftar Siswa -->
 <div class="ui two column centered grid">

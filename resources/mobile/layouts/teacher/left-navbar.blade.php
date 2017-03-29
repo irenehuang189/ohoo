@@ -1,45 +1,42 @@
-<!-- Navbar -->
-<div class="ui left fixed inverted vertical accordion menu">
-  <div class="item">
-    <img class="ui image" src="{{ asset('images/logo.png') }}">
-    <div class="ui hidden divider"></div>
-    <div class="ui center aligned one column grid">
-      <div class="column">
-        <h5>@yield('user-name')</h5>
-        @yield('user-tid')
-      </div>
-    </div>
-    <div class="ui hidden divider"></div>
+<div class="ui top attached borderless inverted menu grid" id="mobile-menu">
+  <a class="header item" href="{{ url('/') }}">
+    <img src="{{ asset('images/logo.png') }}" />
+  </a>
+  <div class="right menu">
+    <!-- Manajemen nilai -->
+    <a class="item {{ Request::is('teacher/score') ? 'active' : '' }}" href="{{ url('teacher/score') }}">
+      <i class="student icon"></i> 
+    </a>
+
+    <!-- Manajemen nilai akhir -->
+    <a
+      class="item {{ Request::is('teacher/score/semester') ? 'active' : '' }}" 
+      href="{{ url('teacher/score/semester') }}">
+      <i class="calculator icon"></i>
+    </a>
+
+    <!-- Performansi Individu -->
+    <a
+      class="item {{ Request::is('teacher/individu') ? 'active' : '' }}" 
+      href="{{ url('teacher/individu') }}">
+      <i class="child icon"></i> 
+    </a>
+
+    <!-- Dashboard -->
+    <a
+      class="item {{ Request::is('*statistic*') ? 'active' : '' }}" 
+      href="{{ url('teacher/statistic') }}">
+      <i class="line chart icon"></i> 
+    </a>
+
+    <a class="item" id="user-mobile">
+      <i class="user icon"></i>
+    </a>
   </div>
-  <a class="teal item" href="{{ url('teacher/score') }}">
-    <span>
-      <i class="student icon"></i>Manajemen Nilai
-    </span>
-  </a>
-  <a class="teal item" href="{{ url('teacher/score/semester') }}">
-    <span>
-      <i class="calculator icon"></i>Manajemen Nilai Akhir
-    </span>
-  </a>
-  <a class="teal item" href="{{ url('teacher/individu') }}">
-    <span>
-      <i class="child icon"></i>Performansi Individu
-    </span>
-  </a>
-  <a class="teal item" href="{{ url('teacher/statistic') }}">
-    <span>
-      <i class="line chart icon"></i>Dashboard
-    </span>
-  </a>
-  <a class="teal item" href="{{ url('password/edit') }}">
-    <span>
-      <i class="privacy icon"></i>Ubah Password
-    </span>
-  </a>
-  <a class="teal item" href="{{ url('/logout') }}">
-    <span>
-      <i class="sign out icon"></i>Keluar
-    </span>
-  </a>
 </div>
-<!-- /navbar -->
+
+<!-- User Mobile -->
+<div class="ui bottom attached two item menu grid" id="user-menu">
+  <a class="item" href="{{ url('password/edit') }}">Ubah Password</a>
+  <a class="item" href="{{ url('/logout') }}">Keluar</a>
+</div>
