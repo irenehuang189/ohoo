@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Mar 2017 pada 18.51
+-- Generation Time: 29 Mar 2017 pada 19.01
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -372,7 +372,7 @@ CREATE TABLE IF NOT EXISTS `exams` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `exams_course_id_foreign` (`course_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data untuk tabel `exams`
@@ -380,7 +380,14 @@ CREATE TABLE IF NOT EXISTS `exams` (
 
 INSERT INTO `exams` (`id`, `course_id`, `name`, `materi`, `tanggal`, `created_at`, `updated_at`) VALUES
 (2, 1, 'Ujian Tengah Semester', 'Bab 1 - Bab 4', '2017-03-24', NULL, NULL),
-(3, 1, 'Ujian Akhir Semester', 'Seluruh materi', '2017-03-30', NULL, NULL);
+(3, 1, 'Ujian Akhir Semester', 'Seluruh materi', '2017-03-30', NULL, NULL),
+(4, 60, 'Ujian Tengah Semester', 'Bab 1 - Bab 5', '2017-03-31', NULL, NULL),
+(5, 60, 'Ujian Akhir Semester', 'Bab 6 - Bab 10', '2017-04-28', NULL, NULL),
+(6, 60, 'Ujian 1', 'Bab 1 - 2', '2017-02-13', NULL, NULL),
+(7, 60, 'Ujian 2', 'Bab 3 - Bab 4', '2017-03-09', NULL, NULL),
+(8, 60, 'Ujian 3', 'Bab 5', '2017-04-02', NULL, NULL),
+(9, 60, 'Ujian 5', 'Bab 6 - 7', '2017-04-03', NULL, NULL),
+(10, 60, 'Ujian 6', 'Bab 8 - 10', '2017-04-12', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -398,7 +405,7 @@ CREATE TABLE IF NOT EXISTS `exam_score` (
   PRIMARY KEY (`id`),
   KEY `exam_score_exam_id_foreign` (`exam_id`),
   KEY `exam_score_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data untuk tabel `exam_score`
@@ -407,7 +414,14 @@ CREATE TABLE IF NOT EXISTS `exam_score` (
 INSERT INTO `exam_score` (`id`, `exam_id`, `student_id`, `score`, `created_at`, `updated_at`) VALUES
 (1, 2, 1, '80.00', NULL, NULL),
 (2, 3, 1, '40.00', NULL, NULL),
-(3, 2, 3, '40.00', NULL, NULL);
+(3, 2, 3, '40.00', NULL, NULL),
+(4, 4, 1, '78.00', NULL, NULL),
+(5, 5, 1, '55.00', NULL, NULL),
+(6, 6, 1, '80.00', NULL, NULL),
+(7, 7, 1, '72.00', NULL, NULL),
+(8, 8, 1, '82.00', NULL, NULL),
+(9, 9, 1, '68.00', NULL, NULL),
+(10, 10, 1, '73.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
