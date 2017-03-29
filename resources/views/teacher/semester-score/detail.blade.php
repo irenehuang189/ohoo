@@ -1,13 +1,13 @@
 @extends('layouts.teacher.two-column-content')
 
-@section('title', 'Tambah Nilai Kelas')
+@section('title', 'Daftar Nilai Akhir')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->number_registration }}
 @endsection
 
 @section('right-column')
@@ -32,8 +32,8 @@
 
 @section('left-column')
 <h2 class="ui header">
-  Daftar Nilai Semester Kelas X-1
-  <div class="sub header">Mata Pelajaran Matematika</div>
+  Daftar Nilai Semester Kelas {{ $course->kelas->name }}
+  <div class="sub header">Mata Pelajaran {{ $course->name }}</div>
 </h2>
 <div class="ui divider"></div>
 
@@ -41,11 +41,11 @@
 <div class="ui grid">
   <div class="row">
     <div class="four wide column">Tahun Ajaran</div>
-    <div class="twelve wide column">: 2016/2017</div>
+    <div class="twelve wide column">: {{ $course->kelas->year }}/{{ $course->kelas->year + 1 }}</div>
   </div>
   <div class="row">
     <div class="four wide column">SKBM</div>
-    <div class="twelve wide column">: 65</div>
+    <div class="twelve wide column">: {{ $course->skbm }}</div>
   </div>
 </div>
 <!-- /Rincian Penilaian -->

@@ -84,13 +84,11 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('/teacher/score/assignment/delete/{id}', 'Teacher\ScoreController@deleteAssignment');
 	Route::get('/teacher/score/exam/detail/{id}', 'Teacher\ScoreController@showExamDetail');
 	Route::get('/teacher/score/assignment/detail/{id}', 'Teacher\ScoreController@showAssignmentDetail');
-	Route::get('/teacher/score/semester', 'Teacher\ScoreController@showSemesterScores');
+	Route::get('/teacher/score/final', 'Teacher\ScoreController@showFinalScores');
 	Route::get('/teacher/score/semester/add', function() {
 	  return view('teacher/semester-score/add');
 	});
-	Route::get('/teacher/score/semester/detail', function() {
-	  return view('teacher/semester-score/detail');
-	});
+	Route::get('/teacher/score/semester/detail/{courseId}', 'Teacher\ScoreController@showCourseDetail');
 
 	/* Individu */
 	Route::get('/teacher/individu', 'Teacher\IndividualController@showStudentList');

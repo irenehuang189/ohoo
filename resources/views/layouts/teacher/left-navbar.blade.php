@@ -18,7 +18,7 @@
       <i class="student icon"></i>Manajemen Nilai
     </span>
   </a>
-  <a class="teal item" href="{{ url('teacher/score/semester') }}">
+  <a class="teal item" href="{{ url('teacher/score/final') }}">
     <span>
       <i class="calculator icon"></i>Manajemen Nilai Akhir
     </span>

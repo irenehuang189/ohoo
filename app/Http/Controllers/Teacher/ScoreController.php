@@ -40,7 +40,7 @@ class ScoreController extends Controller
     	return view('teacher/score', compact('assignments', 'classId', 'classes', 'courseId', 'courses', 'teacher', 'exams'));
     }
 
-    public function showSemesterScores(Request $request) {
+    public function showFinalScores(Request $request) {
         $classId = $request->query('class');
         $courseId = $request->query('course');
 
@@ -77,6 +77,12 @@ class ScoreController extends Controller
         $teacher = $this->teacher;
         $students = $task->students;
         return view('teacher/score/detail', compact('students', 'task', 'taskType', 'teacher'));
+    }
+
+    public function showCourseDetail($courseId) {
+        $teacher = $this->teacher;
+        $course = Course::find($courseId);
+        return view('teacher/semester-score/detail', compact('course', 'teacher'));
     }
 
     public function showAddExamForm() {

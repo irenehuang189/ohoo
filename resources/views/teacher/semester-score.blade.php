@@ -100,7 +100,7 @@
       <td class="center aligned">{{ $course->students->avg('pivot.nilai_praktik') }}</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/semester/detail/' . $course->id) }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
       </td>
     </tr>
@@ -145,7 +145,7 @@
       <td class="center aligned">{{ $course->studentsBayangan->avg('pivot.nilai_praktik') }}</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/semester/detail/' . $course->id) }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
       </td>
     </tr>
