@@ -3,27 +3,53 @@
 @section('title', 'Nilai Semester Kelas')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
 <div class="ui small form">
   <div class="field">
     <label>Kelas</label>
-    <select class="ui dropdown" id="choose-class">
+    <select class="ui dropdown" id="choose-class-teacher">
+    @if (!isset($classId))
       <option value="-1" selected>Semua</option>
-      <option value="">Kelas XI-IPA2</option>
+      @foreach ($classes as $class)
+        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @endforeach
+    @else
+      <option value="-1">Semua</option>
+      @foreach ($classes as $class)
+      @if ($class->id == $classId)
+        <option value="{{ $class->id }}" selected>{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @else
+        <option value="{{ $class->id }}">{{ $class->name }} - Semester {{ $class->semester }} - {{ $class->year }}</option>
+      @endif
+      @endforeach
+    @endif
     </select>
   </div>
   <div class="field">
     <label>Mata Pelajaran</label>
-    <select class="ui dropdown" id="choose-course">
+    <select class="ui dropdown" id="choose-course-teacher">
+    @if (!isset($courseId))
       <option value="-1" selected>Semua</option>
-      <option value="">Matematika</option>
+      @foreach ($courseChoices as $courseChoice)
+        <option value="{{ $courseChoice->id }}">{{ $courseChoice->name }}</option>
+      @endforeach
+    @else
+      <option value="-1">Semua</option>
+      @foreach ($courseChoices as $courseChoice)
+      @if ($courseChoice->id == $courseId)
+        <option value="{{ $courseChoice->id }}" selected>{{ $courseChoice->name }}</option>
+      @else
+        <option value="{{ $courseChoice->id }}">{{ $courseChoice->name }}</option>
+      @endif
+      @endforeach
+    @endif
     </select>
   </div>
   <div class="row">
@@ -65,18 +91,20 @@
   </tr>
   </thead>
   <tbody>
+  @foreach ($courses as $course)
     <tr>
-      <td>2016/2017</td>
-      <td>XI-IPA2</td>
-      <td>Matematika</td>
-      <td class="center aligned">73</td>
-      <td class="center aligned">80</td>
+      <td>{{ $course->kelas->year }}/{{ $course->kelas->year + 1 }}</td>
+      <td>{{ $course->kelas->name }}</td>
+      <td>{{ $course->name }}</td>
+      <td class="center aligned">{{ $course->students->avg('pivot.nilai') }}</td>
+      <td class="center aligned">{{ $course->students->avg('pivot.nilai_praktik') }}</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
       </td>
     </tr>
+  @endforeach
   </tbody>
 </table>
 <!-- /Semester score table -->
@@ -108,18 +136,20 @@
   </tr>
   </thead>
   <tbody>
+  @foreach ($courses as $course)
     <tr>
-      <td>2016/2017</td>
-      <td>XI-IPA2</td>
-      <td>Matematika</td>
-      <td class="center aligned">73</td>
-      <td class="center aligned">80</td>
+      <td>{{ $course->kelas->year }}/{{ $course->kelas->year + 1 }}</td>
+      <td>{{ $course->kelas->name }}</td>
+      <td>{{ $course->name }}</td>
+      <td class="center aligned">{{ $course->studentsBayangan->avg('pivot.nilai') }}</td>
+      <td class="center aligned">{{ $course->studentsBayangan->avg('pivot.nilai_praktik') }}</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
       </td>
     </tr>
+  @endforeach
   </tbody>
 </table>
 <!-- /Midterm score table -->

@@ -152,6 +152,20 @@ $(document).ready(function(){
     window.location.href = '/student/detailed-report/' + classId + '/' + courseId;
   });
 
+  studentId = $("#student-id").val();
+  $(".show-individual-detailed-report-blank").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/detailed-report/" + studentId + '/' + classId + '/' + courseId;
+  });
+  $(".show-individual-detailed-report").click(function(){
+    var classId = $("#choose-class :selected").val();
+    var courseId = $("#choose-course :selected").val();
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    window.location.href = baseUrl + "/teacher/individu/detailed-report/" + studentId + '/' + classId + '/' + courseId;
+  });
+
   $(".show-detailed-report-blank").click(function(){
     var classId = $("#choose-class :selected").val();
     var courseId = $("#choose-course :selected").val();
