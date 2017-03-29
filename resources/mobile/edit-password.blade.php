@@ -11,15 +11,17 @@
 @endsection
 
 @section('content')
-<div class="ui grid item">
-  <div class="three wide column"></div>
-  <div class="twelve wide column">
+<div class="ui one column grid item">
+  <div class="column">
     <!-- Form -->
-    <div class="ui center aligned two column grid">
+    <div class="ui center aligned">
       <div class="left aligned column">
         <form class="ui large form">
           <div class="ui segment">
-            <h2 class="ui dividing header">Ubah Password</h2>
+            <h3 class="ui center aligned teal header">
+              <i class="key icon"></i>Ubah Password
+            </h3>
+            <div class="ui divider"></div>
             <div class="field">
               <label>Password Saat Ini</label>
               <input class="popup" type="password" placeholder="Password Lama" data-content="Silahkan masukan password Anda saat ini.">

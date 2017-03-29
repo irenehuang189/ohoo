@@ -10,6 +10,10 @@
   {{ $teacher->registration_number }}
 @endsection
 
+@section('header-left-column')
+  <i class="student icon"></i>Daftar Nilai
+@endsection
+
 @section('right-column')
 <div class="ui small form">
   <div class="field">
@@ -64,18 +68,8 @@
 @endsection
 
 @section('left-column')
-<h2 class="ui dividing header">Daftar Nilai</h2>
 <!-- Exam score table -->
-<div class="ui grid">
-  <div class="twelve wide column">
-    <div class="ui teal big ribbon label">Nilai Ujian</div>
-  </div>
-  <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/exam/add') }}">
-      <i class="plus icon"></i>Tambah
-    </a>
-  </div>
-</div>
+<div class="ui teal big ribbon label">Nilai Ujian</div>
 <table class="ui structured selectable celled table" id="exam-score">
   <thead class="center aligned">
   <tr>
@@ -96,16 +90,12 @@
       <td>{{ $exam->name }}</td>
       <td>{{ $exam->materi }}</td>
       <td>{{ date('d-m-Y', strtotime($exam->tanggal)) }}</td>
-      <td class="center aligned">
+      <td>
         {{ $exam->students->avg('pivot.score') }}
       </td>
       <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/exam/detail/' . $exam->id) }}" class="ui blue basic button"><i class="eye icon"></i></a>
-        @if ($exam->course->kelas->is_current)
-          <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
-          <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
-        @endif
         </div>
       </td>
     </tr>
@@ -115,16 +105,7 @@
 <!-- /Exam score table -->
 <div class="ui hidden divider"></div>
 <!-- Assignment score table -->
-<div class="ui grid">
-  <div class="twelve wide column">
-    <div class="ui teal big ribbon label">Nilai Tugas</div>
-  </div>
-  <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/assignment/add') }}">
-      <i class="plus icon"></i>Tambah
-    </a>
-  </div>
-</div>
+<div class="ui teal big ribbon label">Nilai Tugas</div>
 <table class="ui structured selectable celled table" id="assignment-score">
   <thead class="center aligned">
   <tr>
@@ -145,12 +126,10 @@
       <td>{{ $assignment->name }}</td>
       <td>{{ $assignment->materi }}</td>
       <td>{{ date('d-m-Y', strtotime($assignment->tanggal)) }}</td>
-      <td class="center aligned">{{ $assignment->students->avg('pivot.score') }}</td>
+      <td>{{ $assignment->students->avg('pivot.score') }}</td>
       <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/assignment/detail/' . $assignment->id) }}" class="ui blue basic button"><i class="eye icon"></i></a>
-          <a href="{{ url('teacher/score/add') }}" class="ui yellow basic button"><i class="pencil icon"></i></a>
-          <button class="ui red basic button" id="delete"><i class="trash icon"></i></button>
         </div>
       </td>
     </tr>

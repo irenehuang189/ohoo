@@ -1,22 +1,17 @@
 @extends('layouts.master')
 
 @section('content')
-<div class="ui grid" id="context"> 
-  <div class="three wide column"></div>
-  <div class="nine wide column">
-    <!-- Filter -->
-    <div class="right ui rail container">
-      <div class="ui sticky">
-        @yield('right-column')
-      </div>
-    </div>
-    <!-- /Filter -->
-   
-    <!-- Context -->
-    <div class="ui segment">
-      @yield('left-column')
-    </div>
-    <!-- /Context -->
+<div class="ui segments">
+  <div class="ui segment">
+    <h3 class="ui teal header center aligned">
+      @yield('header-left-column')
+    </h3>
   </div>
+  <div class="ui segment">
+    @yield('right-column')
+  </div>
+</div>
+<div class="ui segment">
+  @yield('left-column')
 </div>
 @endsection

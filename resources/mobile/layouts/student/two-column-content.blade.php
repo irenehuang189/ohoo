@@ -2,21 +2,15 @@
 
 @section('content')
 <div class="ui segments">
-  <div class="ui teal inverted segment">
-    <h2 class="ui header center aligned">
+  <div class="ui segment">
+    <h3 class="ui teal header center aligned">
       <i class="book icon"></i>@yield('header-left-column')
-    </h2>
+    </h3>
   </div>
   <div class="ui segment">
     @yield('right-column')
   </div>
 </div>
-  <!-- <div class="ui teal segment"> -->
-    @yield('left-column')
-  <!-- </div> -->
-  
-
-<div class="ui "></div>
-
+@yield('left-column')
 
 @endsection

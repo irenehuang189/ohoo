@@ -11,6 +11,6 @@ class Exam extends Model
 	}
 
 	public function students() {
-		return $this->belongsToMany('App\Student', 'exam_score')->withPivot('score');
+		return $this->belongsToMany('App\Student', 'exam_score')->withPivot('id', 'score');
 	}
 }

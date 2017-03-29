@@ -11,7 +11,9 @@
   <div class="one wide column"></div>
   <div class="fourteen wide column">
   <!-- Page Content -->
-    <h2 class="ui header">Statistik Nilai</h2>
+    <h3 class="ui teal header center aligned">
+      <i class="line chart icon"></i>Statistik Nilai
+    </h3>
 
     <!-- Overview -->
     <div class="ui three column center aligned stackable grid">

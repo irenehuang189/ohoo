@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  @if(Request::is('*student*'))
+  @if(Auth::user()->parent || Auth::user()->student)
     @include('layouts.student.top-navbar')
   @else
     @include('layouts.teacher.left-navbar')

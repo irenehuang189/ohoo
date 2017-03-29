@@ -10,6 +10,10 @@
   187290 1271 9276
 @endsection
 
+@section('header-left-column')
+  <i class="calculator icon"></i>Daftar Nilai Akhir
+@endsection
+
 @section('right-column')
 <div class="ui small form">
   <div class="field">
@@ -38,18 +42,8 @@
 @endsection
 
 @section('left-column')
-<h2 class="ui dividing header">Daftar Nilai Akhir</h2>
 <!-- Semester score table -->
-<div class="ui grid">
-  <div class="twelve wide column">
-    <div class="ui teal big ribbon label">Nilai Semester</div>
-  </div>
-  <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/semester/add') }}">
-      <i class="plus icon"></i>Tambah
-    </a>
-  </div>
-</div>
+<div class="ui teal big ribbon label">Nilai Semester</div>
 <table class="ui structured selectable celled table" id="semester-score">
   <thead class="center aligned">
   <tr>
@@ -69,9 +63,9 @@
       <td>2016/2017</td>
       <td>XI-IPA2</td>
       <td>Matematika</td>
-      <td class="center aligned">73</td>
-      <td class="center aligned">80</td>
-      <td class="center aligned">
+      <td>73</td>
+      <td>80</td>
+      <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
@@ -83,16 +77,7 @@
 
 <div class="ui hidden divider"></div>
 <!-- Midterm score table -->
-<div class="ui grid">
-  <div class="twelve wide column">
-    <div class="ui teal big ribbon label">Nilai Bayangan</div>
-  </div>
-  <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/semester/add') }}">
-      <i class="plus icon"></i>Tambah
-    </a>
-  </div>
-</div>
+<div class="ui teal big ribbon label">Nilai Bayangan</div>
 <table class="ui structured selectable celled table" id="midterm-score">
   <thead class="center aligned">
   <tr>
@@ -112,9 +97,9 @@
       <td>2016/2017</td>
       <td>XI-IPA2</td>
       <td>Matematika</td>
-      <td class="center aligned">73</td>
-      <td class="center aligned">80</td>
-      <td class="center aligned">
+      <td>73</td>
+      <td>80</td>
+      <td>
         <div class="ui icon mini buttons">
           <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>

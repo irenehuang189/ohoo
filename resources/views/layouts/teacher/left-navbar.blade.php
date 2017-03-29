@@ -1,7 +1,9 @@
 <!-- Navbar -->
 <div class="ui left fixed inverted vertical accordion menu">
   <div class="item">
-    <img class="ui image" src="{{ asset('images/logo.png') }}">
+    <a class="header" href="{{ url('/')}}">
+      <img class="ui image" src="{{ asset('images/logo.png') }}">
+    </a>
     <div class="ui hidden divider"></div>
     <div class="ui center aligned one column grid">
       <div class="column">

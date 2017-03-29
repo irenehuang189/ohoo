@@ -44,7 +44,7 @@
     Belum ada nilai
   </div>
 @else
-<div class="ui styled accordion segment">
+<div class="ui teal styled accordion segment">
   <div class="title active">
     Nilai Akademik
   </div>
