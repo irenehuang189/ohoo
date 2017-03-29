@@ -26,6 +26,29 @@ $(document).ready(function(){
     $('.ui.basic.modal').modal({blurring: true}).modal('show');
   });
 
+  // Before delete modal
+  // Score management delete from teacher/score
+  $('.exam-delete').click(function(){
+    var examId = $(this).attr('id');
+    $('.ui.basic.modal').modal({blurring: true}).modal('show');
+    $('#delete-task').click(function(){
+      $.get('/teacher/score/exam/delete/' + examId, function(data, status){
+        var baseUrl = window.location.protocol + "//" + window.location.host;
+        window.location.href = baseUrl + '/' + data;
+      });
+    });
+  });
+  $('.assignment-delete').click(function(){
+    var assignmentId = $(this).attr('id');
+    $('.ui.basic.modal').modal({blurring: true}).modal('show');
+    $('#delete-task').click(function(){
+      $.get('/teacher/score/assignment/delete/' + assignmentId, function(data, status){
+        var baseUrl = window.location.protocol + "//" + window.location.host;
+        window.location.href = baseUrl + '/' + data;
+      });
+    });
+  });
+
   // Sort table
   $('i.ascending.icon').click(function(){
     var id = $(this).attr('id');
@@ -389,4 +412,5 @@ function sortTable(n, tableId) {
       }
     }
   }
+
 }

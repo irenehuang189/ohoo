@@ -224,13 +224,13 @@ class ScoreController extends Controller
     public function deleteExam($id) {
         $exam = Exam::find($id);
         $exam->delete();
-        return url('teacher/score');
+        return 'teacher/score';
     }
 
     public function deleteAssignment($id) {
         $assignment = Assignment::find($id);
         $assignment->delete();
-        return url('teacher/score');
+        return 'teacher/score';
     }
 
     private function getExamsByTeacher() {
