@@ -76,6 +76,10 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::post('/teacher/score/exam/add', 'Teacher\ScoreController@addExam');
 	Route::get('/teacher/score/assignment/add', 'Teacher\ScoreController@showAddAssignmentForm');
 	Route::post('/teacher/score/assignment/add', 'Teacher\ScoreController@addAssignment');
+	Route::get('/teacher/score/exam/edit/{id}', 'Teacher\ScoreController@showEditExamForm');
+	Route::post('/teacher/score/exam/edit', 'Teacher\ScoreController@editExam');
+	Route::get('/teacher/score/assignment/edit/{id}', 'Teacher\ScoreController@showEditAssignmentForm');
+	Route::post('/teacher/score/assignment/edit', 'Teacher\ScoreController@editAssignment');
 	Route::get('/teacher/score/exam/detail/{id}', 'Teacher\ScoreController@showExamDetail');
 	Route::get('/teacher/score/assignment/detail/{id}', 'Teacher\ScoreController@showAssignmentDetail');
 	Route::get('/teacher/score/semester', function(){

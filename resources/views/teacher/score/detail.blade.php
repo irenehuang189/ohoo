@@ -39,7 +39,7 @@
     </h2>
   </div>
   <div class="six wide right aligned column">
-    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/add') }}">
+    <a class="ui labeled icon compact yellow button" href="{{ url('teacher/score/' . $taskType . '/edit/' . $task->id) }}">
       <i class="pencil icon"></i>Ubah
     </a>
     <a class="ui labeled icon compact red button" id="delete">

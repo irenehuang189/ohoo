@@ -199,12 +199,13 @@ $(document).ready(function(){
       });
     }
   });
-  $("#add-task").click(function() {
+  $("#add-task-finish").click(function() {
     var classId = $("#choose-class-add").val();
     var courseId = $("#choose-course-add").val();
     var taskName = $("#task-name").val();
     var taskMatter = $("#task-matter").val();
     var taskDate = $("#task-date").val();
+    var taskStatus = "finish";
     var studentIds = [];
     var studentScores = [];
     $("#student-list tr").each(function () {
@@ -217,11 +218,120 @@ $(document).ready(function(){
     object.taskName = taskName;
     object.taskMatter = taskMatter;
     object.taskDate = taskDate;
+    object.taskStatus = taskStatus;
     object.studentIds = studentIds;
     object.studentScores = studentScores;
     var data = JSON.stringify(object);
     var baseUrl = window.location.protocol + "//" + window.location.host;
     var url = baseUrl + window.location.pathname;
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function (data) {
+        window.location.href = data;
+      }
+    });
+  });
+  $("#add-task-continue").click(function() {
+    var classId = $("#choose-class-add").val();
+    var courseId = $("#choose-course-add").val();
+    var taskName = $("#task-name").val();
+    var taskMatter = $("#task-matter").val();
+    var taskDate = $("#task-date").val();
+    var taskStatus = "continue";
+    var studentIds = [];
+    var studentScores = [];
+    $("#student-list tr").each(function () {
+      studentIds.push($(this).attr("id").split("-")[1]);
+      studentScores.push($(this).find("input").val());
+    });
+    var object = new Object();
+    object.classId = classId;
+    object.courseId = courseId;
+    object.taskName = taskName;
+    object.taskMatter = taskMatter;
+    object.taskDate = taskDate;
+    object.taskStatus = taskStatus;
+    object.studentIds = studentIds;
+    object.studentScores = studentScores;
+    var data = JSON.stringify(object);
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    var url = baseUrl + window.location.pathname;
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function (data) {
+        window.location.href = data;
+      }
+    });
+  });
+  $("#edit-task-finish").click(function() {
+    var courseId = $("#choose-course-add").val();
+    var taskId = window.location.pathname.split('/').pop();
+    var taskName = $("#task-name").val();
+    var taskMatter = $("#task-matter").val();
+    var taskDate = $("#task-date").val();
+    var taskStatus = "finish";
+    var taskScoreIds = [];
+    var studentScores = [];
+    $("#student-list tr").each(function () {
+      taskScoreIds.push($(this).attr("id").split("-")[1]);
+      studentScores.push($(this).find("input").val());
+    });
+    var object = new Object();
+    object.courseId = courseId;
+    object.taskId = taskId;
+    object.taskName = taskName;
+    object.taskMatter = taskMatter;
+    object.taskDate = taskDate;
+    object.taskStatus = taskStatus;
+    object.taskScoreIds = taskScoreIds;
+    object.studentScores = studentScores;
+    var data = JSON.stringify(object);
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    var pathName = window.location.pathname.split('/');
+    pathName.pop();
+    pathName = pathName.join('/');
+    var url = baseUrl + pathName;
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function (data) {
+        window.location.href = data;
+      }
+    });
+  });
+  $("#edit-task-continue").click(function() {
+    var courseId = $("#choose-course-add").val();
+    var taskId = window.location.pathname.split('/').pop();
+    var taskName = $("#task-name").val();
+    var taskMatter = $("#task-matter").val();
+    var taskDate = $("#task-date").val();
+    var taskStatus = "continue";
+    var taskScoreIds = [];
+    var studentScores = [];
+    $("#student-list tr").each(function () {
+      taskScoreIds.push($(this).attr("id").split("-")[1]);
+      studentScores.push($(this).find("input").val());
+    });
+    var object = new Object();
+    object.courseId = courseId;
+    object.taskId = taskId;
+    object.taskName = taskName;
+    object.taskMatter = taskMatter;
+    object.taskDate = taskDate;
+    object.taskStatus = taskStatus;
+    object.taskScoreIds = taskScoreIds;
+    object.studentScores = studentScores;
+    var data = JSON.stringify(object);
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    var pathName = window.location.pathname.split('/');
+    pathName.pop();
+    pathName = pathName.join('/');
+    var url = baseUrl + pathName;
     $.ajax({
       type: 'POST',
       url: url,
