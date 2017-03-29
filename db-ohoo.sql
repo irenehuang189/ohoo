@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: 29 Mar 2017 pada 19.01
+-- Generation Time: 29 Mar 2017 pada 19.42
 -- Versi Server: 5.6.16
 -- PHP Version: 5.5.11
 
@@ -97,7 +97,7 @@ CREATE TABLE IF NOT EXISTS `classes` (
   `updated_at` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `classes_teacher_id_foreign` (`teacher_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=11 ;
 
 --
 -- Dumping data untuk tabel `classes`
@@ -109,7 +109,10 @@ INSERT INTO `classes` (`id`, `teacher_id`, `name`, `semester`, `year`, `is_curre
 (4, 1, 'XI IPA', 1, 2015, 0, NULL, NULL),
 (5, 1, 'XI IPA', 2, 2015, 0, NULL, NULL),
 (6, 1, 'XII IPA', 1, 2016, 0, NULL, NULL),
-(7, 1, 'XII IPA', 2, 2016, 1, NULL, NULL);
+(7, 1, 'XII IPA', 2, 2016, 1, NULL, NULL),
+(8, 2, 'XII IPA', 2, 2015, 0, NULL, NULL),
+(9, 1, 'XII IPA', 2, 2014, 0, NULL, NULL),
+(10, 2, 'XII IPA', 2, 2013, 0, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -128,7 +131,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
   PRIMARY KEY (`id`),
   KEY `courses_teacher_id_foreign` (`teacher_id`),
   KEY `courses_class_id_foreign` (`class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=69 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=72 ;
 
 --
 -- Dumping data untuk tabel `courses`
@@ -188,7 +191,10 @@ INSERT INTO `courses` (`id`, `teacher_id`, `class_id`, `name`, `skbm`, `created_
 (65, 1, 7, 'Sejarah', 65, NULL, NULL),
 (66, 1, 7, 'Kewarganegaraan', 65, NULL, NULL),
 (67, 1, 7, 'Bahasa Inggris', 65, NULL, NULL),
-(68, 1, 7, 'Bahasa Indonesia', 65, NULL, NULL);
+(68, 1, 7, 'Bahasa Indonesia', 65, NULL, NULL),
+(69, 2, 8, 'Fisika', 65, NULL, NULL),
+(70, 2, 9, 'Fisika', 70, NULL, NULL),
+(71, 1, 10, 'Fisika', 60, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -208,7 +214,7 @@ CREATE TABLE IF NOT EXISTS `course_score` (
   PRIMARY KEY (`id`),
   KEY `course_score_course_id_foreign` (`course_id`),
   KEY `course_score_student_id_foreign` (`student_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=146 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=152 ;
 
 --
 -- Dumping data untuk tabel `course_score`
@@ -319,7 +325,13 @@ INSERT INTO `course_score` (`id`, `course_id`, `student_id`, `nilai`, `nilai_pra
 (142, 65, 2, 89, 75, 'A', NULL, NULL),
 (143, 66, 2, 90, 75, 'A', NULL, NULL),
 (144, 67, 2, 77, 75, 'A', NULL, NULL),
-(145, 68, 2, 85, 75, 'A', NULL, NULL);
+(145, 68, 2, 85, 75, 'A', NULL, NULL),
+(146, 69, 1, 60, 65, 'C', NULL, NULL),
+(147, 70, 1, 80, 65, 'C', NULL, NULL),
+(148, 71, 1, 75, 65, 'C', NULL, NULL),
+(149, 69, 2, 63, 65, 'C', NULL, NULL),
+(150, 70, 2, 85, 65, 'C', NULL, NULL),
+(151, 71, 2, 70, 65, 'C', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -529,7 +541,7 @@ CREATE TABLE IF NOT EXISTS `students` (
 
 INSERT INTO `students` (`id`, `registration_number`, `name`, `created_at`, `updated_at`) VALUES
 (1, 13513026, 'William', NULL, NULL),
-(2, 11111, 'Waluyo Akbar', NULL, NULL),
+(2, 11111, 'Waluyo', NULL, NULL),
 (3, 13513002, 'Irene', NULL, NULL),
 (4, 123412, 'Toni', NULL, NULL),
 (5, 123712, 'Jessica', NULL, NULL);
@@ -549,7 +561,7 @@ CREATE TABLE IF NOT EXISTS `student_class` (
   PRIMARY KEY (`id`),
   KEY `student_class_student_id_foreign` (`student_id`),
   KEY `student_class_class_id_foreign` (`class_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=10 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=14 ;
 
 --
 -- Dumping data untuk tabel `student_class`
@@ -561,7 +573,11 @@ INSERT INTO `student_class` (`id`, `student_id`, `class_id`, `created_at`, `upda
 (6, 1, 4, NULL, NULL),
 (7, 1, 5, NULL, NULL),
 (8, 1, 6, NULL, NULL),
-(9, 1, 7, NULL, NULL);
+(9, 1, 7, NULL, NULL),
+(10, 2, 7, NULL, NULL),
+(11, 3, 7, NULL, NULL),
+(12, 4, 7, NULL, NULL),
+(13, 5, 7, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -584,7 +600,7 @@ CREATE TABLE IF NOT EXISTS `teachers` (
 --
 
 INSERT INTO `teachers` (`id`, `registration_number`, `name`, `created_at`, `updated_at`) VALUES
-(1, 123, 'Budi', NULL, NULL),
+(1, 9869237643728, 'Budi', NULL, NULL),
 (2, 123123, 'Santi', NULL, NULL);
 
 -- --------------------------------------------------------
@@ -615,8 +631,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 --
 
 INSERT INTO `users` (`id`, `student_id`, `teacher_id`, `parent_id`, `username`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 1, NULL, NULL, 'william', '$2y$10$.3EOjjko8Ce4p9GOB87mBeXyqwSjAaPEyqp0SR2K.TwjtlHanmRWi', '68r9UyKxwdUJnQBoaj1BlQTTAvsZUvZdBqEpzk7ItmkDRbCuCB69NPpksdXC', NULL, '2017-03-28 11:37:41'),
-(2, NULL, 1, NULL, 'budi', '$2y$10$AERnWhT2sYMSMp0VaNNDuOT8qqxPQHuGRGUlLOqrn32MF2jlORkXG', 'ZZRQEpckEEQFFnBZTaDDTwjnwDYvyrVdDnDVy6jnAEYLWuHXrTKvVXaey1eO', NULL, '2017-03-29 09:13:59'),
+(1, 1, NULL, NULL, 'william', '$2y$10$.3EOjjko8Ce4p9GOB87mBeXyqwSjAaPEyqp0SR2K.TwjtlHanmRWi', 'djb2vkXXHRLedUJkXbJztVYGVfo14Uimkx3snQtICbeuRwwMTNeFm7EtupLF', NULL, '2017-03-29 10:03:15'),
+(2, NULL, 1, NULL, 'budi', '$2y$10$AERnWhT2sYMSMp0VaNNDuOT8qqxPQHuGRGUlLOqrn32MF2jlORkXG', 'VIxOi5nULG8SBWPm1Gga8TLRjvzPRlccoN0c6Va5wY6F7jzsDBOWX3cLIVSz', NULL, '2017-03-29 10:03:59'),
 (3, NULL, NULL, 1, 'angela', '$2y$10$mmS0cBG25YsKYOk5/YWUSuwjZLPQfp3nsYXVcixt0gCyv8mvhZmPu', '0ZKrMzLQBWgbkotB3JRGy4ifoIEwEUjaOXzr0g3cOAfOf9WvdC4eaLihIBw0', NULL, '2017-03-28 11:02:59');
 
 --
