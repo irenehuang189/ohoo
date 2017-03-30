@@ -44,7 +44,10 @@
         <td>{{ $student->registration_number }}</td>
         <td>{{ $student->name }}</td>
         <td>
-          <a href="{{ url('teacher/individu/detail/' . $student->id) }}" class="ui blue basic icon mini button"><i class="eye icon"></i></a>
+          <div class="ui icon mini buttons">
+          <a href="{{ url('teacher/individu/detail/' . $student->id) }}" class="ui blue basic  button"><i class="eye icon"></i></a>
+          <a class="ui teal basic button" href="{{ url('teacher/score/semester/download/' . $student->id) }}"><i class="download icon"></i></a>
+          </div>
         </td>
       </tr>
     @endforeach

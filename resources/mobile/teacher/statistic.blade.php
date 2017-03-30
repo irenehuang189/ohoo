@@ -83,56 +83,6 @@
           {{--</div>--}}
         {{--</div>--}}
       {{--</div>--}}
-      <div class="column">
-        <div class="ui fluid card">
-          <div class="content">
-            <div class="header">Peringkat Kelas</div>
-            <div class="meta">Per Kelas dan Angkatan</div>
-          </div>
-          <div class="content">
-            <!-- Course selection -->
-            <div class="ui form">
-              <div class="fields">
-                <div class="inline field">
-                  <label>Mata Pelajaran</label>
-                  <select class="ui dropdown">
-                    <option>Semua</option>
-                    <option>Bahasa Indonesia</option>
-                    <option>Bahasa Iggris</option>
-                    <option>Matematika</option>
-                    <option>Fisika</option>
-                    <option>Kimia</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-            <table class="ui celled table">
-              <thead class="center aligned">
-                <th>No. Induk</th>
-                <th>Nama</th>
-                <th>Peringkat</th>
-              </thead>
-              <tbody>
-              <tr>
-                <td>13231</td>
-                <td>Eka Budianto</td>
-                <td>1</td>
-              </tr>
-              <tr>
-                <td>13221</td>
-                <td>Julius Prawirawan</td>
-                <td>2</td>
-              </tr>
-              <tr>
-                <td>13201</td>
-                <td>Eddy Kudo</td>
-                <td>3</td>
-              </tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </div>
     </div>
     <!-- /Statistics -->
 

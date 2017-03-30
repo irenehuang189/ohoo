@@ -212,7 +212,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/score/semester') }}">
+    <a class="ui red ok inverted button" href="{{ url('teacher/score/final') }}">
       <i class="checkmark icon"></i>
       Ya
     </a>
