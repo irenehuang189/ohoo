@@ -242,6 +242,57 @@ $(document).ready(function(){
       $('div#attitude').hide();
       $('div#score').show();
       // TODO: Panggil ajax buat daftar siswa di sini
+      $('#student-list-review').empty();
+      var classId = $("#choose-class-final").val();
+      var courseId = $("#choose-course-final").val();
+      var endtermPercent = $("#endterm-exam").val();
+      var midtermPercent = $("#midterm-exam").val();
+      var dailyPercent = $("#daily-exam").val();
+      var assignPercent = $("#assignment").val();
+      var scoreStatus = "semester";
+      var object = new Object();
+      object.classId = classId;
+      object.courseId = courseId;
+      object.endtermPercent = endtermPercent;
+      object.midtermPercent = midtermPercent;
+      object.dailyPercent = dailyPercent;
+      object.assignPercent = assignPercent;
+      var data = JSON.stringify(object);
+      var baseUrl = window.location.protocol + "//" + window.location.host;
+      var url = baseUrl + '/teacher/scores/semester';
+      $.ajax({
+        type: 'POST',
+        url: url,
+        data: data,
+        success: function (data) {
+          data = JSON.parse(data);
+          $.each(data, function (i, object) {
+            $('#student-list-review').append($('<tr>', {
+              id: "id-" + object.studentId
+            }).append($('<td>', {
+                class: "center aligned",
+                text: i + 1
+              }))
+              .append($('<td>', {
+                class: "center aligned",
+                text: object.studentReg
+              }))
+              .append($('<td>', {
+                text: object.studentName
+              }))
+              .append($('<td>', {
+                class: "center aligned",
+                id: "final-concept",
+                text: object.finalConcept
+              }))
+              .append($('<td>', {
+                class: "center aligned",
+                text: object.finalConcept
+              }))
+            );
+          });
+        }
+      });
     } else if(id == 'attitude'){
       $('#exam').removeClass('active');
       $('#score').removeClass('active');
@@ -284,6 +335,25 @@ $(document).ready(function(){
               }).append("<input id= 'student-score' type='number' placeholder='0' />"))
             )
           );
+        });
+      });
+    }
+  });
+  $("#choose-class-final").change(function(){
+    $('#choose-course-final').empty();
+    $("#choose-course-final").prepend("<option value='' selected='selected'>Pilih Mata Pelajaran</option>").change();
+    $('#student-list-review').empty();
+    $('#student-list-affective').empty();
+    var classId = $("#choose-class-final :selected").val();
+    if (classId >= 1) {
+      var baseUrl = window.location.protocol + "//" + window.location.host;
+      var url = baseUrl + "/teacher/courses/" + classId;
+      $.get(url, function (data, status){
+        $.each(data, function(i, course) {
+          $('#choose-course-final').append($('<option>', {
+            value: course.id,
+            text: course.name
+          }));
         });
       });
     }
@@ -347,6 +417,41 @@ $(document).ready(function(){
     var data = JSON.stringify(object);
     var baseUrl = window.location.protocol + "//" + window.location.host;
     var url = baseUrl + window.location.pathname;
+    $.ajax({
+      type: 'POST',
+      url: url,
+      data: data,
+      success: function (data) {
+        window.location.href = data;
+      }
+    });
+  });
+  $("#add-final").click(function() {
+    var classId = $("#choose-class-final").val();
+    var courseId = $("#choose-course-final").val();
+    var endtermPercent = $("#endterm-exam").val();
+    var midtermPercent = $("#midterm-exam").val();
+    var dailyPercent = $("#daily-exam").val();
+    var assignPercent = $("#assignment").val();
+    var studentIds = [];
+    var studentScores = [];
+    $("#student-list-review tr").each(function () {
+      studentIds.push($(this).attr("id").split("-")[1]);
+      studentScores.push($(this).find("#final-concept").html());
+    });
+    var object = new Object();
+    object.classId = classId;
+    object.courseId = courseId;
+    object.endtermPercent = endtermPercent;
+    object.midtermPercent = midtermPercent;
+    object.dailyPercent = dailyPercent;
+    object.assignPercent = assignPercent;
+    object.studentIds = studentIds;
+    object.studentScores = studentScores;
+    var data = JSON.stringify(object);
+    var baseUrl = window.location.protocol + "//" + window.location.host;
+    var url = baseUrl + window.location.pathname;
+    console.log(url);
     $.ajax({
       type: 'POST',
       url: url,
@@ -429,6 +534,9 @@ $(document).ready(function(){
         window.location.href = data;
       }
     });
+  });
+  $("#score-review").click(function() {
+    
   });
 
   // Show edit individu score modal
