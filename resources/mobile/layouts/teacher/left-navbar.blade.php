@@ -10,8 +10,8 @@
 
     <!-- Manajemen nilai akhir -->
     <a
-      class="item {{ Request::is('teacher/score/semester') ? 'active' : '' }}" 
-      href="{{ url('teacher/score/semester') }}">
+      class="item {{ Request::is('teacher/score/final') ? 'active' : '' }}" 
+      href="{{ url('teacher/score/final') }}">
       <i class="calculator icon"></i>
     </a>
 
