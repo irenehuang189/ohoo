@@ -91,6 +91,7 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::post('/teacher/score/bayangan/add', 'Teacher\ScoreController@addBayangan');
 	Route::get('/teacher/score/semester/detail/{courseId}', 'Teacher\ScoreController@showSemesterDetail');
 	Route::get('/teacher/score/bayangan/detail/{courseId}', 'Teacher\ScoreController@showBayanganDetail');
+	Route::get('teacher/score/semester/download/{id}', 'Teacher\IndividualController@downloadReport');
 
 	/* Individu */
 	Route::get('/teacher/individu', 'Teacher\IndividualController@showStudentList');
@@ -118,4 +119,3 @@ Route::group(['middleware' => 'teacher'], function() {
 	Route::get('teacher/students/{classId}', 'Teacher\ScoreController@getStudentsByClassId');
 	Route::post('teacher/scores/semester', 'Teacher\ScoreController@getSemesterScores');
 });
-
