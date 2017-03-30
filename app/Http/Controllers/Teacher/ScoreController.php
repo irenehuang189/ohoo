@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Assignment;
 use App\AssignmentScore;
 use App\Course;
+use App\CourseScore;
+use App\CourseScoreBayangan;
 use App\Exam;
 use App\ExamScore;
 use App\Kelas;
@@ -108,6 +110,62 @@ class ScoreController extends Controller
         $classes = $this->getCurrentClassesByTeacher();
 
         return view('teacher/score/add', compact('classes', 'taskType', 'teacher'));
+    }
+
+    public function showAddSemesterForm() {
+        $teacher = $this->teacher;
+        $classes = $this->getCurrentClassesByTeacher();
+        $scoreType = "semester";
+        return view('teacher/semester-score/add', compact('classes', 'scoreType', 'teacher'));
+    }
+
+    public function showAddBayanganForm() {
+        $teacher = $this->teacher;
+        $classes = $this->getCurrentClassesByTeacher();
+        $scoreType = "bayangan";
+        return view('teacher/semester-score/add', compact('classes', 'scoreType', 'teacher'));
+    }
+
+    public function addSemester(Request $request) {
+        $requestBody = json_decode($request->getContent());
+        $courseId = $requestBody->courseId;
+        $studentIds = $requestBody->studentIds;
+        $studentScores = $requestBody->studentScores;
+
+        foreach ($studentIds as $index => $studentId) {
+            $studentScore = $studentScores[$index];
+
+            $courseScore = new CourseScore;
+            $courseScore->course_id = $courseId;
+            $courseScore->student_id = $studentId;
+            $courseScore->nilai = $studentScore;
+            $courseScore->nilai_praktik = $studentScore;
+            $courseScore->sikap = 'A';
+            $courseScore->save();
+        }
+
+        return url('/teacher/score/final');
+    }
+
+    public function addBayangan(Request $request) {
+        $requestBody = json_decode($request->getContent());
+        $courseId = $requestBody->courseId;
+        $studentIds = $requestBody->studentIds;
+        $studentScores = $requestBody->studentScores;
+
+        foreach ($studentIds as $index => $studentId) {
+            $studentScore = $studentScores[$index];
+
+            $courseScore = new CourseScoreBayangan;
+            $courseScore->course_id = $courseId;
+            $courseScore->student_id = $studentId;
+            $courseScore->nilai = $studentScore;
+            $courseScore->nilai_praktik = $studentScore;
+            $courseScore->sikap = 'A';
+            $courseScore->save();
+        }
+
+        return url('/teacher/score/final');
     }
 
     public function showEditExamForm($id) {
@@ -438,5 +496,77 @@ class ScoreController extends Controller
         $class = Kelas::find($classId);
         $students = $class->students;
         return $students;
+    }
+
+    public function getSemesterScores(Request $request) {
+        $requestBody = json_decode($request->getContent());
+        $endtermPercent = $requestBody->endtermPercent;
+        $midtermPercent = $requestBody->midtermPercent;
+        $dailyPercent = $requestBody->dailyPercent;
+        $assignPercent = $requestBody->assignPercent;
+
+        $class = Kelas::find($requestBody->classId);
+        $courseId = $requestBody->courseId;
+        $student_list = $class->students;
+
+        $students = [];
+        foreach ($student_list as $student) {
+            $endtermExams = $student->exams;
+            $endterms = collect();
+            foreach ($endtermExams as $endtermExam) {
+                if ($endtermExam->course_id == $courseId && str_contains($endtermExam->name, 'Ujian Akhir Semester')) {
+                    $endterms = $endterms->push($endtermExam);
+                }
+            }
+            $endtermScore = 0;
+            if ($endterms->count() > 0) {
+                $endtermScore = $endterms->sum('pivot.score');
+                $endtermScore = ($endtermPercent/100) * ($endtermScore/$endterms->count());
+            }
+
+            $midtermExams = $student->exams;
+            $midterms = collect();
+            foreach ($midtermExams as $midtermExam) {
+                if ($midtermExam->course_id == $courseId && str_contains($midtermExam->name, 'Ujian Tengah Semester')) {
+                    $midterms = $midterms->push($midtermExam);
+                }
+            }
+            $midtermScore = 0;
+            if ($midterms->count() > 0) {
+                $midtermScore = $midterms->sum('pivot.score');
+                $midtermScore = ($midtermPercent/100) * ($midtermScore/$midterms->count());
+            }
+
+            $dailyExams = $student->exams;
+            $dailys = collect();
+            foreach ($dailyExams as $dailyExam) {
+                if ($dailyExam->course_id == $courseId && str_contains($dailyExam->name, 'Ulangan Harian')) {
+                    $dailys = $dailys->push($dailyExam);
+                }
+            }
+            $dailyScore = 0;
+            if ($dailys->count() > 0) {
+                $dailyScore = $dailys->sum('pivot.score');
+                $dailyScore = ($dailyPercent/100) * ($dailyScore/$dailys->count());
+            }
+
+            $assignments = $student->assignments;
+            $assignScore = 0;
+            $assigns = collect();
+            foreach ($assignments as $assignment) {
+                if ($assignment->course_id == $courseId) {
+                    $assigns = $assigns->push($assignment);
+                }
+            }
+            if ($assigns->count() > 0) {
+                $assignScore = $assigns->sum('pivot.score');
+                $assignScore = ($assignPercent/100) * ($assignScore/$assigns->count());
+            }
+
+            $finalScore = $endtermScore + $midtermScore + $dailyScore + $assignScore;
+            $students[] = ['studentId' => $student->id, 'finalConcept' => $finalScore, 'studentReg' => $student->registration_number, 'studentName' => $student->name];
+        }
+
+        return json_encode($students);
     }
 }

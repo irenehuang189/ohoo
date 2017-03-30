@@ -3,17 +3,17 @@
 @section('title', 'Perhitungan Nilai Akhir')
 
 @section('user-name')
-  NAMA DI SINI
+  {{ $teacher->name }}
 @endsection
 
 @section('user-tid')
-  187290 1271 9276
+  {{ $teacher->registration_number }}
 @endsection
 
 @section('right-column')
 <div class="ui hidden divider"></div>
 <div class="row">
-  <a href="{{ url('teacher/score/semester') }}" class="ui fluid right labeled icon teal button">
+  <a class="ui fluid right labeled icon teal button" id="add-final">
     Simpan & Selesai<i class="save icon"></i>
   </a>
 </div>
@@ -58,20 +58,19 @@
   <div class="row">
     <div class="five wide column">Kelas</div>
     <div class="eleven wide column">
-      <select class="ui fluid dropdown">
+      <select class="ui fluid dropdown" id="choose-class-final">
         <option value="" selected>-- Pilih Kelas --</option>
-        <option value="1">Kelas X</option>
-        <option value="1">Kelas XI</option>
-        <option value="1">Kelas XII</option>
+      @foreach ($classes as $class)
+        <option value="{{ $class->id }}">{{ $class->name }}</option>
+      @endforeach
       </select>
     </div>
   </div>
   <div class="row">
     <div class="five wide column">Mata Pelajaran</div>
     <div class="eleven wide column">
-      <select class="ui fluid dropdown">
+      <select class="ui fluid dropdown" id="choose-course-final">
         <option value="" selected>-- Pilih Mata Pelajaran --</option>
-        <option value="1">Matematika</option>
       </select>
     </div>
   </div>
@@ -79,7 +78,7 @@
     <div class="five wide column">Ujian Akhir Semester</div>
     <div class="eleven wide column">
       <div class="ui fluid right labeled input">
-        <input type="text" placeholder="25">
+        <input id="endterm-exam" type="text" placeholder="25">
         <div class="ui basic label">%</div>
       </div>
     </div>
@@ -88,7 +87,7 @@
     <div class="five wide column">Ujian Tengah Semester</div>
     <div class="eleven wide column">
       <div class="ui fluid right labeled input">
-        <input type="text" placeholder="25">
+        <input id="midterm-exam" type="text" placeholder="25">
         <div class="ui basic label">%</div>
       </div>
     </div>
@@ -97,7 +96,7 @@
     <div class="five wide column">Ulangan Harian</div>
     <div class="eleven wide column">
       <div class="ui fluid right labeled input">
-        <input type="text" placeholder="25">
+        <input id="daily-exam" type="text" placeholder="25">
         <div class="ui basic label">%</div>
       </div>
     </div>
@@ -106,7 +105,7 @@
     <div class="five wide column">Tugas</div>
     <div class="eleven wide column">
       <div class="ui fluid right labeled input">
-        <input type="text" placeholder="25">
+        <input id="assignment" type="text" placeholder="25">
         <div class="ui basic label">%</div>
       </div>
     </div>
@@ -131,28 +130,14 @@
         <th>Praktek</th>
       </tr>
     </thead>
-    <tbody>
-      <tr class="negative">
-        <td class="center aligned">1</td>
-        <td class="center aligned">13232</td>
-        <td>Wina Aryasubedjo</td>
-        <td class="center aligned">87</td>
-        <td class="center aligned">87</td>
-      </tr>
-      <tr>
-        <td class="center aligned">2</td>
-        <td class="center aligned">13233</td>
-        <td>Bekti Hutama</td>
-        <td class="center aligned">74</td>
-        <td class="center aligned">74</td>
-      </tr>
+    <tbody id="student-list-review">
     </tbody>
     <tfoot><tr>
       <th></th>
       <th></th>
       <th><b>Rata-rata Kelas</b></th>
-      <th class="center aligned"><b>75</b></th>
-      <th class="center aligned"><b>75</b></th>
+      <th class="center aligned" id="concept-mean"></th>
+      <th class="center aligned" id="practical-mean"></th>
     </tr></tfoot>
   </table>
   <div class="ui hidden divider"></div>
@@ -171,27 +156,7 @@
         <th class="two wide">Nilai</th>
       </tr>
     </thead>
-    <tbody>
-      <tr class="negative">
-        <td class="center aligned">1</td>
-        <td class="center aligned">13232</td>
-        <td>Wina Aryasubedjo</td>
-        <td class="center aligned">
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
-      </tr>
-      <tr>
-        <td class="center aligned">2</td>
-        <td class="center aligned">13233</td>
-        <td>Bekti Hutama</td>
-        <td class="center aligned">
-          <div class="ui input">
-            <input type="number" placeholder="0"/>
-          </div>
-        </td>
-      </tr>
+    <tbody id="student-list-affective">
     </tbody>
   </table>
   <div class="ui hidden divider"></div>
@@ -212,7 +177,7 @@
       <i class="remove icon"></i>
       Tidak
     </div>
-    <a class="ui red ok inverted button" href="{{ url('teacher/score/final') }}">
+    <a class="ui red ok inverted button" href="{{ Request::url() }}">
       <i class="checkmark icon"></i>
       Ya
     </a>

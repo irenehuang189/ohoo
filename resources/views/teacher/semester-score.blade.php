@@ -118,7 +118,7 @@
     <div class="ui teal big ribbon label">Nilai Bayangan</div>
   </div>
   <div class="four wide right aligned column">
-    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/semester/add') }}">
+    <a class="ui labeled icon compact teal button" href="{{ url('teacher/score/bayangan/add') }}">
       <i class="plus icon"></i>Tambah
     </a>
   </div>
