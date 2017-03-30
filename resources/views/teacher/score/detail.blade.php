@@ -1,6 +1,6 @@
 @extends('layouts.teacher.two-column-content')
 
-@section('title', 'Tambah Nilai Kelas')
+@section('title', 'Daftar Nilai')
 
 @section('user-name')
   {{ $teacher->name }}

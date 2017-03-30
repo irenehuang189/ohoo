@@ -13,12 +13,12 @@ use App\Http\Controllers\Controller;
 use App\Student;
 use App\Assignment;
 use App\Course;
+use App\CourseScore;
 use App\Exam;
 use App\Kelas;
-use Illuminate\Support\Facades\Auth;
-use App\CourseScore;
-use Illuminate\Support\Facades\DB;
 use Barryvdh\DomPDF\Facade as PDF;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class IndividualController extends Controller
 {
@@ -309,42 +309,29 @@ class IndividualController extends Controller
         return view('teacher/individu/detailed-report', compact('teacher', 'blank', 'student', 'courses', 'classes', 'exams', 'assignments', 'exam_averages', 'assignment_averages', 'skbm', 'classId', 'courseId'));
     }
 
-    public function downloadReport($studentId, $classId){
-        $student = Student::find($studentId);
-        $class = Kelas::find($classId);
-        $courses = $class->courses()
+    public function downloadReport($id) {
+        $studentId = $id;
+        $teacher = $this->teacher;
+        $class = $teacher->kelas()
+            ->where('is_current', '=', '1')
+            ->first();
+        $blank = 1;
+        $student = Student::find($id);
+        $classes = $student->kelas;
+        $courses = $classes[0]->courses()
             ->join('course_score', 'courses.id', '=', 'course_score.course_id')
             ->where('student_id', '=', $studentId)
             ->get();
-        $averages = $class->courses()
+        $averages = $classes[0]->courses()
             ->join('course_score', 'courses.id', '=', 'course_score.course_id')
             ->groupBy('course_id')
             ->select('course_id', DB::raw('AVG(nilai) as avg'))
             ->get();
-        $filename = "Test";
-        $pdf = app('dompdf.wrapper');
-        $view = "";
-        $pdf->loadView($view, compact('student', 'class', 'courses', 'averages'));
-        return $pdf->download($filename . '.pdf');
-    }
+        $classId = $classes[0]->id;
+        return view('teacher/semester-score/download', compact('class', 'student', 'classes', 'courses', 'classId', 'blank', 'averages', 'teacher'));
 
-    public function downloadReportBayangan($studentId, $classId){
-        $student = Student::find($studentId);
-        $class = Kelas::find($classId);
-        $courses = $class->courses()
-            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
-            ->where('student_id', '=', $studentId)
-            ->get();
-        $averages = $class->courses()
-            ->join('course_score_bayangan', 'courses.id', '=', 'course_score_bayangan.course_id')
-            ->groupBy('course_id')
-            ->select('course_id', DB::raw('AVG(nilai) as avg'))
-            ->get();
-        $filename = "Test";
-        $pdf = app('dompdf.wrapper');
-        $view = "";
-        $pdf->loadView($view, compact('student', 'class', 'courses', 'averages'));
-        return $pdf->download($filename . '.pdf');
+        // $pdf = app('dompdf.wrapper');
+        // $pdf->loadView('teacher/semester-score/download', compact('class', 'student', 'classes', 'courses', 'classId', 'blank', 'averages', 'teacher'));
+        // return $pdf->download('Rapor Semester ' . $class->semester . ' TA ' . $class->year . ' - ' . $student->registration_number . '.pdf');
     }
-
 }

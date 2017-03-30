@@ -53,7 +53,7 @@
     </select>
   </div>
   <div class="row">
-    <button class="ui horizontal animated teal large fluid button show-detailed-report-blank" tabindex="0">
+    <button class="ui horizontal animated teal large fluid button show-final" tabindex="0">
       <div class="visible content">Search</div>
       <div class="hidden content">
         <i class="search icon"></i>
@@ -80,6 +80,7 @@
   <thead class="center aligned">
   <tr>
     <th rowspan="2">Tahun Ajaran<i class="sort content ascending small icon" id="1"></i></th>
+    <th rowspan="2">Semester<i class="sort content ascending small icon" id="5"></i></th>
     <th rowspan="2">Kelas<i class="sort content ascending small icon" id="2"></i></th>
     <th rowspan="2">Mata Pelajaran<i class="sort content ascending small icon" id="3"></i></th>
     <th colspan="2">Rata-rata Kelas<i class="sort content ascending small icon" id="4"></th>
@@ -94,13 +95,14 @@
   @foreach ($courses as $course)
     <tr>
       <td>{{ $course->kelas->year }}/{{ $course->kelas->year + 1 }}</td>
+      <td class="center aligned">{{ $course->kelas->semester }}</td>
       <td>{{ $course->kelas->name }}</td>
       <td>{{ $course->name }}</td>
       <td class="center aligned">{{ $course->students->avg('pivot.nilai') }}</td>
       <td class="center aligned">{{ $course->students->avg('pivot.nilai_praktik') }}</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/semester/detail/' . $course->id) }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
       </td>
     </tr>
@@ -125,6 +127,7 @@
   <thead class="center aligned">
   <tr>
     <th rowspan="2">Tahun Ajaran<i class="sort content ascending small icon" id="1"></i></th>
+    <th rowspan="2">Semester<i class="sort content ascending small icon" id="5"></i></th>
     <th rowspan="2">Kelas<i class="sort content ascending small icon" id="2"></i></th>
     <th rowspan="2">Mata Pelajaran<i class="sort content ascending small icon" id="3"></i></th>
     <th colspan="2">Rata-rata Kelas<i class="sort content ascending small icon" id="4"></th>
@@ -139,13 +142,14 @@
   @foreach ($courses as $course)
     <tr>
       <td>{{ $course->kelas->year }}/{{ $course->kelas->year + 1 }}</td>
+      <td class="center aligned">{{ $course->kelas->semester }}</td>
       <td>{{ $course->kelas->name }}</td>
       <td>{{ $course->name }}</td>
       <td class="center aligned">{{ $course->studentsBayangan->avg('pivot.nilai') }}</td>
       <td class="center aligned">{{ $course->studentsBayangan->avg('pivot.nilai_praktik') }}</td>
       <td class="center aligned">
         <div class="ui icon mini buttons">
-          <a href="{{ url('teacher/score/semester/detail') }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
+          <a href="{{ url('teacher/score/bayangan/detail/' . $course->id) }}" class="ui blue icon basic mini button"><i class="eye icon"></i></a>
         </div>
       </td>
     </tr>
